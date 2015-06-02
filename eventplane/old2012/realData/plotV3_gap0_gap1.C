@@ -80,7 +80,7 @@ double temp;
  hist->SetXTitle("p_{T} (GeV/c)");
  hist->SetYTitle("v_{3}{EP}");
  hist->SetMinimum(0.001);
- hist->SetMaximum(0.349);
+ hist->SetMaximum(0.199);
  hist->GetXaxis()->CenterTitle(1);
  hist->GetYaxis()->CenterTitle(1);
  hist->GetYaxis()->SetTitleOffset(1.1);
