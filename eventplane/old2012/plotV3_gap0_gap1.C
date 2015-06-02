@@ -1,4 +1,4 @@
-void V2_gap0_gap1()
+void plotV3_gap0_gap1()
 {
 const int NCentBin=15;
 const int NCentBin24=24;
@@ -23,7 +23,7 @@ double temp;
   ifstream inv21;
   ifstream inv22;
   ifstream inv23;
-  inv2a.open("v2.txt");
+  inv2a.open("v3.txt");
   if(!inv2a.good())    cout<<" input fail"<<endl;
   else cout<<" have put in"<<endl;
   for(int i=0;i<NCentBin;i++){
@@ -65,9 +65,9 @@ double temp;
   c1->SetTicks(-1);
  TH1D* hist = new TH1D("hist","",100,0.,8.9);
  hist->SetXTitle("p_{T} (GeV/c)");
- hist->SetYTitle("v_{2}{EP}");
+ hist->SetYTitle("v_{3}{EP}");
  hist->SetMinimum(0.001);
- hist->SetMaximum(0.349);
+ hist->SetMaximum(0.209);
  hist->GetXaxis()->CenterTitle(1);
  hist->GetYaxis()->CenterTitle(1);
  hist->GetYaxis()->SetTitleOffset(1.1);
@@ -79,11 +79,15 @@ double temp;
  hist->Draw();
 
   TF1 *V2vsPt = new TF1("V2vsPt","((x/3.4)^1.8/(1+(x/3)^1.8))*(.00005+(1/x)^0.8)",0.2,10);
-  //TF1 *V2vsPt = new TF1("V2vsPt","0.000000001*x+0.04",0.2,10);
   V2vsPt->SetLineColor(1);
   V2vsPt->SetLineWidth(2);
   V2vsPt->SetLineStyle(2);
-  V2vsPt->Draw("same");
+  //V2vsPt->Draw("same");
+  TF1 *V3vsPt = new TF1("V3vsPt","((x/3.2)^2.3/(1+(x/3.4)^2.1))*(.00005+(1/x)^1.4)",0.2,10);
+  V3vsPt->SetLineColor(1);
+  V3vsPt->SetLineWidth(2);
+  V3vsPt->SetLineStyle(2);
+  V3vsPt->Draw("same");
 
   TGraphErrors *gr2 = new TGraphErrors(NCentBin,pt,v2a,0,v2ae);
       gr2->SetTitle("");
@@ -129,7 +133,8 @@ double temp;
     leg->AddEntry(gr3,"|#Delta#eta|>1.0","p");
     leg->AddEntry(gr4,"|#Delta#eta|>1.5","p");
     leg->AddEntry(gr5,"|#Delta#eta|>2.0","p");
-    leg->AddEntry(V2vsPt,"Input v_{2}","l");
+    //leg->AddEntry(V2vsPt,"Input v_{2}","l");
+    leg->AddEntry(V3vsPt,"Input v_{3}","l");
     leg->Draw();
   
     TLatex *tex1= new TLatex(5,0.305,"STEG, 5k events");
@@ -145,7 +150,7 @@ double temp;
     //tex2->Draw();
 
 
-  c1->Print("eventplanev2.png");
+  c1->Print("eventplanev3.png");
 
 }
 
