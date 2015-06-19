@@ -81,7 +81,7 @@ double temp;
   TF1 *V2vsPt = new TF1("V2vsPt","((x/3.4)^1.8/(1+(x/3)^1.8))*(.00005+(1/x)^0.8)",0.2,10);
   //TF1 *V2vsPt = new TF1("V2vsPt","0.000000001*x+0.04",0.2,10);
   V2vsPt->SetLineColor(1);
-  V2vsPt->SetLineWidth(0.8);
+  V2vsPt->SetLineWidth(2);
   V2vsPt->SetLineStyle(2);
   V2vsPt->Draw("same");
 
@@ -104,7 +104,7 @@ double temp;
 
   TGraphErrors *gr4 = new TGraphErrors(NCentBin,pta2,v22,0,v22e);
       gr4->SetMarkerStyle(25);
-      gr4->SetMarkerSize(1.3);
+      gr4->SetMarkerSize(1.);
       gr4->SetMarkerColor(4);
       gr4->SetLineWidth(2);
       gr4->SetLineColor(1);
@@ -120,7 +120,7 @@ double temp;
 
     TLegend *leg = new TLegend(0.19,0.65,0.38,0.93);
     leg->SetFillColor(10);
-    leg->SetBorderSize(0.035);
+    leg->SetBorderSize(0);
     leg->SetTextFont(42);
     leg->SetTextColor(1);
     leg->SetTextSize(0.04);
@@ -138,11 +138,11 @@ double temp;
     tex1->SetTextFont(42);
     tex1->Draw();
 
-    TLatex *tex1= new TLatex(3,0.265,"90>N>=35,  |#eta| < 2.4");
-    tex1->SetTextColor(1);
-    tex1->SetTextSize(0.05);
-    tex1->SetTextFont(42);
-    //tex1->Draw();
+    TLatex *tex2= new TLatex(3,0.265,"90>N>=35,  |#eta| < 2.4");
+    tex2->SetTextColor(1);
+    tex2->SetTextSize(0.05);
+    tex2->SetTextFont(42);
+    //tex2->Draw();
 
 
   c1->Print("eventplanev2.png");

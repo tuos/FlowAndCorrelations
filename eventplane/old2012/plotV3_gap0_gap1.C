@@ -49,19 +49,6 @@ double temp;
   }
 
 ////////////////
-//real data
-  const int realN=15;
-  double realpt[realN], realv2[realN], realv2state[realN], realv2syse[realN], realv2e[realN];
-  ifstream inv2real;
-  inv2real.open("realdatacent3035v3EP.txt");
-  for(int i=0; i<realN; i++){
-    inv2real>>realpt[i];
-    inv2real>>realv2[i];
-    inv2real>>realv2state[i];
-    inv2real>>realv2syse[i];
-    realv2e[i]=sqrt(realv2state[i]*realv2state[i] + realv2syse[i]*realv2syse[i]);
-    //cout<<realv2e[i]<<endl;
-  }
 
 ////////
   TCanvas *c1 = new TCanvas("c1","c1",1,1,650,550);
@@ -76,11 +63,11 @@ double temp;
   //c1->Divide(2,1,0,0);
  gStyle->SetOptStat(0);
   c1->SetTicks(-1);
- TH1D* hist = new TH1D("hist","",100,0.,5.9);
+ TH1D* hist = new TH1D("hist","",100,0.,8.9);
  hist->SetXTitle("p_{T} (GeV/c)");
  hist->SetYTitle("v_{3}{EP}");
  hist->SetMinimum(0.001);
- hist->SetMaximum(0.199);
+ hist->SetMaximum(0.209);
  hist->GetXaxis()->CenterTitle(1);
  hist->GetYaxis()->CenterTitle(1);
  hist->GetYaxis()->SetTitleOffset(1.1);
@@ -92,52 +79,47 @@ double temp;
  hist->Draw();
 
   TF1 *V2vsPt = new TF1("V2vsPt","((x/3.4)^1.8/(1+(x/3)^1.8))*(.00005+(1/x)^0.8)",0.2,10);
-  //TF1 *V2vsPt = new TF1("V2vsPt","0.000000001*x+0.04",0.2,10);
   V2vsPt->SetLineColor(1);
   V2vsPt->SetLineWidth(2);
   V2vsPt->SetLineStyle(2);
   //V2vsPt->Draw("same");
-  TGraphErrors *grreal = new TGraphErrors(15,realpt,realv2,0,realv2e);
-      grreal->SetTitle("");
-      grreal->SetMarkerStyle(20);
-      grreal->SetMarkerSize(1.0);
-      grreal->SetMarkerColor(1);
-      grreal->SetLineWidth(2);
-      grreal->SetLineColor(1);
-  grreal->Draw("plsameez");
-
+  TF1 *V3vsPt = new TF1("V3vsPt","((x/3.2)^2.3/(1+(x/3.4)^2.1))*(.00005+(1/x)^1.4)",0.2,10);
+  V3vsPt->SetLineColor(1);
+  V3vsPt->SetLineWidth(2);
+  V3vsPt->SetLineStyle(2);
+  V3vsPt->Draw("same");
 
   TGraphErrors *gr2 = new TGraphErrors(NCentBin,pt,v2a,0,v2ae);
       gr2->SetTitle("");
-      gr2->SetMarkerStyle(21);
+      gr2->SetMarkerStyle(20);
       gr2->SetMarkerSize(1.0);
-      gr2->SetMarkerColor(2);
+      gr2->SetMarkerColor(1);
       gr2->SetLineWidth(2);
-      gr2->SetLineColor(2);
+      gr2->SetLineColor(1);
   gr2->Draw("psameez");
  
   TGraphErrors *gr3 = new TGraphErrors(NCentBin,pta,v21,0,v21e);
       gr3->SetMarkerStyle(24);
       gr3->SetMarkerSize(1.);
-      gr3->SetMarkerColor(4);
+      gr3->SetMarkerColor(2);
       gr3->SetLineWidth(2);
-      gr3->SetLineColor(4);
+      gr3->SetLineColor(1);
   gr3->Draw("psameez");
 
   TGraphErrors *gr4 = new TGraphErrors(NCentBin,pta2,v22,0,v22e);
       gr4->SetMarkerStyle(25);
       gr4->SetMarkerSize(1.);
-      gr4->SetMarkerColor(6);
+      gr4->SetMarkerColor(4);
       gr4->SetLineWidth(2);
-      gr4->SetLineColor(6);
+      gr4->SetLineColor(1);
   gr4->Draw("psameez");
 
   TGraphErrors *gr5 = new TGraphErrors(NCentBin,pta3,v23,0,v23e);
       gr5->SetMarkerStyle(28);
       gr5->SetMarkerSize(1);
-      gr5->SetMarkerColor(8);
+      gr5->SetMarkerColor(3);
       gr5->SetLineWidth(2);
-      gr5->SetLineColor(8);
+      gr5->SetLineColor(1);
   gr5->Draw("psameez");
 
     TLegend *leg = new TLegend(0.19,0.65,0.38,0.93);
@@ -147,14 +129,15 @@ double temp;
     leg->SetTextColor(1);
     leg->SetTextSize(0.04);
     //leg->SetLineStyle(0.06);
-    leg->AddEntry(grreal,"Published v_{3}","pl");
     leg->AddEntry(gr2,"|#Delta#eta|>0.0","p");
     leg->AddEntry(gr3,"|#Delta#eta|>1.0","p");
     leg->AddEntry(gr4,"|#Delta#eta|>1.5","p");
     leg->AddEntry(gr5,"|#Delta#eta|>2.0","p");
+    //leg->AddEntry(V2vsPt,"Input v_{2}","l");
+    leg->AddEntry(V3vsPt,"Input v_{3}","l");
     leg->Draw();
   
-    TLatex *tex1= new TLatex(3,0.305,"Real Data, 30-35%");
+    TLatex *tex1= new TLatex(5,0.305,"STEG, 5k events");
     tex1->SetTextColor(1);
     tex1->SetTextSize(0.05);
     tex1->SetTextFont(42);
