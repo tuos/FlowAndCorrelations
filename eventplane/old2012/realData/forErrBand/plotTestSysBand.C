@@ -2,7 +2,8 @@ void plotTestSysBand()
 {
   const int nBin=5;
   double pt[nBin]={0.5, 0.9, 1.5, 3.5, 5};
-  double v2[nBin]={0.03, 0.06, 0.08, 0.12, 0.1};
+  //double v2[nBin]={0.03, 0.06, 0.08, 0.12, 0.1};
+  double v2[nBin]={1.0, 1.0, 1.0, 1., 1.0};
   double v2e[nBin]={0.002, 0.004, 0.007, 0.01, 0.015};
 
   TCanvas *c1 = new TCanvas("c1","c1",1,1,650,550);
@@ -19,8 +20,8 @@ void plotTestSysBand()
   TH1D* hist = new TH1D("hist","",100,0.,5.9);
   hist->SetXTitle("p_{T} (GeV/c)");
   hist->SetYTitle("v_{2}{EP}");
-  hist->SetMinimum(0.001);
-  hist->SetMaximum(0.199);
+  hist->SetMinimum(0.801);
+  hist->SetMaximum(1.199);
   hist->GetXaxis()->CenterTitle(1);
   hist->GetYaxis()->CenterTitle(1);
   hist->GetYaxis()->SetTitleOffset(1.1);
