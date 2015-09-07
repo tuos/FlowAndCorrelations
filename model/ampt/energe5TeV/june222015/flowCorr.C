@@ -71,7 +71,7 @@ void flowCorr(){
      t1->SetBranchAddress("b", &b0);
      int neve=t1->GetEntries();
      cout<<"Nevts = "<<neve<<endl;
-     neve = 50000;
+     neve = 5000;
      for(int ne=0; ne<neve; ne++){
        if(ne%1000==0)  cout<<"Have run "<<ne<<" events ,"<<" First pass"<<endl;
        t1->GetEntry(ne);
@@ -162,7 +162,7 @@ void flowCorr(){
 
      cout<<hMultPlus->GetMean()<<"   "<<hMultMinus->GetMean()<<endl;  
      for(int ibin=0; ibin<nCentBin; ibin++)
-       cout<<i<<"   "<<2Psi2[ibin]<<"   "<<v3Psi3[ibin]<<"   "<<v4Psi4[ibin]<<"   "<<v6Psi6[ibin]<<endl;
+       cout<<ibin<<"   "<<v2Psi2[ibin]<<"   "<<v3Psi3[ibin]<<"   "<<v4Psi4[ibin]<<"   "<<v6Psi6[ibin]<<endl;
      for(int ibin=0; ibin<nCentBin; ibin++){
        cout<<(bbin[ibin]+bbin[ibin+1])/2<<"   "<<v2Psi2[ibin]<<"   "<<v3Psi3[ibin]<<"  "<<v4Psi2[ibin]/v4Psi4[ibin]<<"   "<<v6Psi2[ibin]/v6Psi6[ibin]<<"   "<<v5Psi2Psi3[ibin]<<endl;  
      }
