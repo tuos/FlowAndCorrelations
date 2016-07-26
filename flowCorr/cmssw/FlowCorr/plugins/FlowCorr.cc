@@ -75,6 +75,10 @@ class FlowCorr : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
    TH1D* hCent;
    TH1D* hHF;
    TH1D* hAngle;
+   TH1D* hAngleFlat;
+   TH1D* hvz;
+   TH1D* hvx;
+   TH1D* hvy;
 
 };
 
@@ -139,6 +143,21 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       double anglem2 = (*evtPlanes)[6].angle(evtPlaneLevel_);
       hAngle->Fill(anglem2);        
     }
+    edm::Handle<reco::EvtPlaneCollection> evtPlanesFlat;
+    iEvent.getByToken(EvtPlaneFlatTag_,evtPlanesFlat);
+    if(evtPlanesFlat.isValid()){
+      double anglem2Flat = (*evtPlanesFlat)[6].angle();
+      hAngleFlat->Fill(anglem2Flat);
+    }
+
+    edm::Handle<std::vector<reco::Vertex>> vertex;
+    iEvent.getByToken(VertexTag_, vertex);
+    double vx=vertex->begin()->x();
+    double vy=vertex->begin()->y();
+    double vz=vertex->begin()->z();
+    hvz->Fill(vz);
+    hvx->Fill(vx);
+    hvy->Fill(vy);
 
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
@@ -161,6 +180,10 @@ FlowCorr::beginJob()
   hCent = fs->make<TH1D>("centrality","PbPb Centrality",200,0,200);
   hHF = fs->make<TH1D>("hf","HF ET",8000,0,8000);
   hAngle = fs->make<TH1D>("angle","EP angle",200,-4,4);
+  hAngleFlat = fs->make<TH1D>("angleFlat","EP angle",200,-4,4);
+  hvz = fs->make<TH1D>("vz","vertex z",300,-30,30);
+  hvx = fs->make<TH1D>("vx","vertex x",200,-0.5,0.5);
+  hvy = fs->make<TH1D>("vy","vertex y",200,-0.5,0.5);
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
