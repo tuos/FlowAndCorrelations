@@ -41,9 +41,7 @@
 #include "DataFormats/TrackReco/interface/TrackFwd.h"
 #include "DataFormats/CaloTowers/interface/CaloTowerCollection.h"
 
-using namespace std;
-using namespace reco;
-using namespace edm;
+#include "Analysis/FlowCorr/plugins/FlowCorr.h"
 
 //
 // class declaration
@@ -82,19 +80,6 @@ class FlowCorr : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
 
   edm::Service<TFileService> fs;
 
-   TH1D* hCent;
-   TH1D* hHF;
-   TH1D* hAngle;
-   TH1D* hAngleFlat;
-   TH1D* hvz;
-   TH1D* hvx;
-   TH1D* hvy;
-   TH1D* hNtrks;
-   TH1D* hpt;
-   TH1D* heta;
-   TH1D* hphi;
-   TH1D* hHFcal;
-
   double trackPtMinCut_;
   double trackPtMaxCut_;
   double trackEtaCut_;
@@ -103,6 +88,7 @@ class FlowCorr : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
   double dxyRelCut_;
 
   int evtPlaneLevel_;
+
 
 };
 
@@ -168,6 +154,11 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     edm::Handle<reco::Centrality> centrality;
     iEvent.getByToken(CentralityTag_, centrality);
     hHF->Fill(centrality->EtHFtowerSum());
+       int ibin=-1;
+       for(int j=0;j<nCentBin;j++)
+       if(hiBin>=2*cBin[j]&&hiBin<2*cBin[j+1])
+         ibin=j;
+       if(ibin<0 || ibin==nCentBin) return;
 
     edm::Handle<reco::EvtPlaneCollection> evtPlanes;
     iEvent.getByToken(EvtPlaneTag_,evtPlanes);
@@ -199,9 +190,11 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
      //edm::Handle<std::vector<reco::Track> tracks;
      //iEvent.getByToken(TrackTag_,tracks);
+     int nTracks = 0;
+     pVect_trkEtaPlus = new vector<TVector3>;
+     pVect_trkEtaMinus = new vector<TVector3>;
      Handle<vector<Track>> tracks;
      iEvent.getByToken(TrackTag_, tracks);
-     int nTracks = 0;
      for(unsigned int i = 0 ; i < tracks->size(); ++i){
        const Track& track = (*tracks)[i];
        if(!track.quality(reco::TrackBase::qualityByName(TrackQualityTag_))) continue;
@@ -226,6 +219,10 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          heta->Fill(track.eta());
          hphi->Fill(track.phi());
          nTracks++;
+         TVector3 pvectorTrack;
+         pvectorTrack.SetPtEtaPhi(track.pt(),track.eta(),track.phi());
+         if(track.eta()>=0) pVect_trkEtaPlus->push_back(pvectorTrack);
+         if(track.eta()<0) pVect_trkEtaMinus->push_back(pvectorTrack);
        }
      }
      hNtrks->Fill(nTracks);
@@ -233,21 +230,69 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     double etHFtowerSumPlus = 0;
     double etHFtowerSumMinus = 0;
     double etHFtowerSum = 0;
+    pVect_hfEtaPlus = new vector<TVector3>;
+    pVect_hfEtaMinus = new vector<TVector3>;
     Handle<CaloTowerCollection> towers;
     iEvent.getByToken(TowerTag_,towers);
     for( size_t i = 0; i<towers->size(); ++ i){
        const CaloTower & tower = (*towers)[ i ];
        double etahf = tower.eta();
        bool isHF = tower.ietaAbs() > 29;
+       TVector3 pvectorHF;
+       pvectorHF.SetPtEtaPhi(tower.pt(),tower.eta(),tower.phi());
           if(isHF && etahf > 0){
             etHFtowerSumPlus += tower.pt();
+            pVect_hfEtaPlus->push_back(pvectorHF);
           }
           if(isHF && etahf < 0){
             etHFtowerSumMinus += tower.pt();
+            pVect_hfEtaMinus->push_back(pvectorHF);
           }
     }
     etHFtowerSum = etHFtowerSumPlus + etHFtowerSumMinus;
     hHFcal->Fill(etHFtowerSum);
+
+// START Flow Analysis
+       for(int j=0;j<nCentBin;j++){
+         for(int iH=0; iH<nHarmonics; iH++){
+           QhfPlus[j][iH]=0;   
+           QhfMinus[j][iH]=0;   
+         }
+       }
+       nEvent[ibin]+=1;
+
+       hMultTrkEtaPlus->Fill((int)pVect_trkEtaPlus->size());
+       hMultTrkEtaMinus->Fill((int)pVect_trkEtaMinus->size());
+       hMultHFEtaPlus->Fill((int)pVect_hfEtaPlus->size());  
+       hMultHFEtaMinus->Fill((int)pVect_hfEtaMinus->size()); 
+
+       for(int iH=0; iH<nHarmonics; iH++){
+         double sumwPlus=0;
+         double sumwMinus=0;
+         for(int iplus=0;iplus<(int)pVect_hfEtaPlus->size();iplus++){
+           TVector3 pvector_hfPlus = (*pVect_hfEtaPlus)[iplus];
+           //double pt_hfPlus = pvector_hfPlus.Pt();
+           double phi_hfPlus = pvector_hfPlus.Phi();
+           //sumwPlus+=pt_hfPlus; 
+           sumwPlus+=1; 
+           QhfPlus[ibin][iH]+=TComplex::Exp(TComplex(0,(iH+1)*phi_hfPlus));
+         }
+         if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus;
+         else QhfPlus[ibin][iH]=0;
+
+         for(int iminus=0;iminus<(int)pVect_hfEtaMinus->size();iminus++){
+           TVector3 pvector_hfMinus = (*pVect_hfEtaMinus)[iminus];
+           //double pt_hfMinus = pvector_hfMinus.Pt();
+           double phi_hfMinus = pvector_hfMinus.Phi();
+           //sumwMinus+=pt_hfMinus; 
+           sumwMinus+=1;
+           QhfMinus[ibin][iH]+=TComplex::Exp(TComplex(0,(iH+1)*phi_hfMinus));
+         }
+         if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus;
+         else QhfMinus[ibin][iH]=0;
+       }
+
+
 
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
@@ -279,6 +324,33 @@ FlowCorr::beginJob()
   heta = fs->make<TH1D>("eta","eta",300,-3,3);
   hphi = fs->make<TH1D>("phi","phi",200,-4,4);
   hHFcal = fs->make<TH1D>("hfCal","HF ET",8000,0,8000);
+
+  hMultTrkEtaPlus = fs->make<TH1D>("multtrketaplus","N",300,0,3000);
+  hMultTrkEtaMinus = fs->make<TH1D>("multtrketaminus","N",300,0,3000);
+  hMultHFEtaPlus = fs->make<TH1D>("multhfetaplus","N",400,0,4000);
+  hMultHFEtaMinus = fs->make<TH1D>("multhfetaminus","N",400,0,4000);
+  for(int ibin=0; ibin<nCentBin; ibin++){
+    for(int iH=0; iH<nHarmonics; iH++){
+      hQhfPlusX[ibin][iH] = fs->make<TH1D>(Form("hQhfPlusX_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
+      hQhfPlusY[ibin][iH] = fs->make<TH1D>(Form("hQhfPlusY_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
+      hQhfPlusQ[ibin][iH] = fs->make<TH1D>(Form("hQhfPlusQ_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
+      hQhfMinusX[ibin][iH] = fs->make<TH1D>(Form("hQhfMinusX_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
+      hQhfMinusY[ibin][iH] = fs->make<TH1D>(Form("hQhfMinusY_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
+      hQhfMinusQ[ibin][iH] = fs->make<TH1D>(Form("hQhfMinusQ_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
+      hVnAbs2[ibin][iH] = fs->make<TH1D>(Form("hVnAbs2_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
+      hVnAbs4[ibin][iH] = fs->make<TH1D>(Form("hVnAbs4_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
+      hVnAbs6[ibin][iH] = fs->make<TH1D>(Form("hVnAbs6_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
+    }
+    hV2Abs2V3Abs2[ibin] = fs->make<TH1D>(Form("hV2Abs2V3Abs2_ibin%d",ibin),"",200,-1000,1000);
+    hV2Abs4V3Abs2[ibin] = fs->make<TH1D>(Form("hV2Abs4V3Abs2_ibin%d",ibin),"",200,-1000,1000);
+    hV4V2starV2star[ibin] = fs->make<TH1D>(Form("hV4V2starV2star_ibin%d",ibin),"",200,-1000,1000);
+    hV6V2starV2starV2star[ibin] = fs->make<TH1D>(Form("hV6V2starV2starV2star_ibin%d",ibin),"",200,-1000,1000);
+    hV6V3starV3star[ibin] = fs->make<TH1D>(Form("hV6V3starV3star_ibin%d",ibin),"",200,-1000,1000);
+    hV5V2starV3star[ibin] = fs->make<TH1D>(Form("hV5V2starV3star_ibin%d",ibin),"",200,-1000,1000);
+    hV7V2starV2starV3star[ibin] = fs->make<TH1D>(Form("hV7V2starV2starV3star_ibin%d",ibin),"",200,-1000,1000);
+  }
+
+
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
