@@ -83,6 +83,7 @@ class FlowCorr : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
   double trackPtMinCut_;
   double trackPtMaxCut_;
   double trackEtaCut_;
+  double trackEtaMinCut_;
   double ptErrCut_;
   double dzRelCut_;
   double dxyRelCut_;
@@ -117,6 +118,7 @@ FlowCorr::FlowCorr(const edm::ParameterSet& iConfig) :
   trackPtMinCut_(iConfig.getParameter<double>("trackPtMinCut")),
   trackPtMaxCut_(iConfig.getParameter<double>("trackPtMaxCut")),
   trackEtaCut_(iConfig.getParameter<double>("trackEtaCut")),
+  trackEtaMinCut_(iConfig.getParameter<double>("trackEtaMinCut")),
   ptErrCut_(iConfig.getParameter<double>("ptErrCut")),
   dzRelCut_(iConfig.getParameter<double>("dzRelCut")),
   dxyRelCut_(iConfig.getParameter<double>("dxyRelCut")),
@@ -221,8 +223,8 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          nTracks++;
          TVector3 pvectorTrack;
          pvectorTrack.SetPtEtaPhi(track.pt(),track.eta(),track.phi());
-         if(track.eta()>=0) pVect_trkEtaPlus->push_back(pvectorTrack);
-         if(track.eta()<0) pVect_trkEtaMinus->push_back(pvectorTrack);
+         if(track.eta()>=trackEtaMinCut_) pVect_trkEtaPlus->push_back(pvectorTrack);
+         if(track.eta()<-1*trackEtaMinCut_) pVect_trkEtaMinus->push_back(pvectorTrack);
        }
      }
      hNtrks->Fill(nTracks);
@@ -269,8 +271,9 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
        for(int iH=0; iH<nHarmonics; iH++){
          double sumwPlus=0;
          double sumwMinus=0;
-         for(int iplus=0;iplus<(int)pVect_hfEtaPlus->size();iplus++){
-           TVector3 pvector_hfPlus = (*pVect_hfEtaPlus)[iplus];
+         // choose hf or trk here (two lines): pVect_hfEtaPlus vs pVect_trkEtaPlus;
+         for(int iplus=0;iplus<(int)pVect_trkEtaPlus->size();iplus++){
+           TVector3 pvector_hfPlus = (*pVect_trkEtaPlus)[iplus];
            //double pt_hfPlus = pvector_hfPlus.Pt();
            double phi_hfPlus = pvector_hfPlus.Phi();
            //sumwPlus+=pt_hfPlus; 
@@ -280,8 +283,9 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus;
          else QhfPlus[ibin][iH]=0;
 
-         for(int iminus=0;iminus<(int)pVect_hfEtaMinus->size();iminus++){
-           TVector3 pvector_hfMinus = (*pVect_hfEtaMinus)[iminus];
+         // choose hf or trk here (two lines): pVect_hfEtaMinus vs pVect_trkEtaMinus;
+         for(int iminus=0;iminus<(int)pVect_trkEtaMinus->size();iminus++){
+           TVector3 pvector_hfMinus = (*pVect_trkEtaMinus)[iminus];
            //double pt_hfMinus = pvector_hfMinus.Pt();
            double phi_hfMinus = pvector_hfMinus.Phi();
            //sumwMinus+=pt_hfMinus; 
