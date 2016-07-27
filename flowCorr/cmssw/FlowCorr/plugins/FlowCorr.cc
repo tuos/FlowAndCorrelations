@@ -39,7 +39,7 @@
 #include "SimDataFormats/GeneratorProducts/interface/GenEventInfoProduct.h"
 #include "DataFormats/TrackReco/interface/Track.h"
 #include "DataFormats/TrackReco/interface/TrackFwd.h"
-
+#include "DataFormats/CaloTowers/interface/CaloTowerCollection.h"
 
 using namespace std;
 using namespace reco;
@@ -78,6 +78,7 @@ class FlowCorr : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
   //edm::EDGetTokenT<std::vector<reco::Track> > TrackTag_;
   edm::EDGetTokenT<vector<Track> > TrackTag_;
   std::string TrackQualityTag_;
+  edm::EDGetTokenT<CaloTowerCollection>  TowerTag_;
 
   edm::Service<TFileService> fs;
 
@@ -92,6 +93,7 @@ class FlowCorr : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
    TH1D* hpt;
    TH1D* heta;
    TH1D* hphi;
+   TH1D* hHFcal;
 
   double trackPtMinCut_;
   double trackPtMaxCut_;
@@ -125,6 +127,7 @@ FlowCorr::FlowCorr(const edm::ParameterSet& iConfig) :
   //TrackTag_(consumes<std::vector<reco::Track>>(iConfig.getParameter<edm::InputTag>("Track"))),
   TrackTag_(consumes<vector<Track>>(iConfig.getParameter<edm::InputTag>("Track"))),
   TrackQualityTag_(iConfig.getUntrackedParameter<std::string>("TrackQuality","highPurity")),
+  TowerTag_(consumes<CaloTowerCollection>(iConfig.getParameter<edm::InputTag>("Tower"))),
   trackPtMinCut_(iConfig.getParameter<double>("trackPtMinCut")),
   trackPtMaxCut_(iConfig.getParameter<double>("trackPtMaxCut")),
   trackEtaCut_(iConfig.getParameter<double>("trackEtaCut")),
@@ -202,6 +205,11 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
      for(unsigned int i = 0 ; i < tracks->size(); ++i){
        const Track& track = (*tracks)[i];
        if(!track.quality(reco::TrackBase::qualityByName(TrackQualityTag_))) continue;
+       if(track.charge() == 0) continue;
+       //if(track.numberOfValidHits() < 11 ) continue;
+       //double algoOffline = track.algo();
+       //if(!(algoOffline==4 || algoOffline==6 || algoOffline==7 || algoOffline==5 || algoOffline==11)) continue;
+       //if(track.normalizedChi2() / track.hitPattern().trackerLayersWithMeasurement() > 0.15 ) continue;       
 
        math::XYZPoint v1(vx,vy,vz);
        double dz= track.dz(v1);
@@ -220,8 +228,27 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          nTracks++;
        }
      }
-
      hNtrks->Fill(nTracks);
+
+    double etHFtowerSumPlus = 0;
+    double etHFtowerSumMinus = 0;
+    double etHFtowerSum = 0;
+    Handle<CaloTowerCollection> towers;
+    iEvent.getByToken(TowerTag_,towers);
+    for( size_t i = 0; i<towers->size(); ++ i){
+       const CaloTower & tower = (*towers)[ i ];
+       double etahf = tower.eta();
+       bool isHF = tower.ietaAbs() > 29;
+          if(isHF && etahf > 0){
+            etHFtowerSumPlus += tower.pt();
+          }
+          if(isHF && etahf < 0){
+            etHFtowerSumMinus += tower.pt();
+          }
+    }
+    etHFtowerSum = etHFtowerSumPlus + etHFtowerSumMinus;
+    hHFcal->Fill(etHFtowerSum);
+
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
    Handle<ExampleData> pIn;
@@ -251,6 +278,7 @@ FlowCorr::beginJob()
   hpt = fs->make<TH1D>("pt","pt",200,0,20);
   heta = fs->make<TH1D>("eta","eta",300,-3,3);
   hphi = fs->make<TH1D>("phi","phi",200,-4,4);
+  hHFcal = fs->make<TH1D>("hfCal","HF ET",8000,0,8000);
 }
 
 // ------------ method called once each job just after ending the event loop  ------------

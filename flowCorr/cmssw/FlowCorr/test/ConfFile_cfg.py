@@ -10,7 +10,8 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 100
 process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
     fileNames = cms.untracked.vstring(
-        'file:/afs/cern.ch/user/t/tuos/work/private/hin1600x/flowPbPb/CMSSW_7_5_8_patch4/src/HIMinBias_101.root'
+        #'file:/afs/cern.ch/user/t/tuos/work/private/hin1600x/flowPbPb/CMSSW_7_5_8_patch4/src/HIMinBias_101.root'
+        'file:/afs/cern.ch/user/t/tuos/work/private/hin1600x/flowPbPb/CMSSW_7_5_8_patch4/src/pixeltracking_101.root'
     )
 )
 
@@ -33,8 +34,9 @@ process.flowCorr = cms.EDAnalyzer('FlowCorr',
    EvtPlaneFlat     = cms.InputTag("hiEvtPlaneFlat",""),  
    HiMC             = cms.InputTag("heavyIon"),                            
    Vertex           = cms.InputTag("hiSelectedVertex"),
-   Track            = cms.InputTag("hiGeneralTracks"),
+   Track            = cms.InputTag("hiGeneralAndPixelTracks"),
    TrackQuality     = cms.untracked.string('highPurity'),
+   Tower            = cms.InputTag("towerMaker"),
    trackPtMinCut = cms.double(0.3),
    trackPtMaxCut = cms.double(10.0),
    trackEtaCut = cms.double(1.0),
