@@ -37,6 +37,13 @@
 #include "SimDataFormats/HiGenData/interface/GenHIEvent.h"
 #include "SimDataFormats/GeneratorProducts/interface/HepMCProduct.h"
 #include "SimDataFormats/GeneratorProducts/interface/GenEventInfoProduct.h"
+#include "DataFormats/TrackReco/interface/Track.h"
+#include "DataFormats/TrackReco/interface/TrackFwd.h"
+
+
+using namespace std;
+using namespace reco;
+using namespace edm;
 
 //
 // class declaration
@@ -68,8 +75,10 @@ class FlowCorr : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
   edm::EDGetTokenT<reco::EvtPlaneCollection> EvtPlaneFlatTag_;
   edm::EDGetTokenT<edm::GenHIEvent> HiMCTag_;
   edm::EDGetTokenT<std::vector<reco::Vertex>> VertexTag_;
+  //edm::EDGetTokenT<std::vector<reco::Track> > TrackTag_;
+  edm::EDGetTokenT<vector<Track> > TrackTag_;
+  std::string TrackQualityTag_;
 
-  int evtPlaneLevel_;
   edm::Service<TFileService> fs;
 
    TH1D* hCent;
@@ -79,6 +88,19 @@ class FlowCorr : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
    TH1D* hvz;
    TH1D* hvx;
    TH1D* hvy;
+   TH1D* hNtrks;
+   TH1D* hpt;
+   TH1D* heta;
+   TH1D* hphi;
+
+  double trackPtMinCut_;
+  double trackPtMaxCut_;
+  double trackEtaCut_;
+  double ptErrCut_;
+  double dzRelCut_;
+  double dxyRelCut_;
+
+  int evtPlaneLevel_;
 
 };
 
@@ -100,6 +122,15 @@ FlowCorr::FlowCorr(const edm::ParameterSet& iConfig) :
   EvtPlaneFlatTag_(consumes<reco::EvtPlaneCollection>(iConfig.getParameter<edm::InputTag>("EvtPlaneFlat"))),
   HiMCTag_(consumes<edm::GenHIEvent>(iConfig.getParameter<edm::InputTag>("HiMC"))),
   VertexTag_(consumes<std::vector<reco::Vertex>>(iConfig.getParameter<edm::InputTag>("Vertex"))),
+  //TrackTag_(consumes<std::vector<reco::Track>>(iConfig.getParameter<edm::InputTag>("Track"))),
+  TrackTag_(consumes<vector<Track>>(iConfig.getParameter<edm::InputTag>("Track"))),
+  TrackQualityTag_(iConfig.getUntrackedParameter<std::string>("TrackQuality","highPurity")),
+  trackPtMinCut_(iConfig.getParameter<double>("trackPtMinCut")),
+  trackPtMaxCut_(iConfig.getParameter<double>("trackPtMaxCut")),
+  trackEtaCut_(iConfig.getParameter<double>("trackEtaCut")),
+  ptErrCut_(iConfig.getParameter<double>("ptErrCut")),
+  dzRelCut_(iConfig.getParameter<double>("dzRelCut")),
+  dxyRelCut_(iConfig.getParameter<double>("dxyRelCut")),
   evtPlaneLevel_(iConfig.getParameter<int>("evtPlaneLevel"))
 {
    //now do what ever initialization is needed
@@ -155,10 +186,42 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     double vx=vertex->begin()->x();
     double vy=vertex->begin()->y();
     double vz=vertex->begin()->z();
+    double vxError=vertex->begin()->xError();
+    double vyError=vertex->begin()->yError();
+    double vzError=vertex->begin()->zError();
     hvz->Fill(vz);
     hvx->Fill(vx);
     hvy->Fill(vy);
+   
 
+     //edm::Handle<std::vector<reco::Track> tracks;
+     //iEvent.getByToken(TrackTag_,tracks);
+     Handle<vector<Track>> tracks;
+     iEvent.getByToken(TrackTag_, tracks);
+     int nTracks = 0;
+     for(unsigned int i = 0 ; i < tracks->size(); ++i){
+       const Track& track = (*tracks)[i];
+       if(!track.quality(reco::TrackBase::qualityByName(TrackQualityTag_))) continue;
+
+       math::XYZPoint v1(vx,vy,vz);
+       double dz= track.dz(v1);
+       double dzsigma2 = track.dzError()*track.dzError()+vzError*vzError;
+       double dxy= track.dxy(v1);
+       double dxysigma2 = track.dxyError()*track.dxyError()+vxError*vyError;
+
+       if(track.pt()>trackPtMinCut_ && track.pt()<trackPtMaxCut_ && 
+       track.eta()<trackEtaCut_ && track.eta()>-1.0*trackEtaCut_ &&
+       track.ptError()/track.pt() < ptErrCut_ &&
+       dz*dz < dzRelCut_*dzRelCut_ * dzsigma2 &&
+       dxy*dxy < dxyRelCut_*dxyRelCut_ * dxysigma2 ){
+         hpt->Fill(track.pt());
+         heta->Fill(track.eta());
+         hphi->Fill(track.phi());
+         nTracks++;
+       }
+     }
+
+     hNtrks->Fill(nTracks);
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
    Handle<ExampleData> pIn;
@@ -184,6 +247,10 @@ FlowCorr::beginJob()
   hvz = fs->make<TH1D>("vz","vertex z",300,-30,30);
   hvx = fs->make<TH1D>("vx","vertex x",200,-0.5,0.5);
   hvy = fs->make<TH1D>("vy","vertex y",200,-0.5,0.5);
+  hNtrks = fs->make<TH1D>("ntrks","number of tracks",3000,0,3000);
+  hpt = fs->make<TH1D>("pt","pt",200,0,20);
+  heta = fs->make<TH1D>("eta","eta",300,-3,3);
+  hphi = fs->make<TH1D>("phi","phi",200,-4,4);
 }
 
 // ------------ method called once each job just after ending the event loop  ------------

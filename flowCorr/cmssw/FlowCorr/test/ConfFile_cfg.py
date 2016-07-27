@@ -33,11 +33,17 @@ process.flowCorr = cms.EDAnalyzer('FlowCorr',
    EvtPlaneFlat     = cms.InputTag("hiEvtPlaneFlat",""),  
    HiMC             = cms.InputTag("heavyIon"),                            
    Vertex           = cms.InputTag("hiSelectedVertex"),
+   Track            = cms.InputTag("hiGeneralTracks"),
+   TrackQuality     = cms.untracked.string('highPurity'),
+   trackPtMinCut = cms.double(0.3),
+   trackPtMaxCut = cms.double(10.0),
+   trackEtaCut = cms.double(1.0),
+   ptErrCut = cms.double(0.1),
+   dzRelCut = cms.double(3.0),
+   dxyRelCut = cms.double(3.0),
    evtPlaneLevel    = cms.int32(0)
 )
 
-
-#process.p = cms.Path(process.collisionEventSelectionAOD * process.centralityBin * process.flowCorr)
 process.p = cms.Path(process.collisionEventSelectionAOD * process.flowCorr)
 
 
