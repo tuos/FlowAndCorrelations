@@ -292,6 +292,69 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          else QhfMinus[ibin][iH]=0;
        }
 
+       TComplex temp;
+       double tempReal;
+       for(int iH=0; iH<nHarmonics; iH++){
+         hQhfPlusX[ibin][iH]->Fill(QhfPlus[ibin][iH].Re());
+         hQhfPlusY[ibin][iH]->Fill(QhfPlus[ibin][iH].Im());
+         hQhfPlusQ[ibin][iH]->Fill(TComplex::Abs(QhfPlus[ibin][iH]));
+         hQhfMinusX[ibin][iH]->Fill(QhfMinus[ibin][iH].Re());
+         hQhfMinusY[ibin][iH]->Fill(QhfMinus[ibin][iH].Im());
+         hQhfMinusQ[ibin][iH]->Fill(TComplex::Abs(QhfMinus[ibin][iH]));
+         temp=QhfPlus[ibin][iH]*TComplex::Conjugate(QhfMinus[ibin][iH]);
+         double vnabs2evt;
+         if(useRe) vnabs2evt=temp.Re();  // or use Abs(temp) ???
+         else vnabs2evt=TComplex::Abs(temp);  // or use Abs(temp) ???
+         //double vnabs2evt=(QhfPlus[ibin][iH]*TComplex::Conjugate(QhfMinus[ibin][iH])).Re();
+         VnAbs2[ibin][iH]+=vnabs2evt;
+         VnAbs4[ibin][iH]+=vnabs2evt*vnabs2evt;
+         VnAbs6[ibin][iH]+=vnabs2evt*vnabs2evt*vnabs2evt;
+         hVnAbs2[ibin][iH]->Fill(vnabs2evt);
+         hVnAbs4[ibin][iH]->Fill(vnabs2evt*vnabs2evt);
+         hVnAbs6[ibin][iH]->Fill(vnabs2evt*vnabs2evt*vnabs2evt);
+       }
+
+       temp=QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1]) * QhfPlus[ibin][2]*TComplex::Conjugate(QhfMinus[ibin][2]);
+       if(useRe) tempReal=temp.Re();
+       else tempReal=TComplex::Abs(temp);
+       V2Abs2V3Abs2[ibin]+=tempReal;
+       hV2Abs2V3Abs2[ibin]->Fill(tempReal);
+       //V2Abs2V3Abs2[ibin]+=(QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1]) * QhfPlus[ibin][2]*TComplex::Conjugate(QhfMinus[ibin][2])).Re();
+       temp=QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1]) * QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1]) * QhfPlus[ibin][2]*TComplex::Conjugate(QhfMinus[ibin][2]);
+       if(useRe) tempReal=temp.Re();
+       else tempReal=TComplex::Abs(temp);       
+       V2Abs4V3Abs2[ibin]+=tempReal;
+       hV2Abs4V3Abs2[ibin]->Fill(tempReal);
+       temp=QhfPlus[ibin][3]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]);
+       if(useRe) tempReal=temp.Re();
+       else tempReal=TComplex::Abs(temp);
+       V4V2starV2star[ibin]+=tempReal;
+       hV4V2starV2star[ibin]->Fill(tempReal);
+       temp=QhfPlus[ibin][5]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]);
+       if(useRe) tempReal=temp.Re();
+       else tempReal=TComplex::Abs(temp);
+       V6V2starV2starV2star[ibin]+=tempReal;
+       hV6V2starV2starV2star[ibin]->Fill(tempReal);
+       temp=QhfPlus[ibin][5]*TComplex::Conjugate(QhfMinus[ibin][2])*TComplex::Conjugate(QhfMinus[ibin][2]);
+       if(useRe) tempReal=temp.Re();
+       else tempReal=TComplex::Abs(temp);
+       V6V3starV3star[ibin]+=tempReal;
+       hV6V3starV3star[ibin]->Fill(tempReal);
+       temp=QhfPlus[ibin][4]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]);
+       if(useRe) tempReal=temp.Re();
+       else tempReal=TComplex::Abs(temp);
+       V5V2starV3star[ibin]+=tempReal;
+       hV5V2starV3star[ibin]->Fill(tempReal);
+       temp=QhfPlus[ibin][6]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]);
+       if(useRe) tempReal=temp.Re();
+       else tempReal=TComplex::Abs(temp);
+       V7V2starV2starV3star[ibin]+=tempReal;
+       hV7V2starV2starV3star[ibin]->Fill(tempReal);
+
+       delete pVect_trkEtaPlus;
+       delete pVect_trkEtaMinus;
+       delete pVect_hfEtaPlus;
+       delete pVect_hfEtaMinus;
 
 
 
