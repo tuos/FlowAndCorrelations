@@ -4,7 +4,7 @@ process = cms.Process("Demo")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(1000) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 #process.MessageLogger.cerr.FwkReport.reportEvery = 100
 
 process.source = cms.Source("PoolSource",
@@ -46,9 +46,9 @@ process.flowCorr = cms.EDAnalyzer('FlowCorr',
    TrackQuality     = cms.string('highPurity'),
    Tower            = cms.InputTag("towerMaker"),
    trackPtMinCut = cms.double(0.3),
-   trackPtMaxCut = cms.double(5.0),
+   trackPtMaxCut = cms.double(12.0),
    trackEtaCut = cms.double(2.4),
-   trackEtaMinCut = cms.double(0.6),
+   trackEtaMinCut = cms.double(0.0),
    ptErrCut = cms.double(0.1),
    dzRelCut = cms.double(3.0),
    dxyRelCut = cms.double(3.0)
