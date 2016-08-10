@@ -272,28 +272,29 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          double sumwPlus=0;
          double sumwMinus=0;
          // choose hf or trk here (two lines): pVect_hfEtaPlus vs pVect_trkEtaPlus;
-         for(int iplus=0;iplus<(int)pVect_trkEtaPlus->size();iplus++){
-           TVector3 pvector_hfPlus = (*pVect_trkEtaPlus)[iplus];
+         for(int iplus=0;iplus<(int)pVect_hfEtaPlus->size();iplus++){
+           TVector3 pvector_hfPlus = (*pVect_hfEtaPlus)[iplus];
            //double pt_hfPlus = pvector_hfPlus.Pt();
            double phi_hfPlus = pvector_hfPlus.Phi();
            //sumwPlus+=pt_hfPlus; 
-           sumwPlus+=1; 
+           sumwPlus+=1;
            QhfPlus[ibin][iH]+=TComplex::Exp(TComplex(0,(iH+1)*phi_hfPlus));
          }
-         if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus;
+         if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus - TComplex(meanQxPlus[ibin][iH],                   meanQyPlus[ibin][iH]); //re-centering
          else QhfPlus[ibin][iH]=0;
 
          // choose hf or trk here (two lines): pVect_hfEtaMinus vs pVect_trkEtaMinus;
-         for(int iminus=0;iminus<(int)pVect_trkEtaMinus->size();iminus++){
-           TVector3 pvector_hfMinus = (*pVect_trkEtaMinus)[iminus];
+         for(int iminus=0;iminus<(int)pVect_hfEtaMinus->size();iminus++){
+           TVector3 pvector_hfMinus = (*pVect_hfEtaMinus)[iminus];
            //double pt_hfMinus = pvector_hfMinus.Pt();
            double phi_hfMinus = pvector_hfMinus.Phi();
            //sumwMinus+=pt_hfMinus; 
            sumwMinus+=1;
            QhfMinus[ibin][iH]+=TComplex::Exp(TComplex(0,(iH+1)*phi_hfMinus));
          }
-         if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus;
+         if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus - TComplex(meanQxMinus[ibin][iH],              meanQyMinus[ibin][iH]); //re-centering;
          else QhfMinus[ibin][iH]=0;
+
        }
 
        TComplex temp;
@@ -329,6 +330,12 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
        else tempReal=TComplex::Abs(temp);       
        V2Abs4V3Abs2[ibin]+=tempReal;
        hV2Abs4V3Abs2[ibin]->Fill(tempReal);
+
+//Numerators
+       temp=QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1]);
+       if(useRe) tempReal=temp.Re();
+       else tempReal=TComplex::Abs(temp);
+       hV2V2star[ibin]->Fill(tempReal);
        temp=QhfPlus[ibin][3]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]);
        if(useRe) tempReal=temp.Re();
        else tempReal=TComplex::Abs(temp);
@@ -354,6 +361,80 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
        else tempReal=TComplex::Abs(temp);
        V7V2starV2starV3star[ibin]+=tempReal;
        hV7V2starV2starV3star[ibin]->Fill(tempReal);
+
+       for(int iplus=0;iplus<(int)pVect_trkEtaPlus->size();iplus++){
+         TVector3 pvector_trkPlus = (*pVect_trkEtaPlus)[iplus];
+         double phi_trkPlus = pvector_trkPlus.Phi();
+         double pt_trkPlus = pvector_trkPlus.Pt();
+         int cpt=-1;
+         for(int ipt=0; ipt<nPtBin; ipt++){
+           if(pt_trkPlus>=ptBin[ipt] && pt_trkPlus<ptBin[ipt+1])
+             cpt=ipt;
+         }
+         if(cpt<0) cpt=nPtBin-1;
+
+         temp = TComplex::Exp(TComplex(0,(2)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][1]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv2V2star[ibin][cpt]->Fill(tempReal);
+         temp = TComplex::Exp(TComplex(0,(4)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv4V2starV2star[ibin][cpt]->Fill(tempReal);
+         temp=TComplex::Exp(TComplex(0,(6)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv6V2starV2starV2star[ibin][cpt]->Fill(tempReal);
+         temp=TComplex::Exp(TComplex(0,(6)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][2])*TComplex::Conjugate(QhfMinus[ibin][2]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv6V3starV3star[ibin][cpt]->Fill(tempReal);
+         temp=TComplex::Exp(TComplex(0,(5)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv5V2starV3star[ibin][cpt]->Fill(tempReal);
+         temp=TComplex::Exp(TComplex(0,(7)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv7V2starV2starV3star[ibin][cpt]->Fill(tempReal);
+       }
+
+       for(int iminus=0;iminus<(int)pVect_trkEtaMinus->size();iminus++){
+         TVector3 pvector_trkMinus = (*pVect_trkEtaMinus)[iminus];
+         double phi_trkMinus = pvector_trkMinus.Phi();
+         double pt_trkMinus = pvector_trkMinus.Pt();
+         int cpt=-1;
+         for(int ipt=0; ipt<nPtBin; ipt++){
+           if(pt_trkMinus>=ptBin[ipt] && pt_trkMinus<ptBin[ipt+1])
+             cpt=ipt;
+         }
+         if(cpt<0) cpt=nPtBin-1;
+
+         temp = TComplex::Exp(TComplex(0,(2)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][1]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv2V2star[ibin][cpt]->Fill(tempReal);
+         temp = TComplex::Exp(TComplex(0,(4)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv4V2starV2star[ibin][cpt]->Fill(tempReal);
+         temp=TComplex::Exp(TComplex(0,(6)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv6V2starV2starV2star[ibin][cpt]->Fill(tempReal);
+         temp=TComplex::Exp(TComplex(0,(6)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][2])*TComplex::Conjugate(QhfPlus[ibin][2]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv6V3starV3star[ibin][cpt]->Fill(tempReal);
+         temp=TComplex::Exp(TComplex(0,(5)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv5V2starV3star[ibin][cpt]->Fill(tempReal);
+         temp=TComplex::Exp(TComplex(0,(7)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv7V2starV2starV3star[ibin][cpt]->Fill(tempReal);
+       }
 
        delete pVect_trkEtaPlus;
        delete pVect_trkEtaMinus;
@@ -410,13 +491,22 @@ FlowCorr::beginJob()
     }
     hV2Abs2V3Abs2[ibin] = fs->make<TH1D>(Form("hV2Abs2V3Abs2_ibin%d",ibin),"",200,-1000,1000);
     hV2Abs4V3Abs2[ibin] = fs->make<TH1D>(Form("hV2Abs4V3Abs2_ibin%d",ibin),"",200,-1000,1000);
+
+    hV2V2star[ibin] = fs->make<TH1D>(Form("hV2V2star_ibin%d",ibin),"",200,-1000,1000);
     hV4V2starV2star[ibin] = fs->make<TH1D>(Form("hV4V2starV2star_ibin%d",ibin),"",200,-1000,1000);
     hV6V2starV2starV2star[ibin] = fs->make<TH1D>(Form("hV6V2starV2starV2star_ibin%d",ibin),"",200,-1000,1000);
     hV6V3starV3star[ibin] = fs->make<TH1D>(Form("hV6V3starV3star_ibin%d",ibin),"",200,-1000,1000);
     hV5V2starV3star[ibin] = fs->make<TH1D>(Form("hV5V2starV3star_ibin%d",ibin),"",200,-1000,1000);
     hV7V2starV2starV3star[ibin] = fs->make<TH1D>(Form("hV7V2starV2starV3star_ibin%d",ibin),"",200,-1000,1000);
+    for(int ipt=0; ipt<nPtBin; ipt++){
+      hv2V2star[ibin][ipt] = fs->make<TH1D>(Form("hv2V2star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      hv4V2starV2star[ibin][ipt] = fs->make<TH1D>(Form("hv4V2starV2star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      hv6V2starV2starV2star[ibin][ipt] = fs->make<TH1D>(Form("hv6V2starV2starV2star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      hv6V3starV3star[ibin][ipt] = fs->make<TH1D>(Form("hv6V3starV3star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      hv5V2starV3star[ibin][ipt] = fs->make<TH1D>(Form("hv5V2starV3star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      hv7V2starV2starV3star[ibin][ipt] = fs->make<TH1D>(Form("hv7V2starV2starV3star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+    }
   }
-
 
 }
 
