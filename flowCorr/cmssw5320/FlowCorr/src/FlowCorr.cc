@@ -233,11 +233,11 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
        bool isHF = tower.ietaAbs() > 29;
        TVector3 pvectorHF;
        pvectorHF.SetPtEtaPhi(tower.pt(),tower.eta(),tower.phi());
-          if(isHF && etahf > 0){
+          if(isHF && etahf > 0 && tower.pt()>0.005 && tower.pt()<30.0){
             etHFtowerSumPlus += tower.pt();
             pVect_hfEtaPlus->push_back(pvectorHF);
           }
-          if(isHF && etahf < 0){
+          if(isHF && etahf < 0 && tower.pt()>0.005 && tower.pt()<30.0){
             etHFtowerSumMinus += tower.pt();
             pVect_hfEtaMinus->push_back(pvectorHF);
           }
@@ -272,7 +272,7 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
            sumwPlus+=1; 
            QhfPlus[ibin][iH]+=TComplex::Exp(TComplex(0,(iH+1)*phi_hfPlus));
          }
-         if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus;
+         if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus - TComplex(meanQxPlus[ibin][iH], meanQyPlus[ibin][iH]); //re-centering
          else QhfPlus[ibin][iH]=0;
 
          // choose hf or trk here (two lines): pVect_hfEtaMinus vs pVect_trkEtaMinus;
@@ -284,7 +284,7 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
            sumwMinus+=1;
            QhfMinus[ibin][iH]+=TComplex::Exp(TComplex(0,(iH+1)*phi_hfMinus));
          }
-         if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus;
+         if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus - TComplex(meanQxMinus[ibin][iH], meanQyMinus[ibin][iH]); //re-centering;
          else QhfMinus[ibin][iH]=0;
 
        }
@@ -324,6 +324,10 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
        hV2Abs4V3Abs2[ibin]->Fill(tempReal);
 
 //Numerators
+       temp=QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1]);
+       if(useRe) tempReal=temp.Re();
+       else tempReal=TComplex::Abs(temp);
+       hV2V2star[ibin]->Fill(tempReal);
        temp=QhfPlus[ibin][3]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]);
        if(useRe) tempReal=temp.Re();
        else tempReal=TComplex::Abs(temp);
@@ -361,6 +365,10 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          }
          if(cpt<0) cpt=nPtBin-1;
 
+         temp = TComplex::Exp(TComplex(0,(2)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][1]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv2V2star[ibin][cpt]->Fill(tempReal);
          temp = TComplex::Exp(TComplex(0,(4)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]);
          if(useRe) tempReal=temp.Re();
          else tempReal=TComplex::Abs(temp);
@@ -394,6 +402,10 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          }
          if(cpt<0) cpt=nPtBin-1;
 
+         temp = TComplex::Exp(TComplex(0,(2)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][1]);
+         if(useRe) tempReal=temp.Re();
+         else tempReal=TComplex::Abs(temp);
+         hv2V2star[ibin][cpt]->Fill(tempReal);
          temp = TComplex::Exp(TComplex(0,(4)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]);
          if(useRe) tempReal=temp.Re();
          else tempReal=TComplex::Abs(temp);
@@ -475,12 +487,15 @@ FlowCorr::beginJob()
     }
     hV2Abs2V3Abs2[ibin] = fs->make<TH1D>(Form("hV2Abs2V3Abs2_ibin%d",ibin),"",200,-1000,1000);
     hV2Abs4V3Abs2[ibin] = fs->make<TH1D>(Form("hV2Abs4V3Abs2_ibin%d",ibin),"",200,-1000,1000);
+
+    hV2V2star[ibin] = fs->make<TH1D>(Form("hV2V2star_ibin%d",ibin),"",200,-1000,1000);
     hV4V2starV2star[ibin] = fs->make<TH1D>(Form("hV4V2starV2star_ibin%d",ibin),"",200,-1000,1000);
     hV6V2starV2starV2star[ibin] = fs->make<TH1D>(Form("hV6V2starV2starV2star_ibin%d",ibin),"",200,-1000,1000);
     hV6V3starV3star[ibin] = fs->make<TH1D>(Form("hV6V3starV3star_ibin%d",ibin),"",200,-1000,1000);
     hV5V2starV3star[ibin] = fs->make<TH1D>(Form("hV5V2starV3star_ibin%d",ibin),"",200,-1000,1000);
     hV7V2starV2starV3star[ibin] = fs->make<TH1D>(Form("hV7V2starV2starV3star_ibin%d",ibin),"",200,-1000,1000);
     for(int ipt=0; ipt<nPtBin; ipt++){
+      hv2V2star[ibin][ipt] = fs->make<TH1D>(Form("hv2V2star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hv4V2starV2star[ibin][ipt] = fs->make<TH1D>(Form("hv4V2starV2star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hv6V2starV2starV2star[ibin][ipt] = fs->make<TH1D>(Form("hv6V2starV2starV2star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hv6V3starV3star[ibin][ipt] = fs->make<TH1D>(Form("hv6V3starV3star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
