@@ -266,25 +266,27 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          // choose hf or trk here (two lines): pVect_hfEtaPlus vs pVect_trkEtaPlus;
          for(int iplus=0;iplus<(int)pVect_hfEtaPlus->size();iplus++){
            TVector3 pvector_hfPlus = (*pVect_hfEtaPlus)[iplus];
-           //double pt_hfPlus = pvector_hfPlus.Pt();
            double phi_hfPlus = pvector_hfPlus.Phi();
-           //sumwPlus+=pt_hfPlus; 
-           sumwPlus+=1; 
-           QhfPlus[ibin][iH]+=TComplex::Exp(TComplex(0,(iH+1)*phi_hfPlus));
+           //double pt_hfPlus_weight = 1.0;
+           double pt_hfPlus_weight = pvector_hfPlus.Pt();
+           sumwPlus+= pt_hfPlus_weight; 
+           QhfPlus[ibin][iH]+= pt_hfPlus_weight * TComplex::Exp(TComplex(0,(iH+1)*phi_hfPlus));
          }
-         if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus - TComplex(meanQxPlus[ibin][iH], meanQyPlus[ibin][iH]); //re-centering
+         //if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus - TComplex(meanQxPlus[ibin][iH], meanQyPlus[ibin][iH]); //re-centering
+         if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus; 
          else QhfPlus[ibin][iH]=0;
 
          // choose hf or trk here (two lines): pVect_hfEtaMinus vs pVect_trkEtaMinus;
          for(int iminus=0;iminus<(int)pVect_hfEtaMinus->size();iminus++){
            TVector3 pvector_hfMinus = (*pVect_hfEtaMinus)[iminus];
-           //double pt_hfMinus = pvector_hfMinus.Pt();
            double phi_hfMinus = pvector_hfMinus.Phi();
-           //sumwMinus+=pt_hfMinus; 
-           sumwMinus+=1;
-           QhfMinus[ibin][iH]+=TComplex::Exp(TComplex(0,(iH+1)*phi_hfMinus));
+           //double pt_hfMinus_weight = 1.0;
+           double pt_hfMinus_weight = pvector_hfMinus.Pt();
+           sumwMinus+= pt_hfMinus_weight; 
+           QhfMinus[ibin][iH]+= pt_hfMinus_weight * TComplex::Exp(TComplex(0,(iH+1)*phi_hfMinus));
          }
-         if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus - TComplex(meanQxMinus[ibin][iH], meanQyMinus[ibin][iH]); //re-centering;
+         //if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus - TComplex(meanQxMinus[ibin][iH], meanQyMinus[ibin][iH]); //re-centering;
+         if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus; 
          else QhfMinus[ibin][iH]=0;
 
        }
@@ -300,7 +302,7 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          hQhfMinusQ[ibin][iH]->Fill(TComplex::Abs(QhfMinus[ibin][iH]));
          temp=QhfPlus[ibin][iH]*TComplex::Conjugate(QhfMinus[ibin][iH]);
          double vnabs2evt;
-         if(useRe) vnabs2evt=temp.Re();  // or use Abs(temp) ???
+         if(useReDenominator) vnabs2evt=temp.Re();  // or use Abs(temp) ???
          else vnabs2evt=TComplex::Abs(temp);  // or use Abs(temp) ???
          //double vnabs2evt=(QhfPlus[ibin][iH]*TComplex::Conjugate(QhfMinus[ibin][iH])).Re();
          VnAbs2[ibin][iH]+=vnabs2evt;
@@ -311,15 +313,14 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          hVnAbs6[ibin][iH]->Fill(vnabs2evt*vnabs2evt*vnabs2evt);
        }
 
-       temp=QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1]) * QhfPlus[ibin][2]*TComplex::Conjugate(QhfMinus[ibin][2]);
-       if(useRe) tempReal=temp.Re();
-       else tempReal=TComplex::Abs(temp);
+       //temp=QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1]) * QhfPlus[ibin][2]*TComplex::Conjugate(QhfMinus[ibin][2]);
+       if(useReDenominator) tempReal=(QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1])).Re() * (QhfPlus[ibin][2]*TComplex::Conjugate(QhfMinus[ibin][2])).Re();
+       else tempReal=TComplex::Abs(QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1])) * TComplex::Abs(QhfPlus[ibin][2]*TComplex::Conjugate(QhfMinus[ibin][2]));
        V2Abs2V3Abs2[ibin]+=tempReal;
        hV2Abs2V3Abs2[ibin]->Fill(tempReal);
-       //V2Abs2V3Abs2[ibin]+=(QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1]) * QhfPlus[ibin][2]*TComplex::Conjugate(QhfMinus[ibin][2])).Re();
-       temp=QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1]) * QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1]) * QhfPlus[ibin][2]*TComplex::Conjugate(QhfMinus[ibin][2]);
-       if(useRe) tempReal=temp.Re();
-       else tempReal=TComplex::Abs(temp);       
+       //temp=QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1]) * QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1]) * QhfPlus[ibin][2]*TComplex::Conjugate(QhfMinus[ibin][2]);
+       if(useReDenominator) tempReal=(QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1])).Re() * (QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1])).Re() * (QhfPlus[ibin][2]*TComplex::Conjugate(QhfMinus[ibin][2])).Re();
+       else tempReal=TComplex::Abs(QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1])) * TComplex::Abs(QhfPlus[ibin][1]*TComplex::Conjugate(QhfMinus[ibin][1])) * TComplex::Abs(QhfPlus[ibin][2]*TComplex::Conjugate(QhfMinus[ibin][2]));       
        V2Abs4V3Abs2[ibin]+=tempReal;
        hV2Abs4V3Abs2[ibin]->Fill(tempReal);
 
@@ -389,6 +390,8 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          if(useRe) tempReal=temp.Re();
          else tempReal=TComplex::Abs(temp);
          hv7V2starV2starV3star[ibin][cpt]->Fill(tempReal);
+
+         hMeanPt[ibin][cpt]->Fill(pt_trkPlus);
        }
 
        for(int iminus=0;iminus<(int)pVect_trkEtaMinus->size();iminus++){
@@ -426,6 +429,8 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          if(useRe) tempReal=temp.Re();
          else tempReal=TComplex::Abs(temp);
          hv7V2starV2starV3star[ibin][cpt]->Fill(tempReal);
+
+         hMeanPt[ibin][cpt]->Fill(pt_trkMinus);
        }
 
        delete pVect_trkEtaPlus;
@@ -501,6 +506,7 @@ FlowCorr::beginJob()
       hv6V3starV3star[ibin][ipt] = fs->make<TH1D>(Form("hv6V3starV3star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hv5V2starV3star[ibin][ipt] = fs->make<TH1D>(Form("hv5V2starV3star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hv7V2starV2starV3star[ibin][ipt] = fs->make<TH1D>(Form("hv7V2starV2starV3star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      hMeanPt[ibin][ipt] = fs->make<TH1D>(Form("hMeanPt_ibin%d_ipt%d",ibin,ipt),"",200,0,20);
     }
   }
 
