@@ -875,7 +875,8 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 void 
 FlowCorr::beginJob()
 {
-  for(int i=0; i<nPtEffBin; i++) EffVsPtHist->SetBinContent(i+1,effValues[i]);
+  //for(int i=0; i<nPtEffBin; i++) EffVsPtHist->SetBinContent(i+1, effValues[i]);
+  for(int i=0; i<nPtEffBin; i++) EffVsPtHist->SetBinContent(i+1, 1.0);
   TH1D::SetDefaultSumw2();
   hCent = fs->make<TH1D>("centrality","PbPb Centrality",200,0,200);
   hHF = fs->make<TH1D>("hf","HF ET",8000,0,8000);
