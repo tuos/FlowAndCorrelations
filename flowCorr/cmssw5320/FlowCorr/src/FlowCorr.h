@@ -114,6 +114,19 @@ using namespace edm;
   TH1D* hV3Abs4Qtrk[nCentBin];
   TH1D* hV2Abs2V3Abs2Qtrk[nCentBin];
   TH1D* hV2Abs4V3Abs2Qtrk[nCentBin];
+  //only QtrkHF
+  TH1D* hV2V2starQtrkHF[nCentBin];
+  TH1D* hV4V2starV2starQtrkHF[nCentBin];
+  TH1D* hV6V2starV2starV2starQtrkHF[nCentBin];
+  TH1D* hV6V3starV3starQtrkHF[nCentBin];
+  TH1D* hV5V2starV3starQtrkHF[nCentBin];
+  TH1D* hV7V2starV2starV3starQtrkHF[nCentBin];
+  TH1D* hV2Abs2QtrkHF[nCentBin];
+  TH1D* hV2Abs4QtrkHF[nCentBin];
+  TH1D* hV2Abs6QtrkHF[nCentBin];
+  TH1D* hV3Abs4QtrkHF[nCentBin];
+  TH1D* hV2Abs2V3Abs2QtrkHF[nCentBin];
+  TH1D* hV2Abs4V3Abs2QtrkHF[nCentBin];
 
   TH1D* hV2V2star[nCentBin];
   TH1D* hV4V2starV2star[nCentBin];
