@@ -1,3 +1,6 @@
+#include "histEffVsPt.C"
+#include "cent1030EffVsPt.C"
+
 void getEffPt()
 {
 
@@ -67,7 +70,7 @@ ofile.open("mcEffpT5020_1030cent.txt");
    effpt[i]->SetLineColor(colors[i]);
    effpt[i]->SetMarkerColor(colors[i]);
    effpt[i]->SetMarkerStyle(markers[i]);
-   effpt[i]->Draw("same");
+   //effpt[i]->Draw("same");
 
  }
 
@@ -77,7 +80,44 @@ ofile.open("mcEffpT5020_1030cent.txt");
     leg->AddEntry(effpt[1],"5-10%","pl");
     leg->AddEntry(effpt[2],"10-30%","pl");
     leg->AddEntry(effpt[3],"30-50%","pl");
-    leg->Draw();
+    //leg->Draw();
+
+effpt[2]->Draw("same");
+TF1 *f1 = new TF1("f1","[0]+[1]*x+[2]*x*x+[3]*x*x*x+[4]*x*x*x*x+[5]*x*x*x*x*x+[6]*x*x*x*x*x*x+[7]*x*x*x*x*x*x*x", 0.3, 1.5);
+TF1 *f2 = new TF1("f2","[0]+[1]*x+[2]*x*x+[3]*x*x*x+[4]*x*x*x*x+[5]*x*x*x*x*x+[6]*x*x*x*x*x*x+[7]*x*x*x*x*x*x*x", 1.5, 3.0);
+//TF1 *total = new TF1("total","f1+f2",0.3,3.0);
+//Double_t par[16];
+f1->SetParameters(1,1,1,1,1,1,1,1);
+f1->SetLineColor(1);
+effpt[2]->Fit("f1", "R");
+//f1->Draw("same");
+//effpt[2]->Fit("pol6");
+f2->SetLineColor(2);
+f2->SetParameters(1,1,1,1,1,1,1,1);
+effpt[2]->Fit("f2", "R+");
+
+/*
+cout<<endl<<endl;
+TH1D *effVsPt = new TH1D("effVsPt", "effVsPt",27,0.3,3);
+for(int i=0;i<27;i++){
+if(i<12){
+cout<<0.3+0.05+0.1*i<<"   "<<f1->Eval(0.3+0.05+0.1*i)<<endl;
+effVsPt->SetBinContent(i+1, f1->Eval(0.3+0.05+0.1*i));
+}
+else {
+cout<<0.3+0.05+0.1*i<<"   "<<f2->Eval(0.3+0.05+0.1*i)<<endl;
+effVsPt->SetBinContent(i+1, f2->Eval(0.3+0.05+0.1*i));
+}
+
+}
+//effVsPt->Draw("");
+*/
+//histEffVsPt();
+//cout<<endl<<effVsPt->GetBinContent(effVsPt->FindBin(100.85))<<endl;
+cent1030EffVsPt();
+cout<<endl<<EffVsPt1030Hist->GetBinContent(EffVsPt1030Hist->FindBin(100.85))<<endl;
+//effpt[2]->Draw();
+
 }
 
 

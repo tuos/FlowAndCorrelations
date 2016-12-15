@@ -1,0 +1,65 @@
+void cent1030EffVsPt(){
+   Double_t xAxis1[54] = {0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.8, 3.2, 3.6, 4, 4.4, 4.8, 5.2, 5.6, 6, 6.4, 6.8, 7.2, 8.4, 9.6, 10.8, 10000}; 
+   
+   TH1D *EffVsPt1030Hist = new TH1D("EffVsPt1030Hist","eff/(1-fak)",53, xAxis1);
+   EffVsPt1030Hist->SetBinContent(1,1.752243e-06);
+   EffVsPt1030Hist->SetBinContent(2,1.752243e-06);
+   EffVsPt1030Hist->SetBinContent(3,1.752243e-06);
+   EffVsPt1030Hist->SetBinContent(4,2.811524e-06);
+   EffVsPt1030Hist->SetBinContent(5,0.01610214);
+   EffVsPt1030Hist->SetBinContent(6,0.4045916);
+   EffVsPt1030Hist->SetBinContent(7,0.5120242);
+   EffVsPt1030Hist->SetBinContent(8,0.5674722);
+   EffVsPt1030Hist->SetBinContent(9,0.6096484);
+   EffVsPt1030Hist->SetBinContent(10,0.6419688);
+   EffVsPt1030Hist->SetBinContent(11,0.6672749);
+   EffVsPt1030Hist->SetBinContent(12,0.6869595);
+   EffVsPt1030Hist->SetBinContent(13,0.7017428);
+   EffVsPt1030Hist->SetBinContent(14,0.7143214);
+   EffVsPt1030Hist->SetBinContent(15,0.7240358);
+   EffVsPt1030Hist->SetBinContent(16,0.7312891);
+   EffVsPt1030Hist->SetBinContent(17,0.7376361);
+   EffVsPt1030Hist->SetBinContent(18,0.7428441);
+   EffVsPt1030Hist->SetBinContent(19,0.7476342);
+   EffVsPt1030Hist->SetBinContent(20,0.7513046);
+   EffVsPt1030Hist->SetBinContent(21,0.7541743);
+   EffVsPt1030Hist->SetBinContent(22,0.7566443);
+   EffVsPt1030Hist->SetBinContent(23,0.7592669);
+   EffVsPt1030Hist->SetBinContent(24,0.7609981);
+   EffVsPt1030Hist->SetBinContent(25,0.7631254);
+   EffVsPt1030Hist->SetBinContent(26,0.7656778);
+   EffVsPt1030Hist->SetBinContent(27,0.7714119);
+   EffVsPt1030Hist->SetBinContent(28,0.7919665);
+   EffVsPt1030Hist->SetBinContent(29,0.8188741);
+   EffVsPt1030Hist->SetBinContent(30,0.828377);
+   EffVsPt1030Hist->SetBinContent(31,0.7584424);
+   EffVsPt1030Hist->SetBinContent(32,0.7424328);
+   EffVsPt1030Hist->SetBinContent(33,0.7343215);
+   EffVsPt1030Hist->SetBinContent(34,0.7242384);
+   EffVsPt1030Hist->SetBinContent(35,0.7142176);
+   EffVsPt1030Hist->SetBinContent(36,0.7079376);
+   EffVsPt1030Hist->SetBinContent(37,0.7036838);
+   EffVsPt1030Hist->SetBinContent(38,0.698056);
+   EffVsPt1030Hist->SetBinContent(39,0.698776);
+   EffVsPt1030Hist->SetBinContent(40,0.6968297);
+   EffVsPt1030Hist->SetBinContent(41,0.6943336);
+   EffVsPt1030Hist->SetBinContent(42,0.6878444);
+   EffVsPt1030Hist->SetBinContent(43,0.6884733);
+   EffVsPt1030Hist->SetBinContent(44,0.6892275);
+   EffVsPt1030Hist->SetBinContent(45,0.6810003);
+   EffVsPt1030Hist->SetBinContent(46,0.6833382);
+   EffVsPt1030Hist->SetBinContent(47,0.6877825);
+   EffVsPt1030Hist->SetBinContent(48,0.6716979);
+   EffVsPt1030Hist->SetBinContent(49,0.6808914);
+   EffVsPt1030Hist->SetBinContent(50,0.6736653);
+   EffVsPt1030Hist->SetBinContent(51,0.6692775);
+   EffVsPt1030Hist->SetBinContent(52,0.6811485);
+   EffVsPt1030Hist->SetBinContent(53,0.6811485);
+ 
+   EffVsPt1030Hist->SetLineWidth(3);
+   EffVsPt1030Hist->SetLineColor(4);
+   EffVsPt1030Hist->SetLineStyle(2);
+   //EffVsPt1030Hist->Draw("");
+   EffVsPt1030Hist->Draw("Lsame");
+  
+}
