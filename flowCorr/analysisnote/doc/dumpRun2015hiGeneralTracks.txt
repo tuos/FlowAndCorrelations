@@ -1,0 +1,18 @@
+Type                                  Module                     Label        Process   
+----------------------------------------------------------------------------------------
+edm::TriggerResults                   "TriggerResults"           ""           "HLT"     
+L1GlobalTriggerReadoutRecord          "gtDigis"                  ""           "RECO"    
+edm::SortedCollection<CaloTower,edm::StrictWeakOrdering<CaloTower> >    "towerMaker"               ""           "RECO"    
+edm::SortedCollection<ZDCDataFrame,edm::StrictWeakOrdering<ZDCDataFrame> >    "castorDigis"              ""           "RECO"    
+edm::TriggerResults                   "TriggerResults"           ""           "RECO"    
+int                                   "centralityBin"            "HFtowers"   "RECO"    
+reco::BeamSpot                        "offlineBeamSpot"          ""           "RECO"    
+reco::Centrality                      "hiCentrality"             ""           "RECO"    
+reco::ClusterCompatibility            "hiClusterCompatibility"   ""           "RECO"    
+vector<reco::CastorTower>             "CastorTowerReco"          ""           "RECO"    
+vector<reco::EvtPlane>                "hiEvtPlane"               ""           "RECO"    
+vector<reco::PFCandidate>             "particleFlowTmp"          ""           "RECO"    
+vector<reco::Track>                   "hiGeneralTracks"          ""           "RECO"    
+vector<reco::Vertex>                  "hiSelectedVertex"         ""           "RECO"    
+edm::TriggerResults                   "TriggerResults"           ""           "SKIM"    
+int                                   "centralityBin"            "HFtowers"   "SKIM" 

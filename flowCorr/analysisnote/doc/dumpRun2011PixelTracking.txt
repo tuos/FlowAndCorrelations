@@ -1,0 +1,12 @@
+Type                                  Module                      Label         Process           
+--------------------------------------------------------------------------------------------------
+vector<reco::Track>                   "hiGeneralAndPixelTracks"   ""            "PIXELTRACKRECO"   
+edm::TriggerResults                   "TriggerResults"            ""            "ANASKIM"         
+edm::TriggerResults                   "TriggerResults"            ""            "HLT"             
+L1GlobalTriggerReadoutRecord          "gtDigis"                   ""            "reRECO"          
+edm::SortedCollection<CaloTower,edm::StrictWeakOrdering<CaloTower> >    "towerMaker"                ""            "reRECO"          
+edm::TriggerResults                   "TriggerResults"            ""            "reRECO"          
+reco::BeamSpot                        "offlineBeamSpot"           ""            "reRECO"          
+reco::Centrality                      "hiCentrality"              ""            "reRECO"          
+vector<reco::EvtPlane>                "hiEvtPlane"                "recoLevel"   "reRECO"          
+vector<reco::Vertex>                  "hiSelectedVertex"          ""            "reRECO" 
