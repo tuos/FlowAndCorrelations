@@ -382,8 +382,8 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
            sumwPlus+= pt_hfPlus_weight; 
            QhfPlus[ibin][iH]+= pt_hfPlus_weight * TComplex::Exp(TComplex(0,(iH+1)*phi_hfPlus));
          }
-         //if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus - TComplex(meanQxPlus[ibin][iH], meanQyPlus[ibin][iH]); //re-centering
-         if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus; 
+         if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus - TComplex(meanQxPlus[ibin][iH], meanQyPlus[ibin][iH]); //re-centering
+         //if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus; 
          else QhfPlus[ibin][iH]=0;
 
          // choose hf or trk here (two lines): pVect_hfEtaMinus vs pVect_trkEtaMinus;
@@ -395,8 +395,8 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
            sumwMinus+= pt_hfMinus_weight; 
            QhfMinus[ibin][iH]+= pt_hfMinus_weight * TComplex::Exp(TComplex(0,(iH+1)*phi_hfMinus));
          }
-         //if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus - TComplex(meanQxMinus[ibin][iH], meanQyMinus[ibin][iH]); //re-centering;
-         if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus; 
+         if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus - TComplex(meanQxMinus[ibin][iH], meanQyMinus[ibin][iH]); //re-centering;
+         //if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus; 
          else QhfMinus[ibin][iH]=0;
 
          ////trk
@@ -419,7 +419,7 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
              QtrkPlus1[ibin][iH]+= 1.0/effV * TComplex::Exp(TComplex(0,(iH+1)*phi_trkPlus));
            }
          }
-         if(sumwtrkPlus>0) QtrkPlus[ibin][iH]=QtrkPlus[ibin][iH]/sumwtrkPlus;// - TComplex(meanQxPlus[ibin][iH], meanQyPlus[ibin][iH]); //re-centering
+         if(sumwtrkPlus>0) QtrkPlus[ibin][iH]=QtrkPlus[ibin][iH]/sumwtrkPlus - TComplex(meanQxTrkPlus[ibin][iH], meanQyTrkPlus[ibin][iH]); //re-centering
          else QtrkPlus[ibin][iH]=0;     
          if(sumwtrkPlus1>0) QtrkPlus1[ibin][iH]=QtrkPlus1[ibin][iH]/sumwtrkPlus1;
          else QtrkPlus1[ibin][iH]=0;    
@@ -437,7 +437,7 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
              QtrkMinus1[ibin][iH]+= 1.0/effV * TComplex::Exp(TComplex(0,(iH+1)*phi_trkMinus));
            }
          }
-         if(sumwtrkMinus>0) QtrkMinus[ibin][iH]=QtrkMinus[ibin][iH]/sumwtrkMinus;// - TComplex(meanQxMinus[ibin][iH], meanQyMinus[ibin][iH]); //re-centering;
+         if(sumwtrkMinus>0) QtrkMinus[ibin][iH]=QtrkMinus[ibin][iH]/sumwtrkMinus - TComplex(meanQxTrkMinus[ibin][iH], meanQyTrkMinus[ibin][iH]); //re-centering;
          else QtrkMinus[ibin][iH]=0;
          if((sumwtrkPlus+sumwtrkMinus)>0) QtrkAll[ibin][iH]=QtrkAll[ibin][iH]/(sumwtrkPlus+sumwtrkMinus);
          else QtrkAll[ibin][iH]=0;
@@ -454,6 +454,10 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          hQhfMinusX[ibin][iH]->Fill(QhfMinus[ibin][iH].Re());
          hQhfMinusY[ibin][iH]->Fill(QhfMinus[ibin][iH].Im());
          hQhfMinusQ[ibin][iH]->Fill(TComplex::Abs(QhfMinus[ibin][iH]));
+         hQtrkPlusX[ibin][iH]->Fill(QtrkPlus[ibin][iH].Re());
+         hQtrkPlusY[ibin][iH]->Fill(QtrkPlus[ibin][iH].Im());
+         hQtrkMinusX[ibin][iH]->Fill(QtrkMinus[ibin][iH].Re());
+         hQtrkMinusY[ibin][iH]->Fill(QtrkMinus[ibin][iH].Im());
          double vnabsmevt;
          temp=QhfPlus[ibin][iH]*TComplex::Conjugate(QhfMinus[ibin][iH]);
          if(useReDenominator) vnabsmevt=temp.Re();  // or use Abs(temp) ???
@@ -903,6 +907,10 @@ FlowCorr::beginJob()
       hQhfMinusX[ibin][iH] = fs->make<TH1D>(Form("hQhfMinusX_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
       hQhfMinusY[ibin][iH] = fs->make<TH1D>(Form("hQhfMinusY_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
       hQhfMinusQ[ibin][iH] = fs->make<TH1D>(Form("hQhfMinusQ_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
+      hQtrkPlusX[ibin][iH] = fs->make<TH1D>(Form("hQtrkPlusX_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
+      hQtrkPlusY[ibin][iH] = fs->make<TH1D>(Form("hQtrkPlusY_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
+      hQtrkMinusX[ibin][iH] = fs->make<TH1D>(Form("hQtrkMinusX_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
+      hQtrkMinusY[ibin][iH] = fs->make<TH1D>(Form("hQtrkMinusY_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
       hVnAbs2[ibin][iH] = fs->make<TH1D>(Form("hVnAbs2_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
       hVnAbs4[ibin][iH] = fs->make<TH1D>(Form("hVnAbs4_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
       hVnAbs6[ibin][iH] = fs->make<TH1D>(Form("hVnAbs6_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
