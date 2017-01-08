@@ -7,14 +7,14 @@ config.JobType.allowUndistributedCMSSW = True
 
 config.JobType.pluginName = 'Analysis'
 config.JobType.psetName = 'ConfFile_cfg.py'
-config.Data.inputDataset = '/HIMinimumBias2/qwang-crab_HIMB2_PixelTracking_v3-f359806bdfa543922b20b1cc8503759a/USER'
-config.Data.inputDBS = 'phys03'
+config.Data.inputDataset = '/HIMinimumBias2/HIRun2015-25Aug2016-v1/AOD'
+config.Data.inputDBS = 'global'
 config.Data.lumiMask = 'cert_262548_263757_PromptReco_HICollisions15_JSON_v2.txt'
 config.Data.splitting = 'FileBased'
-config.Data.unitsPerJob = 5
-config.Data.outLFNDirBase = '/store/user/tuos/flowCorr/v01aug08_5tev'
+config.Data.unitsPerJob = 20
+config.Data.outLFNDirBase = '/store/user/tuos/mixedHarmonics/v08Ana_5tevReCentPt_jan07A'
 config.Data.publication = False
-config.Data.outputDatasetTag = 'pbpb2015_flowcorr_v01aug08_5tev'
+config.Data.outputDatasetTag = 'pbpb2015_flowcorr_v08Ana_5tevReCentPt_jan07A'
 
 config.Site.storageSite = 'T2_US_Vanderbilt'
 
@@ -23,7 +23,7 @@ if __name__ == '__main__':
    from CRABClient.ClientExceptions import ClientException
    from httplib import HTTPException
 
-   config.General.workArea = 'pbpb2015_flowcorr_v01aug08_5tev'
+   config.General.workArea = 'pbpb2015_flowcorr_v08Ana_5tevReCentPt_jan07A'
 
    def submit(config):
       try:
@@ -38,10 +38,10 @@ if __name__ == '__main__':
        print "Submitting Data Set %d " % (num+1)
 
        if num == 0:
-           RequestName = 'pbpb2015_flowcorr_v01aug08_5tev'
-           DataSetName = '/HIMinimumBias2/qwang-crab_HIMB2_PixelTracking_v3-f359806bdfa543922b20b1cc8503759a/USER'
+           RequestName = 'pbpb2015_flowcorr_v08Ana_5tevReCentPt_jan07A'
+           DataSetName = '/HIMinimumBias2/HIRun2015-25Aug2016-v1/AOD'
            LumiMasks = 'cert_262548_263757_PromptReco_HICollisions15_JSON_v2.txt'
-           OutDirBase = '/store/user/tuos/flowCorr/v01aug08_5tev'
+           OutDirBase = '/store/user/tuos/mixedHarmonics/v08Ana_5tevReCentPt_jan07A'
            
        config.General.requestName = RequestName
        config.Data.inputDataset = DataSetName
