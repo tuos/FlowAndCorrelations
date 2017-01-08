@@ -397,7 +397,7 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
            sumwPlus+= pt_hfPlus_weight;
            QhfPlus[ibin][iH]+= pt_hfPlus_weight * TComplex::Exp(TComplex(0,(iH+1)*phi_hfPlus));
          }
-         if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus - TComplex(meanQxPlus[ibin][iH], meanQyPlus[ibin][iH]); //re-centering
+         if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus;// - TComplex(meanQxPlus[ibin][iH], meanQyPlus[ibin][iH]); //re-centering
          //if(sumwPlus>0) QhfPlus[ibin][iH]=QhfPlus[ibin][iH]/sumwPlus;
          else QhfPlus[ibin][iH]=0;
 
@@ -410,7 +410,7 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
            sumwMinus+= pt_hfMinus_weight;
            QhfMinus[ibin][iH]+= pt_hfMinus_weight * TComplex::Exp(TComplex(0,(iH+1)*phi_hfMinus));
          }
-         if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus - TComplex(meanQxMinus[ibin][iH], meanQyMinus[ibin][iH]); //re-centering;
+         if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus;// - TComplex(meanQxMinus[ibin][iH], meanQyMinus[ibin][iH]); //re-centering;
          //if(sumwMinus>0) QhfMinus[ibin][iH]=QhfMinus[ibin][iH]/sumwMinus;
          else QhfMinus[ibin][iH]=0;
 
@@ -434,7 +434,7 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
              QtrkPlus1[ibin][iH]+= 1.0/effV * TComplex::Exp(TComplex(0,(iH+1)*phi_trkPlus));
            }
          }
-         if(sumwtrkPlus>0) QtrkPlus[ibin][iH]=QtrkPlus[ibin][iH]/sumwtrkPlus - TComplex(meanQxTrkPlus[ibin][iH], meanQyTrkPlus[ibin][iH]); // re-centering
+         if(sumwtrkPlus>0) QtrkPlus[ibin][iH]=QtrkPlus[ibin][iH]/sumwtrkPlus;// - TComplex(meanQxTrkPlus[ibin][iH], meanQyTrkPlus[ibin][iH]); // re-centering
          else QtrkPlus[ibin][iH]=0;
          if(sumwtrkPlus1>0) QtrkPlus1[ibin][iH]=QtrkPlus1[ibin][iH]/sumwtrkPlus1;
          else QtrkPlus1[ibin][iH]=0;
@@ -452,7 +452,7 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
              QtrkMinus1[ibin][iH]+= 1.0/effV * TComplex::Exp(TComplex(0,(iH+1)*phi_trkMinus));
            }
          }
-         if(sumwtrkMinus>0) QtrkMinus[ibin][iH]=QtrkMinus[ibin][iH]/sumwtrkMinus - TComplex(meanQxTrkMinus[ibin][iH], meanQyTrkMinus[ibin][iH]); //re-centering;
+         if(sumwtrkMinus>0) QtrkMinus[ibin][iH]=QtrkMinus[ibin][iH]/sumwtrkMinus;// - TComplex(meanQxTrkMinus[ibin][iH], meanQyTrkMinus[ibin][iH]); //re-centering;
          else QtrkMinus[ibin][iH]=0;  
          if((sumwtrkPlus+sumwtrkMinus)>0) QtrkAll[ibin][iH]=QtrkAll[ibin][iH]/(sumwtrkPlus+sumwtrkMinus);
          else QtrkAll[ibin][iH]=0;
