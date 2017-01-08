@@ -10,8 +10,8 @@ process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
     fileNames = cms.untracked.vstring(
-        #'file:/afs/cern.ch/user/t/tuos/work/private/hin1600x/flowPbPb/CMSSW_5_3_20/src/hiMB_1001_1_irY.root'
-        '/store/user/davidlw/HIMinBiasUPC/Skim_rereco_MB_pixeltracks_final_v2/9c1b4b9b6b9ff3e493a474ba7d01bc76/hiMB_1001_1_irY.root'
+        'file:/afs/cern.ch/user/t/tuos/work/private/hin1600x/flowPbPb/CMSSW_5_3_20/src/hiMB_1001_1_irY.root'
+        #'/store/user/davidlw/HIMinBiasUPC/Skim_rereco_MB_pixeltracks_final_v2/9c1b4b9b6b9ff3e493a474ba7d01bc76/hiMB_1001_1_irY.root'
     )
 )
 
@@ -47,12 +47,17 @@ process.flowCorr = cms.EDAnalyzer('FlowCorr',
    TrackQuality     = cms.string('highPurity'),
    Tower            = cms.InputTag("towerMaker"),
    trackPtMinCut = cms.double(0.3),
-   trackPtMaxCut = cms.double(12.0),
-   trackEtaCut = cms.double(0.8),
+   trackPtMaxCut = cms.double(20.0),
+   trackEtaCut = cms.double(2.4),
    trackEtaMinCut = cms.double(0.0),
    ptErrCut = cms.double(0.1),
    dzRelCut = cms.double(3.0),
-   dxyRelCut = cms.double(3.0)
+   dxyRelCut = cms.double(3.0),
+   chi2nMax = cms.double(0.15),
+   nhitsMin = cms.int32(11),
+   algoParameters = cms.vint32(4,5,6,7),
+   vertexZMin = cms.double(0.0),
+   vertexZMax = cms.double(15.0)
 )
 
 
