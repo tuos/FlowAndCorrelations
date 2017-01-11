@@ -12,9 +12,9 @@ config.Data.inputDBS = 'global'
 config.Data.lumiMask = 'cert_262548_263757_PromptReco_HICollisions15_JSON_v2.txt'
 config.Data.splitting = 'FileBased'
 config.Data.unitsPerJob = 20
-config.Data.outLFNDirBase = '/store/user/tuos/mixedHarmonics/v08Ana_5tevReCentPt_jan07A'
+config.Data.outLFNDirBase = '/store/user/tuos/mixedHarmonics/v08Ana_5tevReCentPt_jan10A'
 config.Data.publication = False
-config.Data.outputDatasetTag = 'pbpb2015_flowcorr_v08Ana_5tevReCentPt_jan07A'
+config.Data.outputDatasetTag = 'pbpb2015_flowcorr_v08Ana_5tevReCentPt_jan10A'
 
 config.Site.storageSite = 'T2_US_Vanderbilt'
 
@@ -23,7 +23,7 @@ if __name__ == '__main__':
    from CRABClient.ClientExceptions import ClientException
    from httplib import HTTPException
 
-   config.General.workArea = 'pbpb2015_flowcorr_v08Ana_5tevReCentPt_jan07A'
+   config.General.workArea = 'pbpb2015_flowcorr_v08Ana_5tevReCentPt_jan10A'
 
    def submit(config):
       try:
@@ -38,10 +38,10 @@ if __name__ == '__main__':
        print "Submitting Data Set %d " % (num+1)
 
        if num == 0:
-           RequestName = 'pbpb2015_flowcorr_v08Ana_5tevReCentPt_jan07A'
+           RequestName = 'pbpb2015_flowcorr_v08Ana_5tevReCentPt_jan10A'
            DataSetName = '/HIMinimumBias2/HIRun2015-25Aug2016-v1/AOD'
            LumiMasks = 'cert_262548_263757_PromptReco_HICollisions15_JSON_v2.txt'
-           OutDirBase = '/store/user/tuos/mixedHarmonics/v08Ana_5tevReCentPt_jan07A'
+           OutDirBase = '/store/user/tuos/mixedHarmonics/v08Ana_5tevReCentPt_jan10A'
            
        config.General.requestName = RequestName
        config.Data.inputDataset = DataSetName

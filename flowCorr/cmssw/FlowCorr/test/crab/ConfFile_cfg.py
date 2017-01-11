@@ -12,8 +12,8 @@ process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
         #'/store/user/qwang/HIMinimumBias3/HIMinBias_v2/160128_201904/0000/HIMinBias_101.root'
         #'file:/afs/cern.ch/user/t/tuos/work/private/hin1600x/flowPbPb/CMSSW_7_5_8_patch4/src/HIMinBias_101.root'
-        '/store/user/qwang/pixel/HIMinimumBias2/crab_HIMB2_PixelTracking_v3/160629_161137/0000/pixeltracking_101.root'
-        #'file:/afs/cern.ch/user/t/tuos/work/private/hin1600x/flowPbPb/CMSSW_7_5_8_patch4/src/pixeltracking_101.root'
+        #'/store/hidata/HIRun2015/HIMinimumBias2/AOD/25Aug2016-v1/00000/02645A37-E274-E611-AE31-D4AE528E309D.root'
+        'file:/afs/cern.ch/user/t/tuos/work/private/hin1600x/flowPbPb/CMSSW_7_5_8_patch4/src/pixeltracking_101.root'
     )
 )
 
@@ -50,12 +50,18 @@ process.flowCorr = cms.EDAnalyzer('FlowCorr',
    TrackQuality     = cms.untracked.string('highPurity'),
    Tower            = cms.InputTag("towerMaker"),
    trackPtMinCut = cms.double(0.3),
-   trackPtMaxCut = cms.double(12.0),
+   trackPtMaxCut = cms.double(20.0),
    trackEtaCut = cms.double(2.4),
    trackEtaMinCut = cms.double(0.0),
    ptErrCut = cms.double(0.1),
    dzRelCut = cms.double(3.0),
    dxyRelCut = cms.double(3.0),
+   chi2nMax = cms.double(0.15),
+   nhitsMin = cms.int32(11),
+   algoParameters = cms.vint32(4,5,6,7),
+   vertexZMin = cms.double(0.0),
+   vertexZMax = cms.double(15.0),
+   hfEtaMin = cms.double(0.0),
    evtPlaneLevel    = cms.int32(0)
 )
 
