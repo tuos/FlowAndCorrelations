@@ -90,6 +90,7 @@ class FlowCorr : public edm::EDAnalyzer {
   std::vector<int> algoParameters_;
   double vertexZMin_;
   double vertexZMax_;
+  double hfEtaMin_;
 
   edm::Service<TFileService> fs;
   CentralityProvider * centProvider;
@@ -129,7 +130,7 @@ FlowCorr::FlowCorr(const edm::ParameterSet& iConfig)
   algoParameters_ = iConfig.getParameter<std::vector<int> >("algoParameters");
   vertexZMin_ = iConfig.getParameter<double>("vertexZMin");
   vertexZMax_ = iConfig.getParameter<double>("vertexZMax");
-
+  hfEtaMin_ = iConfig.getParameter<double>("hfEtaMin");
 
 }
 
@@ -266,11 +267,11 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
        bool isHF = tower.ietaAbs() > 29;
        TVector3 pvectorHF;
        pvectorHF.SetPtEtaPhi(tower.pt(),tower.eta(),tower.phi());
-          if(isHF && etahf > 0 && tower.pt()>0.005 && tower.pt()<30.0){
+          if(isHF && etahf > 1.0*hfEtaMin_ && tower.pt()>0.005 && tower.pt()<30.0){
             etHFtowerSumPlus += tower.pt();
             pVect_hfEtaPlus->push_back(pvectorHF);
           }
-          if(isHF && etahf < 0 && tower.pt()>0.005 && tower.pt()<30.0){
+          if(isHF && etahf < -1.0*hfEtaMin_ && tower.pt()>0.005 && tower.pt()<30.0){
             etHFtowerSumMinus += tower.pt();
             pVect_hfEtaMinus->push_back(pvectorHF);
           }

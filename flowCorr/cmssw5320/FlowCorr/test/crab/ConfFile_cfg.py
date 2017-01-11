@@ -57,7 +57,8 @@ process.flowCorr = cms.EDAnalyzer('FlowCorr',
    nhitsMin = cms.int32(11),
    algoParameters = cms.vint32(4,5,6,7),
    vertexZMin = cms.double(0.0),
-   vertexZMax = cms.double(15.0)
+   vertexZMax = cms.double(15.0),
+   hfEtaMin = cms.double(0.0)
 )
 
 
