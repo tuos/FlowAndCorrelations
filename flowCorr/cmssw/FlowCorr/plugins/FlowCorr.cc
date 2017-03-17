@@ -483,10 +483,7 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          hQtrkPlusY[ibin][iH]->Fill(QtrkPlus[ibin][iH].Im());
          hQtrkMinusX[ibin][iH]->Fill(QtrkMinus[ibin][iH].Re());
          hQtrkMinusY[ibin][iH]->Fill(QtrkMinus[ibin][iH].Im());
-         for(int iPt=0; iPt<nPtBin; iPt++){
-           hQtrkPtX[ibin][iH][iPt]->Fill(QtrkPt[ibin][iH][iPt].Re());
-           hQtrkPtY[ibin][iH][iPt]->Fill(QtrkPt[ibin][iH][iPt].Im());
-         }
+
          double vnabsmevt;
          temp=QhfPlus[ibin][iH]*TComplex::Conjugate(QhfMinus[ibin][iH]);
          if(useReDenominator) vnabsmevt=temp.Re();  // or use Abs(temp) ???
@@ -922,6 +919,13 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
            //if(sumwtrkPt[ipt]>0) QtrkPt[ibin][iH][ipt]=QtrkPt[ibin][iH][ipt]/sumwtrkPt[ipt] - TComplex(meanQxTrkPt[ibin][iH][ipt], meanQyTrkPt[ibin][iH][ipt]); // re-centering
            if(sumwtrkPt[ipt]>0) QtrkPt[ibin][iH][ipt]=QtrkPt[ibin][iH][ipt]/sumwtrkPt[ipt];
            else QtrkPt[ibin][iH][ipt]=0;
+         }
+       }
+
+       for(int iH=0; iH<nHarmonics; iH++){
+         for(int iPt=0; iPt<nPtBin; iPt++){
+           hQtrkPtX[ibin][iH][iPt]->Fill(QtrkPt[ibin][iH][iPt].Re());
+           hQtrkPtY[ibin][iH][iPt]->Fill(QtrkPt[ibin][iH][iPt].Im());
          }
        }
 
