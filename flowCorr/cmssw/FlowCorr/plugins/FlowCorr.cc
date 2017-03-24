@@ -916,7 +916,7 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
        for(int iH=0; iH<nHarmonics; iH++){
          for(int ipt=0; ipt<nPtBin; ipt++){
-           if(sumwtrkPt[ipt]>0) QtrkPt[ibin][iH][ipt]=QtrkPt[ibin][iH][ipt]/sumwtrkPt[ipt] - TComplex(meanQxTrkPt[ibin][iH][ipt], meanQyTrkPt[ibin][iH][ipt]); // re-centering
+           //if(sumwtrkPt[ipt]>0) QtrkPt[ibin][iH][ipt]=QtrkPt[ibin][iH][ipt]/sumwtrkPt[ipt] - TComplex(meanQxTrkPt[ibin][iH][ipt], meanQyTrkPt[ibin][iH][ipt]); // re-centering
            if(sumwtrkPt[ipt]>0) QtrkPt[ibin][iH][ipt]=QtrkPt[ibin][iH][ipt]/sumwtrkPt[ipt];
            else QtrkPt[ibin][iH][ipt]=0;
          }
