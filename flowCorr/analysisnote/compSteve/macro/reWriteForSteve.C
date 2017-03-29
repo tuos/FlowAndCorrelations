@@ -58,6 +58,34 @@ reWriteForSteve(){
   }
 
 // Chi
+  char inFiles[nFile][200]={"outchi422D_corrFlow.txt","outchi523D_corrFlow.txt","outchi6222D_corrFlow.txt","outchi633D_corrFlow.txt","outchi7223D_corrFlow.txt"};
+  char outFiles[nFile][nCent][200]={
+{"Chi42_0_5.txt", "Chi42_5_10.txt","Chi42_10_15.txt","Chi42_15_20.txt","Chi42_20_25.txt","Chi42_25_30.txt","Chi42_30_35.txt","Chi42_35_40.txt","Chi42_40_50.txt","Chi42_50_60.txt"},
+{"Chi523_0_5.txt", "Chi523_5_10.txt","Chi523_10_15.txt","Chi523_15_20.txt","Chi523_20_25.txt","Chi523_25_30.txt","Chi523_30_35.txt","Chi523_35_40.txt","Chi523_40_50.txt","Chi523_50_60.txt"},
+{"Chi62_0_5.txt", "Chi62_5_10.txt","Chi62_10_15.txt","Chi62_15_20.txt","Chi62_20_25.txt","Chi62_25_30.txt","Chi62_30_35.txt","Chi62_35_40.txt","Chi62_40_50.txt","Chi62_50_60.txt"},
+{"Chi63_0_5.txt", "Chi63_5_10.txt","Chi63_10_15.txt","Chi63_15_20.txt","Chi63_20_25.txt","Chi63_25_30.txt","Chi63_30_35.txt","Chi63_35_40.txt","Chi63_40_50.txt","Chi63_50_60.txt"},
+{"Chi723_0_5.txt", "Chi723_5_10.txt","Chi723_10_15.txt","Chi723_15_20.txt","Chi723_20_25.txt","Chi723_25_30.txt","Chi723_30_35.txt","Chi723_35_40.txt","Chi723_40_50.txt","Chi723_50_60.txt"}
+};
+  for(int i=0; i<nFile; i++){
+    ifstream inFile;
+    inFile.open(inFiles[i]);
+    for(int j=0; j<nCent; j++){
+      ofstream outFile;
+      outFile.open(outFiles[i][j]);
+      inFile>>tmp; inFile>>tmp;
+      for(int k=0; k<nPt; k++){
+        inFile>>tmp; inFile>>tmp; inFile>>mPt; inFile>>tmp; inFile>>value; inFile>>err;
+        if(k<16)
+          outFile<<mPt<<"     "<<value<<"     "<<err<<endl;
+      }
+      outFile.close();
+    }
+    inFile.close();
+  }
+
+
+
+
 
 }
 
