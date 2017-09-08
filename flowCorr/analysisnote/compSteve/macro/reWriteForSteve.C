@@ -83,7 +83,31 @@ reWriteForSteve(){
     inFile.close();
   }
 
-
+// mixed harmonics
+  char inFilesV[nFile][200]={"outv42_corrFlow.txt","outv523_corrFlow.txt","outv62_corrFlow.txt","outv63_corrFlow.txt","outv723_corrFlow.txt"};
+  char outFilesV[nFile][nCent][200]={
+{"v42_0_5.txt", "v42_5_10.txt","v42_10_15.txt","v42_15_20.txt","v42_20_25.txt","v42_25_30.txt","v42_30_35.txt","v42_35_40.txt","v42_40_50.txt","v42_50_60.txt"},
+{"v523_0_5.txt", "v523_5_10.txt","v523_10_15.txt","v523_15_20.txt","v523_20_25.txt","v523_25_30.txt","v523_30_35.txt","v523_35_40.txt","v523_40_50.txt","v523_50_60.txt"},
+{"v62_0_5.txt", "v62_5_10.txt","v62_10_15.txt","v62_15_20.txt","v62_20_25.txt","v62_25_30.txt","v62_30_35.txt","v62_35_40.txt","v62_40_50.txt","v62_50_60.txt"},
+{"v63_0_5.txt", "v63_5_10.txt","v63_10_15.txt","v63_15_20.txt","v63_20_25.txt","v63_25_30.txt","v63_30_35.txt","v63_35_40.txt","v63_40_50.txt","v63_50_60.txt"},
+{"v723_0_5.txt", "v723_5_10.txt","v723_10_15.txt","v723_15_20.txt","v723_20_25.txt","v723_25_30.txt","v723_30_35.txt","v723_35_40.txt","v723_40_50.txt","v723_50_60.txt"}
+};
+  for(int i=0; i<nFile; i++){
+    ifstream inFileV;
+    inFileV.open(inFilesV[i]);
+    for(int j=0; j<nCent; j++){
+      ofstream outFileV;
+      outFileV.open(outFilesV[i][j]);
+      inFileV>>tmp; inFileV>>tmp;
+      for(int k=0; k<nPt; k++){
+        inFileV>>tmp; inFileV>>tmp; inFileV>>mPt; inFileV>>tmp; inFileV>>value; inFileV>>err;
+        if(k<16)
+          outFileV<<mPt<<"     "<<value<<"     "<<err<<endl;
+      }
+      outFileV.close();
+    }
+    inFileV.close();
+  }
 
 
 
