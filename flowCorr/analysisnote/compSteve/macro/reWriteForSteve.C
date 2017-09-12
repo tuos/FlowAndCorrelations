@@ -110,6 +110,33 @@ reWriteForSteve(){
   }
 
 
+// vn{Psi_n}
+  char inFilesVn[nFile][200]={"outv22_corrFlow.txt","outv33_corrFlow.txt","outv44_corrFlow.txt","outv55_corrFlow.txt","outv66_corrFlow.txt"};
+  char outFilesVn[nFile][nCent][200]={
+{"v22_0_5.txt", "v22_5_10.txt","v22_10_15.txt","v22_15_20.txt","v22_20_25.txt","v22_25_30.txt","v22_30_35.txt","v22_35_40.txt","v22_40_50.txt","v22_50_60.txt"},
+{"v33_0_5.txt", "v33_5_10.txt","v33_10_15.txt","v33_15_20.txt","v33_20_25.txt","v33_25_30.txt","v33_30_35.txt","v33_35_40.txt","v33_40_50.txt","v33_50_60.txt"},
+{"v44_0_5.txt", "v44_5_10.txt","v44_10_15.txt","v44_15_20.txt","v44_20_25.txt","v44_25_30.txt","v44_30_35.txt","v44_35_40.txt","v44_40_50.txt","v44_50_60.txt"},
+{"v55_0_5.txt", "v55_5_10.txt","v55_10_15.txt","v55_15_20.txt","v55_20_25.txt","v55_25_30.txt","v55_30_35.txt","v55_35_40.txt","v55_40_50.txt","v55_50_60.txt"},
+{"v66_0_5.txt", "v66_5_10.txt","v66_10_15.txt","v66_15_20.txt","v66_20_25.txt","v66_25_30.txt","v66_30_35.txt","v66_35_40.txt","v66_40_50.txt","v66_50_60.txt"}
+};
+  for(int i=0; i<nFile; i++){
+    ifstream inFileVn;
+    inFileVn.open(inFilesVn[i]);
+    for(int j=0; j<nCent; j++){
+      ofstream outFileVn;
+      outFileVn.open(outFilesVn[i][j]);
+      inFileVn>>tmp; inFileVn>>tmp;
+      for(int k=0; k<nPt; k++){
+        inFileVn>>tmp; inFileVn>>tmp; inFileVn>>mPt; inFileVn>>tmp; inFileVn>>value; inFileVn>>err;
+        if(k<16)
+          outFileVn<<mPt<<"     "<<value<<"     "<<err<<endl;
+      }
+      outFileVn.close();
+    }
+    inFileVn.close();
+  }
+
+
 
 }
 
