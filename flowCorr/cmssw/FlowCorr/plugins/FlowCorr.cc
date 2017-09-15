@@ -916,43 +916,43 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          }
        }
 
-       for(int iH=0; iH<nHarmonics; iH++){
-         for(int iPt=0; iPt<nPtBin; iPt++){
-           hQtrkPtX[ibin][iH][iPt]->Fill(QtrkPt[ibin][iH][iPt].Re());
-           hQtrkPtY[ibin][iH][iPt]->Fill(QtrkPt[ibin][iH][iPt].Im());
-         }
-       }
+       //for(int iH=0; iH<nHarmonics; iH++){
+         //for(int iPt=0; iPt<nPtBin; iPt++){
+           //hQtrkPtX[ibin][iH][iPt]->Fill(QtrkPt[ibin][iH][iPt].Re());
+           //hQtrkPtY[ibin][iH][iPt]->Fill(QtrkPt[ibin][iH][iPt].Im());
+         //}
+       //}
 
        for(int ipt=0; ipt<nPtBin; ipt++){
-         hq4Q2starQ2starAA[ibin][ipt]->Fill(QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]));
-         hq4Q2starQ2starBB[ibin][ipt]->Fill(QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
+         //hq4Q2starQ2starAA[ibin][ipt]->Fill(QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]));
+         //hq4Q2starQ2starBB[ibin][ipt]->Fill(QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
          hq4Q2starQ2starAB[ibin][ipt]->Fill(QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
-         hq6Q2starQ2starQ2starAA[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]));
-         hq6Q2starQ2starQ2starBB[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
+         //hq6Q2starQ2starQ2starAA[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]));
+         //hq6Q2starQ2starQ2starBB[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
          hq6Q2starQ2starQ2starAB[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]));
-         hq6Q3starQ3starAA[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfMinus[ibin][2])*TComplex::Conjugate(QhfMinus[ibin][2]));
-         hq6Q3starQ3starBB[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfPlus[ibin][2])*TComplex::Conjugate(QhfPlus[ibin][2]));
+         //hq6Q3starQ3starAA[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfMinus[ibin][2])*TComplex::Conjugate(QhfMinus[ibin][2]));
+         //hq6Q3starQ3starBB[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfPlus[ibin][2])*TComplex::Conjugate(QhfPlus[ibin][2]));
          hq6Q3starQ3starAB[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfMinus[ibin][2])*TComplex::Conjugate(QhfPlus[ibin][2]));
-         hq5Q2starQ3starAA[ibin][ipt]->Fill(QtrkPt[ibin][4][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]));
-         hq5Q2starQ3starBB[ibin][ipt]->Fill(QtrkPt[ibin][4][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
+         //hq5Q2starQ3starAA[ibin][ipt]->Fill(QtrkPt[ibin][4][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]));
+         //hq5Q2starQ3starBB[ibin][ipt]->Fill(QtrkPt[ibin][4][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
          hq5Q2starQ3starAB[ibin][ipt]->Fill(QtrkPt[ibin][4][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
-         hq7Q2starQ2starQ3starAA[ibin][ipt]->Fill(QtrkPt[ibin][6][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]));
-         hq7Q2starQ2starQ3starBB[ibin][ipt]->Fill(QtrkPt[ibin][6][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
+         //hq7Q2starQ2starQ3starAA[ibin][ipt]->Fill(QtrkPt[ibin][6][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]));
+         //hq7Q2starQ2starQ3starBB[ibin][ipt]->Fill(QtrkPt[ibin][6][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
          hq7Q2starQ2starQ3starAB[ibin][ipt]->Fill(QtrkPt[ibin][6][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
-         hQ2Abs4AA[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]));
-         hQ2Abs4BB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
+         //hQ2Abs4AA[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]));
+         //hQ2Abs4BB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
          hQ2Abs4AB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
-         hQ2Abs6AA[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]));
-         hQ2Abs6BB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
+         //hQ2Abs6AA[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]));
+         //hQ2Abs6BB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
          hQ2Abs6AB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
-         hQ3Abs4AA[ibin][ipt]->Fill(QtrkPt[ibin][2][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][2])*TComplex::Conjugate(QhfMinus[ibin][2]));
-         hQ3Abs4BB[ibin][ipt]->Fill(QtrkPt[ibin][2][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfPlus[ibin][2])*TComplex::Conjugate(QhfPlus[ibin][2]));
+         //hQ3Abs4AA[ibin][ipt]->Fill(QtrkPt[ibin][2][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][2])*TComplex::Conjugate(QhfMinus[ibin][2]));
+         //hQ3Abs4BB[ibin][ipt]->Fill(QtrkPt[ibin][2][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfPlus[ibin][2])*TComplex::Conjugate(QhfPlus[ibin][2]));
          hQ3Abs4AB[ibin][ipt]->Fill(QtrkPt[ibin][2][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][2])*TComplex::Conjugate(QhfPlus[ibin][2]));
-         hQ2Abs2Q3Abs2AA[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]));
-         hQ2Abs2Q3Abs2BB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
+         //hQ2Abs2Q3Abs2AA[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]));
+         //hQ2Abs2Q3Abs2BB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
          hQ2Abs2Q3Abs2AB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]));
-         hQ2Abs4Q3Abs2AA[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]));
-         hQ2Abs4Q3Abs2BB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
+         //hQ2Abs4Q3Abs2AA[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]));
+         //hQ2Abs4Q3Abs2BB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
          hQ2Abs4Q3Abs2AB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
 
 
@@ -1014,10 +1014,10 @@ FlowCorr::beginJob()
       hQtrkPlusY[ibin][iH] = fs->make<TH1D>(Form("hQtrkPlusY_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
       hQtrkMinusX[ibin][iH] = fs->make<TH1D>(Form("hQtrkMinusX_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
       hQtrkMinusY[ibin][iH] = fs->make<TH1D>(Form("hQtrkMinusY_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
-      for(int iPt=0; iPt<nPtBin; iPt++){
-        hQtrkPtX[ibin][iH][iPt] = fs->make<TH1D>(Form("hQtrkPtX_ibin%d_iH%d_iPt%d",ibin,iH,iPt),"",200,-1000,1000);
-        hQtrkPtY[ibin][iH][iPt] = fs->make<TH1D>(Form("hQtrkPtY_ibin%d_iH%d_iPt%d",ibin,iH,iPt),"",200,-1000,1000);
-      }
+      //for(int iPt=0; iPt<nPtBin; iPt++){
+        //hQtrkPtX[ibin][iH][iPt] = fs->make<TH1D>(Form("hQtrkPtX_ibin%d_iH%d_iPt%d",ibin,iH,iPt),"",200,-1000,1000);
+        //hQtrkPtY[ibin][iH][iPt] = fs->make<TH1D>(Form("hQtrkPtY_ibin%d_iH%d_iPt%d",ibin,iH,iPt),"",200,-1000,1000);
+      //}
       hVnAbs2[ibin][iH] = fs->make<TH1D>(Form("hVnAbs2_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
       hVnAbs4[ibin][iH] = fs->make<TH1D>(Form("hVnAbs4_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
       hVnAbs6[ibin][iH] = fs->make<TH1D>(Form("hVnAbs6_ibin%d_iH%d",ibin,iH),"",200,-1000,1000);
@@ -1102,35 +1102,35 @@ FlowCorr::beginJob()
       hv8V2starV2starV2starV2star[ibin][ipt] = fs->make<TH1D>(Form("hv8V2starV2starV2starV2star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hv8V2starV3starV3star[ibin][ipt] = fs->make<TH1D>(Form("hv8V2starV3starV3star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
 
-      hq4Q2starQ2starAA[ibin][ipt] = fs->make<TH1D>(Form("hq4Q2starQ2starAA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hq4Q2starQ2starBB[ibin][ipt] = fs->make<TH1D>(Form("hq4Q2starQ2starBB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hq4Q2starQ2starAA[ibin][ipt] = fs->make<TH1D>(Form("hq4Q2starQ2starAA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hq4Q2starQ2starBB[ibin][ipt] = fs->make<TH1D>(Form("hq4Q2starQ2starBB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hq4Q2starQ2starAB[ibin][ipt] = fs->make<TH1D>(Form("hq4Q2starQ2starAB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hq6Q2starQ2starQ2starAA[ibin][ipt] = fs->make<TH1D>(Form("hq6Q2starQ2starQ2starAA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hq6Q2starQ2starQ2starBB[ibin][ipt] = fs->make<TH1D>(Form("hq6Q2starQ2starQ2starBB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hq6Q2starQ2starQ2starAA[ibin][ipt] = fs->make<TH1D>(Form("hq6Q2starQ2starQ2starAA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hq6Q2starQ2starQ2starBB[ibin][ipt] = fs->make<TH1D>(Form("hq6Q2starQ2starQ2starBB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hq6Q2starQ2starQ2starAB[ibin][ipt] = fs->make<TH1D>(Form("hq6Q2starQ2starQ2starAB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hq6Q3starQ3starAA[ibin][ipt] = fs->make<TH1D>(Form("hq6Q3starQ3starAA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hq6Q3starQ3starBB[ibin][ipt] = fs->make<TH1D>(Form("hq6Q3starQ3starBB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hq6Q3starQ3starAA[ibin][ipt] = fs->make<TH1D>(Form("hq6Q3starQ3starAA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hq6Q3starQ3starBB[ibin][ipt] = fs->make<TH1D>(Form("hq6Q3starQ3starBB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hq6Q3starQ3starAB[ibin][ipt] = fs->make<TH1D>(Form("hq6Q3starQ3starAB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hq5Q2starQ3starAA[ibin][ipt] = fs->make<TH1D>(Form("hq5Q2starQ3starAA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hq5Q2starQ3starBB[ibin][ipt] = fs->make<TH1D>(Form("hq5Q2starQ3starBB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hq5Q2starQ3starAA[ibin][ipt] = fs->make<TH1D>(Form("hq5Q2starQ3starAA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hq5Q2starQ3starBB[ibin][ipt] = fs->make<TH1D>(Form("hq5Q2starQ3starBB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hq5Q2starQ3starAB[ibin][ipt] = fs->make<TH1D>(Form("hq5Q2starQ3starAB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hq7Q2starQ2starQ3starAA[ibin][ipt] = fs->make<TH1D>(Form("hq7Q2starQ2starQ3starAA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hq7Q2starQ2starQ3starBB[ibin][ipt] = fs->make<TH1D>(Form("hq7Q2starQ2starQ3starBB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hq7Q2starQ2starQ3starAA[ibin][ipt] = fs->make<TH1D>(Form("hq7Q2starQ2starQ3starAA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hq7Q2starQ2starQ3starBB[ibin][ipt] = fs->make<TH1D>(Form("hq7Q2starQ2starQ3starBB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hq7Q2starQ2starQ3starAB[ibin][ipt] = fs->make<TH1D>(Form("hq7Q2starQ2starQ3starAB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hQ2Abs4AA[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs4AA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hQ2Abs4BB[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs4BB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hQ2Abs4AA[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs4AA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hQ2Abs4BB[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs4BB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hQ2Abs4AB[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs4AB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hQ2Abs6AA[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs6AA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hQ2Abs6BB[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs6BB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hQ2Abs6AA[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs6AA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hQ2Abs6BB[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs6BB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hQ2Abs6AB[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs6AB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hQ3Abs4AA[ibin][ipt] = fs->make<TH1D>(Form("hQ3Abs4AA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hQ3Abs4BB[ibin][ipt] = fs->make<TH1D>(Form("hQ3Abs4BB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hQ3Abs4AA[ibin][ipt] = fs->make<TH1D>(Form("hQ3Abs4AA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hQ3Abs4BB[ibin][ipt] = fs->make<TH1D>(Form("hQ3Abs4BB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hQ3Abs4AB[ibin][ipt] = fs->make<TH1D>(Form("hQ3Abs4AB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hQ2Abs2Q3Abs2AA[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs2Q3Abs2AA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hQ2Abs2Q3Abs2BB[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs2Q3Abs2BB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hQ2Abs2Q3Abs2AA[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs2Q3Abs2AA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hQ2Abs2Q3Abs2BB[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs2Q3Abs2BB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hQ2Abs2Q3Abs2AB[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs2Q3Abs2AB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hQ2Abs4Q3Abs2AA[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs4Q3Abs2AA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hQ2Abs4Q3Abs2BB[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs4Q3Abs2BB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hQ2Abs4Q3Abs2AA[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs4Q3Abs2AA_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
+      //hQ2Abs4Q3Abs2BB[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs4Q3Abs2BB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hQ2Abs4Q3Abs2AB[ibin][ipt] = fs->make<TH1D>(Form("hQ2Abs4Q3Abs2AB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
 
 
