@@ -143,13 +143,6 @@ using namespace edm;
   TH1D* hV5V2starV3star[nCentBin];
   TH1D* hV7V2starV2starV3star[nCentBin];
 
-  TH1D* hv2V2star[nCentBin][nPtBin];
-  TH1D* hv3V3star[nCentBin][nPtBin];
-  TH1D* hv4V4star[nCentBin][nPtBin];
-  TH1D* hv5V5star[nCentBin][nPtBin];
-  TH1D* hv6V6star[nCentBin][nPtBin];
-  TH1D* hv7V7star[nCentBin][nPtBin];
-  TH1D* hv8V8star[nCentBin][nPtBin];
   TH1D* hv4V2starV2star[nCentBin][nPtBin];
   TH1D* hv4V2starV2starAB[nCentBin][nPtBin];
   TH1D* hv4V2starV2starSub[nCentBin][nPtBin];

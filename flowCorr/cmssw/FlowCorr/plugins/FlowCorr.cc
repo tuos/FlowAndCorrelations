@@ -658,34 +658,6 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
            QtrkPt[ibin][iH][cpt]+= pt_trkPlus_weight * TComplex::Exp(TComplex(0,(iH+1)*phi_trkPlus));
          }
 
-         temp = TComplex::Exp(TComplex(0,(2)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][1]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv2V2star[ibin][cpt]->Fill(tempReal);
-         temp = TComplex::Exp(TComplex(0,(3)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][2]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv3V3star[ibin][cpt]->Fill(tempReal);
-         temp = TComplex::Exp(TComplex(0,(4)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][3]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv4V4star[ibin][cpt]->Fill(tempReal);
-         temp = TComplex::Exp(TComplex(0,(5)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][4]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv5V5star[ibin][cpt]->Fill(tempReal);
-         temp = TComplex::Exp(TComplex(0,(6)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][5]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv6V6star[ibin][cpt]->Fill(tempReal);
-         temp = TComplex::Exp(TComplex(0,(7)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][6]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv7V7star[ibin][cpt]->Fill(tempReal);
-         temp = TComplex::Exp(TComplex(0,(8)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][7]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv8V8star[ibin][cpt]->Fill(tempReal);
 
          temp = TComplex::Exp(TComplex(0,(4)*phi_trkPlus))*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]);
          if(useRe) tempReal=temp.Re();
@@ -792,34 +764,6 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
            QtrkPt[ibin][iH][cpt]+= pt_trkMinus_weight * TComplex::Exp(TComplex(0,(iH+1)*phi_trkMinus));
          }
 
-         temp = TComplex::Exp(TComplex(0,(2)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][1]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv2V2star[ibin][cpt]->Fill(tempReal);
-         temp = TComplex::Exp(TComplex(0,(3)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][2]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv3V3star[ibin][cpt]->Fill(tempReal);
-         temp = TComplex::Exp(TComplex(0,(4)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][3]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv4V4star[ibin][cpt]->Fill(tempReal);
-         temp = TComplex::Exp(TComplex(0,(5)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][4]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv5V5star[ibin][cpt]->Fill(tempReal);
-         temp = TComplex::Exp(TComplex(0,(6)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][5]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv6V6star[ibin][cpt]->Fill(tempReal);
-         temp = TComplex::Exp(TComplex(0,(7)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][6]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv7V7star[ibin][cpt]->Fill(tempReal);
-         temp = TComplex::Exp(TComplex(0,(8)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][7]);
-         if(useRe) tempReal=temp.Re();
-         else tempReal=TComplex::Abs(temp);
-         hv8V8star[ibin][cpt]->Fill(tempReal);
 
          temp = TComplex::Exp(TComplex(0,(4)*phi_trkMinus))*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]);
          if(useRe) tempReal=temp.Re();
@@ -924,6 +868,10 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
        //}
 
        for(int ipt=0; ipt<nPtBin; ipt++){
+        if(sumwtrkPt[ipt]>0){
+
+         
+
          //hq4Q2starQ2starAA[ibin][ipt]->Fill(QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]));
          //hq4Q2starQ2starBB[ibin][ipt]->Fill(QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
          hq4Q2starQ2starAB[ibin][ipt]->Fill(QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
@@ -955,7 +903,7 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
          //hQ2Abs4Q3Abs2BB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
          hQ2Abs4Q3Abs2AB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
 
-
+        }
        }
 
 
@@ -1077,13 +1025,6 @@ FlowCorr::beginJob()
     hV5V2starV3star[ibin] = fs->make<TH1D>(Form("hV5V2starV3star_ibin%d",ibin),"",200,-1000,1000);
     hV7V2starV2starV3star[ibin] = fs->make<TH1D>(Form("hV7V2starV2starV3star_ibin%d",ibin),"",200,-1000,1000);
     for(int ipt=0; ipt<nPtBin; ipt++){
-      hv2V2star[ibin][ipt] = fs->make<TH1D>(Form("hv2V2star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hv3V3star[ibin][ipt] = fs->make<TH1D>(Form("hv3V3star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hv4V4star[ibin][ipt] = fs->make<TH1D>(Form("hv4V4star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hv5V5star[ibin][ipt] = fs->make<TH1D>(Form("hv5V5star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hv6V6star[ibin][ipt] = fs->make<TH1D>(Form("hv6V6star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hv7V7star[ibin][ipt] = fs->make<TH1D>(Form("hv7V7star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
-      hv8V8star[ibin][ipt] = fs->make<TH1D>(Form("hv8V8star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hv4V2starV2star[ibin][ipt] = fs->make<TH1D>(Form("hv4V2starV2star_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hv4V2starV2starAB[ibin][ipt] = fs->make<TH1D>(Form("hv4V2starV2starAB_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
       hv4V2starV2starSub[ibin][ipt] = fs->make<TH1D>(Form("hv4V2starV2starSub_ibin%d_ipt%d",ibin,ipt),"",200,-1000,1000);
