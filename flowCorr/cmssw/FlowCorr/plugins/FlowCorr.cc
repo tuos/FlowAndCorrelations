@@ -34,6 +34,7 @@
 #include "DataFormats/HeavyIonEvent/interface/Centrality.h"
 #include "DataFormats/HeavyIonEvent/interface/EvtPlane.h"
 #include "DataFormats/VertexReco/interface/Vertex.h"
+#include "DataFormats/VertexReco/interface/VertexFwd.h"
 #include "SimDataFormats/HiGenData/interface/GenHIEvent.h"
 #include "SimDataFormats/GeneratorProducts/interface/HepMCProduct.h"
 #include "SimDataFormats/GeneratorProducts/interface/GenEventInfoProduct.h"
@@ -88,6 +89,8 @@ class FlowCorr : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
   double dzRelCut_;
   double dxyRelCut_;
   double chi2nMax_;
+  double chi2nPixelMax_;
+  double dzRelPixelCut_;
   int nhitsMin_;
   std::vector<int> algoParameters_;
   double vertexZMin_;
@@ -130,6 +133,8 @@ FlowCorr::FlowCorr(const edm::ParameterSet& iConfig) :
   dzRelCut_(iConfig.getParameter<double>("dzRelCut")),
   dxyRelCut_(iConfig.getParameter<double>("dxyRelCut")),
   chi2nMax_(iConfig.getParameter<double>("chi2nMax")),
+  chi2nPixelMax_(iConfig.getParameter<double>("chi2nPixelMax")),
+  dzRelPixelCut_(iConfig.getParameter<double>("dzRelPixelCut")),
   nhitsMin_(iConfig.getParameter<int>("nhitsMin")),
   algoParameters_(iConfig.getParameter<std::vector<int> >("algoParameters")),
   vertexZMin_(iConfig.getParameter<double>("vertexZMin")),
@@ -191,85 +196,74 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       hAngleFlat->Fill(anglem2Flat);
     }
 
-    edm::Handle<std::vector<reco::Vertex>> vertex;
-    iEvent.getByToken(VertexTag_, vertex);
-    double vx=vertex->begin()->x();
-    double vy=vertex->begin()->y();
-    double vz=vertex->begin()->z();
-    double vxError=vertex->begin()->xError();
-    double vyError=vertex->begin()->yError();
-    double vzError=vertex->begin()->zError();
+    Handle<VertexCollection> vertexCollection;
+    iEvent.getByToken(VertexTag_, vertexCollection);
+    VertexCollection recoVertices = *vertexCollection;
+    if ( recoVertices.size() > 100 ) return;
+    sort(recoVertices.begin(), recoVertices.end(), [](const reco::Vertex &a, const reco::Vertex &b){
+      if ( a.tracksSize() == b.tracksSize() ) return a.chi2() < b.chi2();
+      return a.tracksSize() > b.tracksSize();
+    });
+    int primaryvtx = 0;
+    double vx = recoVertices[primaryvtx].x();
+    double vy = recoVertices[primaryvtx].y();
+    double vz = recoVertices[primaryvtx].z();
+    double vxError = recoVertices[primaryvtx].xError();
+    double vyError = recoVertices[primaryvtx].yError();
+    double vzError = recoVertices[primaryvtx].zError();
     if(fabs(vz)<vertexZMin_ || fabs(vz)>vertexZMax_) return;
     hvz->Fill(vz);
     hvx->Fill(vx);
     hvy->Fill(vy);
-   
+    math::XYZPoint v1(vx,vy,vz);   
 
-     //edm::Handle<std::vector<reco::Track> tracks;
-     //iEvent.getByToken(TrackTag_,tracks);
      int nTracks = 0;
      pVect_trkEtaPlus = new vector<TVector3>;
      pVect_trkEtaMinus = new vector<TVector3>;
-     Handle<vector<Track>> tracks;
-     iEvent.getByToken(TrackTag_, tracks);
-     for(unsigned int i = 0 ; i < tracks->size(); ++i){
-       const Track& track = (*tracks)[i];
-       if(!track.quality(reco::TrackBase::qualityByName(TrackQualityTag_))) continue;
-       if(track.charge() == 0) continue;
-       //if(track.numberOfValidHits() < 11 ) continue;
-       //double algoOffline = track.algo();
-       //if(!(algoOffline==4 || algoOffline==6 || algoOffline==7 || algoOffline==5 || algoOffline==11)) continue;
-       //if(track.normalizedChi2() / track.hitPattern().trackerLayersWithMeasurement() > 0.15 ) continue;       
+     edm::Handle<TrackCollection> tracks;
+     iEvent.getByToken(TrackTag_,tracks);
+    for(TrackCollection::const_iterator itTrack = tracks->begin(); itTrack != tracks->end(); ++itTrack) {
+      if ( itTrack->charge() == 0 ) continue;
+      if ( !itTrack->quality(reco::TrackBase::highPurity) ) continue;
+      if ( fabs(itTrack->eta()) > trackEtaCut_ ) continue;
+      if ( itTrack->pt() < trackPtMinCut_ ) continue;
+      if ( itTrack->pt() > trackPtMaxCut_ ) continue;
 
-       math::XYZPoint v1(vx,vy,vz);
-       double dz= track.dz(v1);
-       double dzsigma2 = track.dzError()*track.dzError()+vzError*vzError;
-       double dxy= track.dxy(v1);
-       double dxysigma2 = track.dxyError()*track.dxyError()+vxError*vyError;
-
-       //if(track.pt()>trackPtMinCut_ && track.pt()<trackPtMaxCut_ && 
-       //track.eta()<trackEtaCut_ && track.eta()>-1.0*trackEtaCut_ &&
-       //track.ptError()/track.pt() < ptErrCut_ &&
-       //dz*dz < dzRelCut_*dzRelCut_ * dzsigma2 &&
-       //dxy*dxy < dxyRelCut_*dxyRelCut_ * dxysigma2 )
-
-       double chi2n = track.normalizedChi2();
-       double nlayers = track.hitPattern().trackerLayersWithMeasurement();
-       chi2n = chi2n/nlayers;
-       int nhits = track.numberOfValidHits();
-       //int algo  = track.originalAlgo(); 
-       int algo  = track.algo();
-       int count = 0;
-       for(unsigned i = 0; i < algoParameters_.size(); i++){
-         if( algo == algoParameters_[i] ) count++;
-       }
-       int passalgocut = 1;
-       if(track.pt()>2.4 && count == 0) passalgocut = 0;
-
-       int passpixeltrackcuts = 0;
-       if(track.pt()<2.4 && ( nhits == 3 || nhits == 4 || nhits == 5 || nhits == 6)) passpixeltrackcuts = 1;
-       int passgeneraltrackcuts = 0;
-       if(
-         track.pt()>trackPtMinCut_ && track.pt()<trackPtMaxCut_ &&
-         track.eta()<trackEtaCut_ && track.eta()>-1.0*trackEtaCut_ &&
-         track.ptError()/track.pt() < ptErrCut_ &&
-         dz*dz < dzRelCut_*dzRelCut_ * dzsigma2 &&
-         dxy*dxy < dxyRelCut_*dxyRelCut_ * dxysigma2 &&
-         chi2n < chi2nMax_ &&
-         nhits > nhitsMin_ &&
-         passalgocut == 1
-       ) passgeneraltrackcuts = 1;
-
-       if(passpixeltrackcuts==1 || passgeneraltrackcuts==1){
-         hpt->Fill(track.pt());
-         heta->Fill(track.eta());
-         hphi->Fill(track.phi());
-         nTracks++;
-         TVector3 pvectorTrack;
-         pvectorTrack.SetPtEtaPhi(track.pt(),track.eta(),track.phi());
-         if(track.eta()>=trackEtaMinCut_) pVect_trkEtaPlus->push_back(pvectorTrack);
-         if(track.eta()<-1*trackEtaMinCut_) pVect_trkEtaMinus->push_back(pvectorTrack);
-       }
+      bool bPix = false;
+      int nHits = itTrack->numberOfValidHits();
+      if ( itTrack->pt() < 2.4 and (nHits==3 or nHits==4 or nHits==5 or nHits==6) ) bPix = true;
+      if ( bPix ) {
+        if ( itTrack->normalizedChi2() / itTrack->hitPattern().trackerLayersWithMeasurement() > chi2nPixelMax_ ) continue;
+        double dzp=itTrack->dz(v1);
+        double dzperror=sqrt(itTrack->dzError()*itTrack->dzError()+vzError*vzError);
+        if ( fabs( dzp/dzperror ) > dzRelPixelCut_ ) continue;        
+      }
+      if ( not bPix ) {
+        if ( nHits < nhitsMin_ ) continue;
+        if ( itTrack->normalizedChi2() / itTrack->hitPattern().trackerLayersWithMeasurement() > chi2nMax_ ) continue;
+        if ( itTrack->ptError()/itTrack->pt() > ptErrCut_ ) continue;
+        if (
+             itTrack->pt() > 2.4 and
+             itTrack->originalAlgo() != 4 and
+             itTrack->originalAlgo() != 5 and
+             itTrack->originalAlgo() != 6 and
+             itTrack->originalAlgo() != 7
+           ) continue;
+        double d0 = -1.* itTrack->dxy(v1);
+        double derror=sqrt(itTrack->dxyError()*itTrack->dxyError()+vxError*vyError);
+        if ( fabs( d0/derror ) > dxyRelCut_ ) continue;
+        double dz=itTrack->dz(v1);
+        double dzerror=sqrt(itTrack->dzError()*itTrack->dzError()+vzError*vzError);
+        if ( fabs( dz/dzerror ) > dzRelCut_ ) continue;
+      }
+      hpt->Fill(itTrack->pt());
+      heta->Fill(itTrack->eta());
+      hphi->Fill(itTrack->phi());
+      nTracks++;
+      TVector3 pvectorTrack;
+      pvectorTrack.SetPtEtaPhi(itTrack->pt(),itTrack->eta(),itTrack->phi());
+      if(itTrack->eta()>=trackEtaMinCut_) pVect_trkEtaPlus->push_back(pvectorTrack);
+      if(itTrack->eta()<-1*trackEtaMinCut_) pVect_trkEtaMinus->push_back(pvectorTrack);
      }
      hNtrks->Fill(nTracks);
 
@@ -916,8 +910,8 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
        for(int iH=0; iH<nHarmonics; iH++){
          for(int ipt=0; ipt<nPtBin; ipt++){
-           //if(sumwtrkPt[ipt]>0) QtrkPt[ibin][iH][ipt]=QtrkPt[ibin][iH][ipt]/sumwtrkPt[ipt] - TComplex(meanQxTrkPt[ibin][iH][ipt], meanQyTrkPt[ibin][iH][ipt]); // re-centering
-           if(sumwtrkPt[ipt]>0) QtrkPt[ibin][iH][ipt]=QtrkPt[ibin][iH][ipt]/sumwtrkPt[ipt];
+           if(sumwtrkPt[ipt]>0) QtrkPt[ibin][iH][ipt]=QtrkPt[ibin][iH][ipt]/sumwtrkPt[ipt] - TComplex(meanQxTrkPt[ibin][iH][ipt], meanQyTrkPt[ibin][iH][ipt]); // re-centering
+           //if(sumwtrkPt[ipt]>0) QtrkPt[ibin][iH][ipt]=QtrkPt[ibin][iH][ipt]/sumwtrkPt[ipt];
            else QtrkPt[ibin][iH][ipt]=0;
          }
        }
@@ -999,7 +993,7 @@ FlowCorr::beginJob()
   hvx = fs->make<TH1D>("vx","vertex x",200,-0.5,0.5);
   hvy = fs->make<TH1D>("vy","vertex y",200,-0.5,0.5);
   hNtrks = fs->make<TH1D>("ntrks","number of tracks",3000,0,3000);
-  hpt = fs->make<TH1D>("pt","pt",200,0,20);
+  hpt = fs->make<TH1D>("pt","pt",nPtBin,ptBin);
   heta = fs->make<TH1D>("eta","eta",300,-3,3);
   hphi = fs->make<TH1D>("phi","phi",200,-4,4);
   hHFcal = fs->make<TH1D>("hfCal","HF ET",8000,0,8000);
