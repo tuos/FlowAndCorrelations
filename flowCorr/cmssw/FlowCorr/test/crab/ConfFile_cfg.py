@@ -5,7 +5,7 @@ process = cms.Process("Demo")
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
-#process.MessageLogger.cerr.FwkReport.reportEvery = 100
+process.MessageLogger.cerr.FwkReport.reportEvery = 100
 
 process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
@@ -19,7 +19,7 @@ process.source = cms.Source("PoolSource",
 
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '75X_dataRun2_v12', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '75X_dataRun2_v13', '')
 
 process.load("HLTrigger.HLTfilters.hltHighLevel_cfi")
 process.hltMB = process.hltHighLevel.clone()
@@ -37,6 +37,7 @@ process.TFileService = cms.Service("TFileService",
                                   )
 
 process.load('HeavyIonsAnalysis.Configuration.collisionEventSelection_cff')
+process.clusterCompatibilityFilter.clusterPars = cms.vdouble(0.0,0.006)
 
 process.flowCorr = cms.EDAnalyzer('FlowCorr',
    CentralitySrc    = cms.InputTag("hiCentrality"),
@@ -51,17 +52,20 @@ process.flowCorr = cms.EDAnalyzer('FlowCorr',
    Tower            = cms.InputTag("towerMaker"),
    trackPtMinCut = cms.double(0.3),
    trackPtMaxCut = cms.double(20.0),
-   trackEtaCut = cms.double(2.4),
+   trackEtaCut = cms.double(0.8),
    trackEtaMinCut = cms.double(0.0),
-   ptErrCut = cms.double(0.1),
-   dzRelCut = cms.double(3.0),
-   dxyRelCut = cms.double(3.0),
+   ptErrCut = cms.double(0.05),
+   dzRelCut = cms.double(2.0),
+   dxyRelCut = cms.double(2.0),
    chi2nMax = cms.double(0.15),
+   chi2nPixelMax = cms.double(9.0),
+   dzRelPixelCut = cms.double(6.0),
    nhitsMin = cms.int32(11),
    algoParameters = cms.vint32(4,5,6,7),
    vertexZMin = cms.double(0.0),
    vertexZMax = cms.double(15.0),
-   hfEtaMin = cms.double(0.0),
+   hfEtaMin = cms.double(3.0),
+   hfEtaMax = cms.double(5.0),
    evtPlaneLevel    = cms.int32(0)
 )
 
