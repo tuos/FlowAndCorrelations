@@ -57,12 +57,12 @@ using namespace edm;
   TH1D* hQhfPlusY[nCentBin][nHarmonics];
   TH1D* hQhfMinusX[nCentBin][nHarmonics];
   TH1D* hQhfMinusY[nCentBin][nHarmonics];
-  TH1D* hQtrkPlusX[nCentBin][nHarmonics];
-  TH1D* hQtrkPlusY[nCentBin][nHarmonics];
-  TH1D* hQtrkMinusX[nCentBin][nHarmonics];
-  TH1D* hQtrkMinusY[nCentBin][nHarmonics];
-  //TH1D* hQtrkPtX[nCentBin][nHarmonics][nPtBin];
-  //TH1D* hQtrkPtY[nCentBin][nHarmonics][nPtBin];
+  //TH1D* hQtrkPlusX[nCentBin][nHarmonics];
+  //TH1D* hQtrkPlusY[nCentBin][nHarmonics];
+  //TH1D* hQtrkMinusX[nCentBin][nHarmonics];
+  //TH1D* hQtrkMinusY[nCentBin][nHarmonics];
+  TH1D* hQtrkPtX[nCentBin][nHarmonics][nPtBin];
+  TH1D* hQtrkPtY[nCentBin][nHarmonics][nPtBin];
   TH1D* hVnAbs2[nCentBin][nHarmonics];
   TH1D* hVnAbs4[nCentBin][nHarmonics];
   TH1D* hVnAbs6[nCentBin][nHarmonics];
@@ -71,6 +71,7 @@ using namespace edm;
   TH1D* hV2Abs4V3Abs2[nCentBin];
   TH1D* hV2Abs2V3Abs4[nCentBin];
   //trk 
+/*
   TH1D* hV2Abs4trk1[nCentBin];
   TH1D* hV2Abs6trk1[nCentBin];
   TH1D* hV3Abs4trk1[nCentBin];
@@ -86,7 +87,7 @@ using namespace edm;
   TH1D* hV3Abs4trk2[nCentBin];
   TH1D* hV2Abs2V3Abs2trk2[nCentBin];
   TH1D* hV2Abs4V3Abs2trk2[nCentBin];
-
+*/
   TH1D* hq2Q2PstarAB[nCentBin][nPtBin];
   TH1D* hq3Q3PstarAB[nCentBin][nPtBin];
   TH1D* hq4Q4PstarAB[nCentBin][nPtBin];
@@ -136,6 +137,30 @@ using namespace edm;
 
   TH1D* hMeanPt[nCentBin][nPtBin];
 
+  TH1D* hnPsi2_cent05_trk0304;  //0, 0
+  TH1D* hnPsi3_cent05_trk0304;
+  TH1D* hnPsi4_cent05_trk0304;
+  TH1D* hnPsi5_cent05_trk0304;
+  TH1D* hnPsi6_cent05_trk0304;
+  TH1D* hnPsi7_cent05_trk0304;
+  TH1D* hnPsi2_cent4050_trk2025;  //8, 8
+  TH1D* hnPsi3_cent4050_trk2025;
+  TH1D* hnPsi4_cent4050_trk2025;
+  TH1D* hnPsi5_cent4050_trk2025;
+  TH1D* hnPsi6_cent4050_trk2025;
+  TH1D* hnPsi7_cent4050_trk2025;
+  TH1D* hnPsi2_cent3035_hfp;  //6
+  TH1D* hnPsi3_cent3035_hfp;
+  TH1D* hnPsi4_cent3035_hfp;
+  TH1D* hnPsi5_cent3035_hfp;
+  TH1D* hnPsi6_cent3035_hfp;
+  TH1D* hnPsi7_cent3035_hfp;
+  TH1D* hnPsi2_cent3035_hfm;  //6
+  TH1D* hnPsi3_cent3035_hfm;
+  TH1D* hnPsi4_cent3035_hfm;
+  TH1D* hnPsi5_cent3035_hfm;
+  TH1D* hnPsi6_cent3035_hfm;
+  TH1D* hnPsi7_cent3035_hfm;
 
    TH1D* hCent;
    TH1D* hHF;
