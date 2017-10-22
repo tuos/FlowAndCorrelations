@@ -169,7 +169,6 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    using namespace edm;
 
     Int_t runID = iEvent.id().run();
-    if(runID>=262548 && runID<=262799) 
     for(int ibin=0; ibin<nCentBin; ibin++){
       for(int iH=0; iH<nHarmonics; iH++){
         if(runID>=262548 && runID<=262799){ 
@@ -191,7 +190,7 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
             meanQxTrkPt[ibin][iH][ipt] = meanQxTrkPtB[ibin][iH][ipt];
             meanQyTrkPt[ibin][iH][ipt] = meanQyTrkPtB[ibin][iH][ipt];
           }
-        }        
+        }
         if(runID>=263231 && runID<=263359){ 
           meanQxPlus[ibin][iH] = meanQxPlusC[ibin][iH];
           meanQyPlus[ibin][iH] = meanQyPlusC[ibin][iH];
@@ -224,6 +223,25 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
         }
       }
     }
+
+// re-centering using only one set of parameters, begin
+// /*
+    for(int ibin=0; ibin<nCentBin; ibin++){
+      for(int iH=0; iH<nHarmonics; iH++){
+          meanQxPlus[ibin][iH] = meanQxPlusA[ibin][iH];
+          meanQyPlus[ibin][iH] = meanQyPlusA[ibin][iH];
+          meanQxMinus[ibin][iH] = meanQxMinusA[ibin][iH];
+          meanQyMinus[ibin][iH] = meanQyMinusA[ibin][iH];
+          for(int ipt=0; ipt<nPtBin; ipt++){
+            meanQxTrkPt[ibin][iH][ipt] = meanQxTrkPtA[ibin][iH][ipt];
+            meanQyTrkPt[ibin][iH][ipt] = meanQyTrkPtA[ibin][iH][ipt];
+          }
+      }
+    }
+// */
+// re-centering using only one set of parameters, end
+
+//cout<<"runID = "<<runID<<",   meanQxTrkPt = "<<meanQxTrkPt[0][0][0]<<endl;
 
     edm::Handle<int> cbin_;
     iEvent.getByToken(CentralityBinTag_,cbin_);
@@ -598,31 +616,31 @@ FlowCorr::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
        for(int ipt=0; ipt<nPtBin; ipt++){
         if(sumwtrkPt[ipt]>0){
 
-         hq2Q2PstarAB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])); 
-         hq3Q3PstarAB[ibin][ipt]->Fill(QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfPlus[ibin][2])); 
-         hq4Q4PstarAB[ibin][ipt]->Fill(QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfPlus[ibin][3])); 
-         hq5Q5PstarAB[ibin][ipt]->Fill(QtrkPt[ibin][4][ipt]*TComplex::Conjugate(QhfPlus[ibin][4])); 
-         hq6Q6PstarAB[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfPlus[ibin][5])); 
-         hq7Q7PstarAB[ibin][ipt]->Fill(QtrkPt[ibin][6][ipt]*TComplex::Conjugate(QhfPlus[ibin][6])); 
-         hq8Q8PstarAB[ibin][ipt]->Fill(QtrkPt[ibin][7][ipt]*TComplex::Conjugate(QhfPlus[ibin][7])); 
-         hq2Q2MstarAB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])); 
-         hq3Q3MstarAB[ibin][ipt]->Fill(QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][2])); 
-         hq4Q4MstarAB[ibin][ipt]->Fill(QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfMinus[ibin][3])); 
-         hq5Q5MstarAB[ibin][ipt]->Fill(QtrkPt[ibin][4][ipt]*TComplex::Conjugate(QhfMinus[ibin][4])); 
-         hq6Q6MstarAB[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfMinus[ibin][5])); 
-         hq7Q7MstarAB[ibin][ipt]->Fill(QtrkPt[ibin][6][ipt]*TComplex::Conjugate(QhfMinus[ibin][6])); 
-         hq8Q8MstarAB[ibin][ipt]->Fill(QtrkPt[ibin][7][ipt]*TComplex::Conjugate(QhfMinus[ibin][7])); 
+         hq2Q2PstarAB[ibin][ipt]->Fill((QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])).Re()); 
+         hq3Q3PstarAB[ibin][ipt]->Fill((QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfPlus[ibin][2])).Re()); 
+         hq4Q4PstarAB[ibin][ipt]->Fill((QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfPlus[ibin][3])).Re()); 
+         hq5Q5PstarAB[ibin][ipt]->Fill((QtrkPt[ibin][4][ipt]*TComplex::Conjugate(QhfPlus[ibin][4])).Re()); 
+         hq6Q6PstarAB[ibin][ipt]->Fill((QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfPlus[ibin][5])).Re()); 
+         hq7Q7PstarAB[ibin][ipt]->Fill((QtrkPt[ibin][6][ipt]*TComplex::Conjugate(QhfPlus[ibin][6])).Re()); 
+         hq8Q8PstarAB[ibin][ipt]->Fill((QtrkPt[ibin][7][ipt]*TComplex::Conjugate(QhfPlus[ibin][7])).Re()); 
+         hq2Q2MstarAB[ibin][ipt]->Fill((QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])).Re()); 
+         hq3Q3MstarAB[ibin][ipt]->Fill((QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][2])).Re()); 
+         hq4Q4MstarAB[ibin][ipt]->Fill((QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfMinus[ibin][3])).Re()); 
+         hq5Q5MstarAB[ibin][ipt]->Fill((QtrkPt[ibin][4][ipt]*TComplex::Conjugate(QhfMinus[ibin][4])).Re()); 
+         hq6Q6MstarAB[ibin][ipt]->Fill((QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfMinus[ibin][5])).Re()); 
+         hq7Q7MstarAB[ibin][ipt]->Fill((QtrkPt[ibin][6][ipt]*TComplex::Conjugate(QhfMinus[ibin][6])).Re()); 
+         hq8Q8MstarAB[ibin][ipt]->Fill((QtrkPt[ibin][7][ipt]*TComplex::Conjugate(QhfMinus[ibin][7])).Re()); 
 
-         hq4Q2starQ2starAB[ibin][ipt]->Fill(QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
-         hq6Q2starQ2starQ2starAB[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1]));
-         hq6Q3starQ3starAB[ibin][ipt]->Fill(QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfMinus[ibin][2])*TComplex::Conjugate(QhfPlus[ibin][2]));
-         hq5Q2starQ3starAB[ibin][ipt]->Fill(QtrkPt[ibin][4][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
-         hq7Q2starQ2starQ3starAB[ibin][ipt]->Fill(QtrkPt[ibin][6][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
-         hQ2Abs4AB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
-         hQ2Abs6AB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1]));
-         hQ3Abs4AB[ibin][ipt]->Fill(QtrkPt[ibin][2][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][2])*TComplex::Conjugate(QhfPlus[ibin][2]));
-         hQ2Abs2Q3Abs2AB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2]));
-         hQ2Abs4Q3Abs2AB[ibin][ipt]->Fill(QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2]));
+         hq4Q2starQ2starAB[ibin][ipt]->Fill((QtrkPt[ibin][3][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])).Re());
+         hq6Q2starQ2starQ2starAB[ibin][ipt]->Fill((QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])).Re());
+         hq6Q3starQ3starAB[ibin][ipt]->Fill((QtrkPt[ibin][5][ipt]*TComplex::Conjugate(QhfMinus[ibin][2])*TComplex::Conjugate(QhfPlus[ibin][2])).Re());
+         hq5Q2starQ3starAB[ibin][ipt]->Fill((QtrkPt[ibin][4][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2])).Re());
+         hq7Q2starQ2starQ3starAB[ibin][ipt]->Fill((QtrkPt[ibin][6][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2])).Re());
+         hQ2Abs4AB[ibin][ipt]->Fill((QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])).Re());
+         hQ2Abs6AB[ibin][ipt]->Fill((QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][1])).Re());
+         hQ3Abs4AB[ibin][ipt]->Fill((QtrkPt[ibin][2][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][2])*TComplex::Conjugate(QhfPlus[ibin][2])).Re());
+         hQ2Abs2Q3Abs2AB[ibin][ipt]->Fill((QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfPlus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][2])).Re());
+         hQ2Abs4Q3Abs2AB[ibin][ipt]->Fill((QtrkPt[ibin][1][ipt]*QtrkPt[ibin][1][ipt]*QtrkPt[ibin][2][ipt]*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfMinus[ibin][1])*TComplex::Conjugate(QhfPlus[ibin][2])).Re());
 
         }
        }
