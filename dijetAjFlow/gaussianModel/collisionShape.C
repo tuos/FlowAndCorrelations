@@ -29,18 +29,29 @@ void collisionShape(){
  hist->GetYaxis()->SetLabelSize(0.05);
  hist->Draw();
 
+double mx=0; double my=0;
+double rmsx=1.5; double rmsy=3;
 TF2 *f2 = new TF2("f2","[0]*TMath::Gaus(x,[1],[2])*TMath::Gaus(y,[3],[4])",-15,15,-15,15);
-f2->SetParameters(1,0,1.5,0,3);
+f2->SetParameters(1,mx,rmsx,my,rmsy);
 //f2->Draw("same");
+TF1 *fx = new TF1("fx","gaus",-15,15);
+fx->SetParameters(1,mx,rmsx);
+TF1 *fy = new TF1("fy","gaus",-15,15);
+fy->SetParameters(1,my,rmsy);
 
  TH2D *h2 = new TH2D("h2","from f2",3000,-15,15,3000,-15,15);
- Long64_t const nEntry = 1e5;
+ TH1D *xhist = new TH1D("xhist","",300,-15,15);
+ Long64_t const nEntry = 1e4;
  double x[nEntry], y[nEntry];
  for (Long64_t i=0; i<nEntry; i++){
-   f2->GetRandom2(x[i], y[i]);
+   //f2->GetRandom2(x[i], y[i]);
+   x[i] = fx->GetRandom();
+   y[i] = fy->GetRandom();
    h2->Fill(x[i], y[i]);
+   xhist->Fill(x[i]);
  }
  h2->Draw("samecolz");
+ //xhist->Draw();
 
 TH1D *pthist = new TH1D("pthist","",300,0,300);
 TH1D *phihist = new TH1D("phihist","",300,-1.5,7.5);
@@ -64,19 +75,29 @@ TF1 *fJet = new TF1("fJet","(9.06402e+13)*pow(x, -5.08010e+00)", 25, 250);
 
  double pt1F[nEntry], pt2F[nEntry];
  double dE1, dE2;
- double dr=0.2;
- double E0=15.0;
+ double dr=0.1;
+ double E0=200.0;
 TH1D *ajhist = new TH1D("ajhist","",100,0,1);
  for (Long64_t i=0; i<nEntry; i++){
 if(i%1000==0) cout<<"running i = "<<i<<endl;
    //f2->GetRandom2(x, y);
 //if(fabs(x[i])>0.1 || fabs(y[i])>0.1 || phi1[i]>0.2) continue;
+   double x1 = x[i];
+   double y1 = y[i];
+   double x2 = x[i];
+   double y2 = y[i];
+   double phi1tmp = phi1[i];
+   double phi2tmp = phi2[i];
    double sumdE1=0; double sumdE2=0;
    for (int j=0;j<100;j++){
-     dE1 = pow(dr, 2)*(f2->Eval(x[i], y[i])+ f2->Eval(x[i] + (j+1)*dr*cos(phi1[i]), y[i]+ (j+1)*dr*sin(phi1[i]) ))/2*E0;
+     dE1 = E0*pow(dr, 2)*( f2->Eval(x1, y1)  +  f2->Eval(x1 + (j+1)*dr*cos(phi1tmp), y1 + (j+1)*dr*sin(phi1tmp)) )/2;
      sumdE1 += dE1;
-     dE2 = pow(dr, 2)*(f2->Eval(x[i], y[i])+ f2->Eval(x[i] + (j+1)*dr*cos(phi2[i]), y[i]+ (j+1)*dr*sin(phi2[i]) ))/2*E0;
+     dE2 = E0*pow(dr, 2)*( f2->Eval(x2, y2)  +  f2->Eval(x2 + (j+1)*dr*cos(phi2tmp), y2 + (j+1)*dr*sin(phi2tmp)) )/2;
      sumdE2 += dE2;
+     x1 += (j+1)*dr*cos(phi1tmp);
+     y1 += (j+1)*dr*sin(phi1tmp);
+     x2 += (j+1)*dr*cos(phi2tmp);
+     y2 += (j+1)*dr*sin(phi2tmp);
    }
    pt1F[i]=pt1[1]-sumdE1; 
    if (pt1F[i]<5) pt1F[i]=5;
