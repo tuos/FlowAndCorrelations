@@ -1,0 +1,18 @@
+
+CMSSW_7_5_0
+
+create: Configuration/GenProduction/python/HI/2015/ReggeGribovPartonMC_EposLHC_5020GeV_PbPb_cfi.py
+https://github.com/CmsHI/genproductions/blob/pbpb2015-configs/python/HI/2015/ReggeGribovPartonMC_EposLHC_5020GeV_PbPb_cfi.py
+
+
+create: Configuration/Generator/data/ReggeGribovPartonMC.param
+https://github.com/cms-sw/cmssw/blob/CMSSW_7_0_X/Configuration/Generator/data/ReggeGribovPartonMC.param
+
+
+cmsDriver.py Configuration/GenProduction/python/HI/2015/ReggeGribovPartonMC_EposLHC_5020GeV_PbPb_cfi.py --mc --eventcontent RAWSIM --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI,Configuration/DataProcessing/Utils.addMonitoring --datatier GEN-SIM --conditions 75X_mcRun2_HeavyIon_v1 --beamspot NominalHICollision2015 --step GEN,SIM --scenario HeavyIons --no_exec -n 5
+
+
+
+crab submit -c crab.py
+
+
