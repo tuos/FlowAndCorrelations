@@ -1,0 +1,10 @@
+
+CMSSW_7_5_8_patch5
+
+cmsDriver.py step2 --conditions auto:run2_mc_HIon --scenario HeavyIons --eventcontent FEVTDEBUGHLT -s DIGI:pdigi_valid,L1,DIGI2RAW,HLT:HIon,RAW2DIGI,L1Reco --datatier GEN-SIM-DIGI-RAW-HLTDEBUG --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI --no_exec --filein file:ReggeGribovPartonMC_EposLHC_5020GeV_PbPb_cfi_py_GEN_SIM_196.root
+
+
+cmsDriver.py step3 --conditions auto:run2_mc_hi -s RAW2DIGI,L1Reco,RECO -n 4 --eventcontent RECODEBUG --runUnscheduled --scenario HeavyIons --datatier GEN-SIM-RECO --beamspot NominalHICollision2015 --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI,RecoHI/Configuration/customise_RecoMergedTrackCollection.customiseAddMergedTrackCollection --io RECOHI_mc.io --python RECOHI_mc.py --no_exec
+
+
+

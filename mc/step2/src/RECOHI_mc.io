@@ -1,0 +1,1 @@
+{"GT": "75X_mcRun2_HeavyIon_v13", "primary": ["file:step3_DIGI2RAW.root"], "RECODEBUGoutput": "step3_RAW2DIGI_L1Reco_RECO.root"}
