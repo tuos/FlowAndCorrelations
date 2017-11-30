@@ -16,3 +16,12 @@ cmsDriver.py Configuration/GenProduction/python/HI/2015/ReggeGribovPartonMC_Epos
 crab submit -c crab.py
 
 
+=====
+AMPT
+create: Configuration/GenProduction/python/HI/2015/AMPT_PbPb_5020GeV_MinimumBias_stringMelting_cfi.py
+https://twiki.cern.ch/twiki/bin/viewauth/CMS/MCFor2017XeXe5TeV
+https://twiki.cern.ch/twiki/pub/CMS/MCFor2017XeXe5TeV/AMPT_XeXe_5442GeV_MinimumBias_stringMelting_cfi.py.txt
+
+cmsDriver.py Configuration/GenProduction/python/HI/2015/AMPT_PbPb_5020GeV_MinimumBias_stringMelting_cfi.py --mc --eventcontent RAWSIM --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI,Configuration/DataProcessing/Utils.addMonitoring --datatier GEN-SIM --conditions 75X_mcRun2_HeavyIon_v1 --beamspot NominalHICollision2015 --step GEN,SIM --scenario HeavyIons --no_exec -n 5
+
+
