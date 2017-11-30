@@ -6,5 +6,6 @@ cmsDriver.py step2 --conditions auto:run2_mc_HIon --scenario HeavyIons --eventco
 
 cmsDriver.py step3 --conditions auto:run2_mc_hi -s RAW2DIGI,L1Reco,RECO -n 4 --eventcontent RECODEBUG --runUnscheduled --scenario HeavyIons --datatier GEN-SIM-RECO --beamspot NominalHICollision2015 --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI,RecoHI/Configuration/customise_RecoMergedTrackCollection.customiseAddMergedTrackCollection --io RECOHI_mc.io --python RECOHI_mc.py --no_exec
 
+To run the step2, the input dataset has to be GEN-SIM, AODSIM does not work.
 
 
