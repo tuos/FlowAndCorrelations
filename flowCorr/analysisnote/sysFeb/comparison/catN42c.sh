@@ -1,0 +1,12 @@
+cat ../SPMixed/data/pt/N42SUB2_0-5.dat
+cat ../SPMixed/data/pt/N42SUB2_5-10.dat
+cat ../SPMixed/data/pt/N42SUB2_10-15.dat
+cat ../SPMixed/data/pt/N42SUB2_15-20.dat
+cat ../SPMixed/data/pt/N42SUB2_20-25.dat
+cat ../SPMixed/data/pt/N42SUB2_25-30.dat
+cat ../SPMixed/data/pt/N42SUB2_30-35.dat
+cat ../SPMixed/data/pt/N42SUB2_35-40.dat
+cat ../SPMixed/data/pt/N42SUB2_40-45.dat
+#cat ../SPMixed/data/pt/N42SUB2_45-50.dat
+cat ../SPMixed/data/pt/N42SUB2_50-60.dat
+cat ../SPMixed/data/pt/N42SUB2_60-70.dat
