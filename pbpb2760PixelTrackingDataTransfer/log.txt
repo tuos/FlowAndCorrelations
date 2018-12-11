@@ -1,5 +1,5 @@
 
-1871 fils in the dataset
+1871 files in the dataset, crab jobs will be fileBased and one input file for each job
 
 file dataset=/HIMinBiasUPC/davidlw-Skim_rereco_MB_pixeltracks_final_v2-9c1b4b9b6b9ff3e493a474ba7d01bc76/USER
 https://cmsweb.cern.ch/das/request?instance=prod/phys03&input=file+dataset%3D%2FHIMinBiasUPC%2Fdavidlw-Skim_rereco_MB_pixeltracks_final_v2-9c1b4b9b6b9ff3e493a474ba7d01bc76%2FUSER
