@@ -1,0 +1,18 @@
+
+1871 fils in the dataset
+
+file dataset=/HIMinBiasUPC/davidlw-Skim_rereco_MB_pixeltracks_final_v2-9c1b4b9b6b9ff3e493a474ba7d01bc76/USER
+https://cmsweb.cern.ch/das/request?instance=prod/phys03&input=file+dataset%3D%2FHIMinBiasUPC%2Fdavidlw-Skim_rereco_MB_pixeltracks_final_v2-9c1b4b9b6b9ff3e493a474ba7d01bc76%2FUSER
+
+===
+
+File name: /store/user/davidlw/HIMinBiasUPC/Skim_rereco_MB_pixeltracks_final_v2/9c1b4b9b6b9ff3e493a474ba7d01bc76/hiMB_1034_1_1Xx.root
+File size: 2803017633 (2.8GB) File type: EDM Number of events: 17654
+Dataset, Block, Sites, Runs, Parents, Children, Lumis Sources: dbs3 show File name: /store/user/davidlw/HIMinBiasUPC/                      Skim_rereco_MB_pixeltracks_final_v2/9c1b4b9b6b9ff3e493a474ba7d01bc76/hiMB_1033_1_Nin.root
+File size: 1928521819 (1.9GB) File type: EDM Number of events: 12520
+Dataset, Block, Sites, Runs, Parents, Children, Lumis Sources: dbs3 show File name: /store/user/davidlw/HIMinBiasUPC/                      Skim_rereco_MB_pixeltracks_final_v2/9c1b4b9b6b9ff3e493a474ba7d01bc76/hiMB_1032_1_SST.root
+File size: 1860667873 (1.9GB) File type: EDM Number of events: 11824
+Dataset, Block, Sites, Runs, Parents, Children, Lumis Sources: dbs3 show
+
+===
+
