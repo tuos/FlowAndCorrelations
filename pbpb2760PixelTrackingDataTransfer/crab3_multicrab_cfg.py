@@ -14,7 +14,7 @@ config.Data.splitting = 'FileBased'
 config.Data.unitsPerJob = 1
 config.Data.outLFNDirBase = '/store/user/tuos/PbPb2760/pixelTrackingMB/CopyFromWei'
 config.Data.publication = True
-config.Data.outputDatasetTag = 'Skim_rereco_2760PbPbMB_pixeltracksCopyFromWei'
+config.Data.outputDatasetTag = 'Skim_rereco_2760PbPbMB_pixeltracksCopyFromWei_v2'
 
 config.Site.storageSite = 'T2_US_Vanderbilt'
 
@@ -23,7 +23,7 @@ if __name__ == '__main__':
    from CRABClient.ClientExceptions import ClientException
    from httplib import HTTPException
 
-   config.General.workArea = 'Skim_rereco_2760PbPbMB_pixeltracksCopyFromWei'
+   config.General.workArea = 'Skim_rereco_2760PbPbMB_pixeltracksCopyFromWei_v2'
 
    def submit(config):
       try:
@@ -38,7 +38,7 @@ if __name__ == '__main__':
        print "Submitting Data Set %d " % (num+1)
 
        if num == 0:
-           RequestName = 'Skim_rereco_2760PbPbMB_pixeltracksCopyFromWei'
+           RequestName = 'Skim_rereco_2760PbPbMB_pixeltracksCopyFromWei_v2'
            DataSetName = '/HIMinBiasUPC/davidlw-Skim_rereco_MB_pixeltracks_final_v2-9c1b4b9b6b9ff3e493a474ba7d01bc76/USER'
            LumiMasks = 'cert_181530_183126_PromptReco_HICollisions11_JSON.txt'
            OutDirBase = '/store/user/tuos/PbPb2760/pixelTrackingMB/CopyFromWei'
