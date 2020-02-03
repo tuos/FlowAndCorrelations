@@ -1,13 +1,10 @@
 
 1. setup vm
-cd /home/tuos/aps_HIC/healpix/vm_setup/
-python3.6 -m venv venv
-#(find ./ -type f | wc)
-#(du --inodes)
-#(du -h)
+cd /home/tuos/aps_hic/vm_setup
+module load GCC/8.2.0 OpenMPI Python
+python -m venv venv
 
 2. activate the vm
-module load GCC/8.2.0
 . venv/bin/activate
 
 3. install pip/setuptools
@@ -15,7 +12,7 @@ pip install --upgrade pip setuptools
 
 ===
 4. setup cfg
-cd /home/tuos/aps_HIC/healpix/Healpix_3.60
+cd /home/tuos/aps_hic/Healpix_3.60
 ./configure
 (5, Enter, Enter, Enter, 0)
 (On line 367, make sure it is like this: "$(HPY_PYTHON) $(HPY_SETUP) install; \")
@@ -29,14 +26,14 @@ make test
 ===
 
 7. healpy is ready to use
-python XXX
+python XXX.py
 
 8. when vm is not needed
 deactivate
 rm -rf venv
 
 9. What to do after login next time
-module load GCC/8.2.0
+#module load GCC/8.2.0
 . /home/tuos/aps_HIC/healpix/vm_setup/venv/bin/activate
 cd /home/tuos/aps_HIC/healpix/Healpix_3.60
 (healpy is ready for you!)
