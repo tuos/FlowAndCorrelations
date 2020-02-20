@@ -34,8 +34,9 @@ rm -rf venv
 
 9. What to do after login next time
 module load GCC/8.2.0 OpenMPI Python
-. /home/tuos/aps_HIC/healpix/vm_setup/venv/bin/activate
-cd /home/tuos/aps_HIC/healpix/Healpix_3.60
+cd /home/tuos/aps_hic/vm_setup
+. venv/bin/activate
+cd /home/tuos/aps_hic/Healpix_3.60
 (healpy is ready for you!)
 
 
