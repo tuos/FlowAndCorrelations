@@ -1,0 +1,35 @@
+
+https://github.com/cms-sw/cms-sw.github.io/blob/2be61cb62fd450a8a7c17a445d69c167941218cd/singularity.md
+
+For SLC6:
+
+# log in to CentOS7 system with singularity installed e.g. lxplus7
+ssh lxplus7
+export SINGULARITY_CACHEDIR="/tmp/$(whoami)/singularity"
+singularity shell -B /afs -B /eos -B /cvmfs docker://cmssw/slc6:latest
+#export SCRAM_ARCH=slc6_amd64_gcc700
+export SCRAM_ARCH=slc6_amd64_gcc491
+source /cvmfs/cms.cern.ch/cmsset_default.sh
+
+===release===
+cmsrel CMSSW_7_5_8_patch5
+Singularity> cd CMSSW_7_5_8_patch5/src/
+Singularity> cmsenv
+Singularity> root -l
+1WARNING: AutoLibraryloader::enable() and AutoLibraryLoader.h are deprecated.
+Use FWLiteEnabler::enable() and FWLiteEnabler.h instead
+root [0] 1+1
+(int) 2
+root [1] .q
+
+===packages===
+Singularity> mkdir uccAnalysis
+Singularity> cd uccAnalysis/
+Singularity> mkedanlzr MConeAnalyzer
+===edits===
+Singularity> scramv1 b -j4
+===> working with singularity <===
+
+
+
+
