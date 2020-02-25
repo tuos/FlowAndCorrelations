@@ -100,6 +100,7 @@ class MConeAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
 
   int evtPlaneLevel_;
 
+  TTree *eventTree;
 
 };
 
@@ -216,6 +217,11 @@ MConeAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     hvx->Fill(vx);
     hvy->Fill(vy);
     math::XYZPoint v1(vx,vy,vz);   
+ 
+    d_centralityBin = hiBin; 
+    d_vz = vz;
+    d_vx = vx;
+    d_vy = vy;
 
      int nTracks = 0;
      pVect_trkEtaPlus = new vector<TVector3>;
@@ -259,12 +265,21 @@ MConeAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       hpt->Fill(itTrack->pt());
       heta->Fill(itTrack->eta());
       hphi->Fill(itTrack->phi());
+
+      d_pt[nTracks] = itTrack->pt();
+      d_eta[nTracks] = itTrack->eta();
+      d_phi[nTracks] = itTrack->phi();
+
       nTracks++;
+
       TVector3 pvectorTrack;
       pvectorTrack.SetPtEtaPhi(itTrack->pt(),itTrack->eta(),itTrack->phi());
       if(itTrack->eta()>=trackEtaMinCut_) pVect_trkEtaPlus->push_back(pvectorTrack);
       if(itTrack->eta()<-1*trackEtaMinCut_) pVect_trkEtaMinus->push_back(pvectorTrack);
      }
+
+     d_nTracks = nTracks;
+
      hNtrks->Fill(nTracks);
 cout<<"nTracs = "<<nTracks<<endl;
 
@@ -293,7 +308,9 @@ cout<<"nTracs = "<<nTracks<<endl;
     etHFtowerSum = etHFtowerSumPlus + etHFtowerSumMinus;
     hHFcal->Fill(etHFtowerSum);
 
+    d_hfEnergy = etHFtowerSum;
 
+    eventTree->Fill(); 
 
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
    Handle<ExampleData> pIn;
@@ -326,6 +343,16 @@ MConeAnalyzer::beginJob()
   hphi = fs->make<TH1D>("phi","phi",200,-4,4);
   hHFcal = fs->make<TH1D>("hfCal","HF ET",8000,0,8000);
 
+  eventTree = fs->make<TTree>("eventTree","event tree");
+  eventTree->Branch("centralityBin",&d_centralityBin,"centralityBin/I");  
+  eventTree->Branch("nTracks",&d_nTracks,"nTracks/I"); 
+  eventTree->Branch("pt",&d_pt,"pt[nTracks]/F");  
+  eventTree->Branch("eta",&d_eta,"eta[nTracks]/F");  
+  eventTree->Branch("phi",&d_phi,"phi[nTracks]/F");  
+  eventTree->Branch("hfEnergy",&d_hfEnergy,"hfEnergy/F");  
+  eventTree->Branch("vz",&d_vz,"vz/F");  
+  eventTree->Branch("vx",&d_vx,"vx/F");  
+  eventTree->Branch("vy",&d_vy,"vy/F");  
 
 }
 

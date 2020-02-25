@@ -1,6 +1,7 @@
 #include "TComplex.h"
 #include <vector>
 #include <TVector3.h>
+#include "TTree.h"
 
 #define nCentBin 14
 #define nHarmonics 8
@@ -34,5 +35,14 @@ using namespace edm;
    TH1D* hphi;
    TH1D* hHFcal;
 
-
+  const int maxN = 50000;
+  Int_t d_centralityBin;
+  Int_t d_nTracks; 
+  Float_t d_pt[maxN];    
+  Float_t d_phi[maxN];     
+  Float_t d_eta[maxN];
+  Float_t d_hfEnergy;
+  Float_t d_vz;
+  Float_t d_vx;
+  Float_t d_vy;
 

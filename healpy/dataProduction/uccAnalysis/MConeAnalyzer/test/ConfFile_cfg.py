@@ -4,8 +4,8 @@ process = cms.Process("Demo")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(200) )
-#process.MessageLogger.cerr.FwkReport.reportEvery = 100
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+process.MessageLogger.cerr.FwkReport.reportEvery = 100
 
 process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
@@ -36,7 +36,7 @@ process.hltMB.throw = cms.bool(False)
 process.load("RecoHI.HiCentralityAlgos.CentralityBin_cfi") 
 
 process.TFileService = cms.Service("TFileService",
-                                  fileName=cms.string("mcanalyzer_data.root")
+                                  fileName=cms.string("aps_ucc_analyzer_data.root")
                                   )
 
 #process.load('HeavyIonsAnalysis.Configuration.collisionEventSelection_cff')
@@ -53,8 +53,8 @@ process.flowCorr = cms.EDAnalyzer('MConeAnalyzer',
    TrackQuality     = cms.untracked.string('highPurity'),
    Tower            = cms.InputTag("towerMaker"),
    trackPtMinCut = cms.double(0.3),
-   trackPtMaxCut = cms.double(20.0),
-   trackEtaCut = cms.double(0.8),
+   trackPtMaxCut = cms.double(2000.0),
+   trackEtaCut = cms.double(2.4),
    trackEtaMinCut = cms.double(0.0),
    ptErrCut = cms.double(0.05),
    dzRelCut = cms.double(2.0),
