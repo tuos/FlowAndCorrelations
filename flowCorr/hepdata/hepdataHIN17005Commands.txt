@@ -1,0 +1,65 @@
+Setting up: 
+https://hepdata-lib.readthedocs.io/en/latest/setup.html
+
+# directory at lxplus:
+# /afs/cern.ch/user/t/tuos/work/private/hepdata
+# cd CMSSW_10_2_3/src
+# cmsenv
+# cd -
+# cd hepdata_lib_env
+# source bin/activate
+
+
+Testing inside python
+
+#Creating hep data submission
+>>> import hepdata_lib
+>>> from hepdata_lib import Submission
+>>> submission = Submission()
+>>> submission.read_abstract("/afs/cern.ch/user/t/tuos/work/private/hepdata/hin17005_abstract.txt")
+>>> submission.add_link("Webpage with all figures and tables", "https://cms-results.web.cern.ch/cms-results/public-results/publications/HIN-17-005/")
+>>> submission.add_link("arXiv", "https://arxiv.org/abs/1910.08789")
+>>> submission.add_record_id(1759853, "inspire")
+
+#Adding a figure
+>>> from hepdata_lib import Table
+>>> table = Table("Figure 1 v422 at 2.76 TeV in 0-20% centrality")
+>>> table.description = "v422 at 2.76 TeV as a function of pT in the 0-20% centrality range"
+>>> table.location = "Data from Figure 1"
+>>> table.keywords["observables"] = ["FLOW", "MIXED HARMONICS"]
+>>> table.keywords["reactions"] = ["Pb Pb"]
+>>> import numpy as np
+>>> data = np.loadtxt("/afs/cern.ch/user/t/tuos/work/private/hepdata/hin17005_fig1_2760_0020_v422.txt", skiprows=0)
+>>> from __future__ import print_function
+>>> print(data)
+>>> from hepdata_lib import Variable
+>>> d = Variable("Transverse momentum", is_independent=True, is_binned=True, units="GeV/c")
+>>> d.values = list(zip(data[:,0], data[:,1]))
+>>> v422_2760_0020 = Variable("Mixed harmonics v422", is_independent=False, is_binned=False, units="")
+>>> v422_2760_0020.values = data[:,3]
+# >>> v422_2760_0020.add_qualifier("SQRT(S)", 2.76, "TeV")
+
+#Adding Uncertainties
+>>> from hepdata_lib import Uncertainty
+>>> unc1 = Uncertainty("Statistical uncertainty", is_symmetric=True)
+>>> unc1.values = data[:,4]
+>>> unc2 = Uncertainty("Systematic uncertainty", is_symmetric=True)
+>>> unc2.values = data[:,5]
+>>> v422_2760_0020.add_uncertainty(unc1)
+>>> v422_2760_0020.add_uncertainty(unc2)
+>>> table.add_variable(d)
+>>> table.add_variable(v422_2760_0020)
+>>> submission.add_table(table)
+>>> outdir = "example_output"
+>>> submission.create_files(outdir)
+
+#The created *.yaml files should be in the directory "example_output"
+#[tuos@lxplus758 hepdata_lib_env]$ ls example_output/
+#figure_1_v422_at_2.76_tev_in_0-20%_centrality.yaml  submission.yaml
+
+
+# HIN-17-005: need 80 of these tables
+# HIN-16-013: need 51 of these tables
+
+
+
