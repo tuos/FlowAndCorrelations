@@ -56,15 +56,14 @@ for i in range(events):
 #hp_smoothed = hp.sphtfunc.smoothing(hpxmap2, fwhm=np.radians(1), iter = 1)
 
 hp.mollview(hpxmap2, cmap = cm.jet, xsize = SIZE, min = events*mult/npix*0.9, max = events*mult/npix*1.1, title='Isotropic randomised')
-fig = plt.gcf()
-ax = plt.gca()
+#fig = plt.gcf()
+#ax = plt.gca()
 #norm = mpl.colors.Normalize(vmin = 50, vmax = 150)
-image = ax.get_images()[0]
+#image = ax.get_images()[0]
 #cmap = fig.colorbar(image, norm = norm, orientation = 'horizontal')
 
-
-plt.savefig("map_iso.png", dpi = DPI)
 hp.graticule()
+plt.savefig("map_iso.png", dpi = DPI)
 
 
 '''
