@@ -16,7 +16,7 @@ import random
 
 
 nsources = int(199999)
-nside = 32
+nside = 8
 npix = hp.nside2npix(nside)
 SIZE = 400
 DPI = 100
@@ -40,21 +40,69 @@ for i in range(nsources):
 indices2 = hp.ang2pix(nside, thetas2, phis2)
 '''
 
-
+cl = []
+for l in range(24):
+   cl.append(0)
+indices2 = []
 hpxmap2 = np.zeros(npix, dtype = np.float)
-events = 8000
+events = 5000
 mult = 2500
+arr = [[0]*(mult)]*events
 for i in range(events):
+    #print(i)
+    hpxmap2 = np.zeros(npix, dtype = np.float)
     for k in range(mult):
        ipix = random.randint(0, npix-1)
        #hpxmap2[indices2[i]] += 1.0
        hpxmap2[ipix] += 1
+       #indices2.append(ipix)
+       arr[i][k] = hp.pix2ang(nside,ipix)
+       #hpxmap[ipix] += 1
+       #print(hp.pix2ang(nside,ipix))
 
+    if i%100 == 0:
+        print("First loop with i = "+str(i))
+
+'''
+    c = hp.anafast(hpxmap)
+    for x in range(len(c)):
+       cl[x] = cl[x] + c[x]
+for y in range(len(cl)):
+    cl[y] = cl[y] /(1.0*events)
+       
+'''
+hpxmapFinal = np.zeros(npix, dtype = np.float)
+for i in range(events): 
+    if i%100 == 0:
+        print("Second loop with i = "+str(i))
+    c = np.zeros(24)   
+    hpxmapFinal = np.zeros(npix, dtype = np.float)
+    hpxmap = np.zeros(npix, dtype = np.float)
+    for k in range(mult):
+       indices = hp.ang2pix(nside,arr[i][k][0],arr[i][k][1])
+       indices2.append(indices)
+       hpxmap[indices] += 1
+    for l in range(mult):
+       hpxmapFinal[indices2[l]] += (hpxmap[indices2[l]]/hpxmap2[indices2[l]]) * (npix* (1.0/mult))
+
+    c = hp.anafast(hpxmapFinal)
+    #print(c)
+    for x in range(len(c)):
+       cl[x] = cl[x] + c[x]
+for y in range(len(cl)):
+    cl[y] = cl[y] /(1.0*events)
+
+print(cl)
+
+
+plt.yscale('log')
+plt.plot(cl)
+plt.savefig("powerspect_iso2.png")
 #hpxmap2[1] = 50
 #hpxmap2[npix-2] = 150
 
 #hp_smoothed = hp.sphtfunc.smoothing(hpxmap2, fwhm=np.radians(1), iter = 1)
-
+'''
 hp.mollview(hpxmap2, cmap = cm.jet, xsize = SIZE, min = events*mult/npix*0.9, max = events*mult/npix*1.1, title='Isotropic randomised')
 #fig = plt.gcf()
 #ax = plt.gca()
@@ -65,7 +113,7 @@ hp.mollview(hpxmap2, cmap = cm.jet, xsize = SIZE, min = events*mult/npix*0.9, ma
 hp.graticule()
 plt.savefig("map_iso.png", dpi = DPI)
 
-
+'''
 '''
 cl = []
 for l in range(24):
