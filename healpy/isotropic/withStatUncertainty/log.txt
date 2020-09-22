@@ -1,0 +1,3 @@
+
+sbatch -J isotropic -o out_job.out jobsub.slurm
+

@@ -1,0 +1,5 @@
+24173567
+isotropic
+cn394
+ERROR:smemwatch:This job has exceeded its memory quota and will be terminated
+ERROR:smemwatch:Killing process 47640 cgroup RSS size 1050.87109375 MB > 1048.9985795556945 MB
