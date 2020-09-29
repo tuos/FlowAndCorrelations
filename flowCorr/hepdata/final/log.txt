@@ -1,0 +1,56 @@
+//references:
+//https://twiki.cern.ch/twiki/bin/viewauth/CMS/SMPHepData
+//https://hepdata-lib.readthedocs.io/en/latest/setup.html
+//https://hepdata-lib.readthedocs.io/en/latest/usage.html
+//https://github.com/HEPData/hepdata_lib
+//https://hepdata-submission.readthedocs.io/en/latest/keywords/observables.html
+
+
+scramv1 project CMSSW CMSSW_10_2_3
+cd CMSSW_10_2_3/src
+cmsenv
+cd -
+
+virtualenv -p $(which python) hepdata_lib_env
+cd hepdata_lib_env
+source bin/activate  # if not using zsh/bash but csh: source bin/activate.csh
+
+python -m pip install hepdata_lib
+
+
+Whenever you log back on to lxplus, do the following:
+
+cd CMSSW_10_2_3/src
+cmsenv
+cd -
+
+cd hepdata_lib_env
+source bin/activate 
+
+#produce the yaml files: python submit_hin17005.py
+#======#
+1. Number of digits:
+  char values_string[Mfiles][Mpoints][200];
+  char values_string_int[Mfiles][Mpoints][200];
+      sprintf(values_string[i][j], "%#.3g", ya[i][j]);
+      sprintf(values_string_int[i][j], "%d", int( atof(values_string[i][j]) ));
+      printf("%g %g  %.3f   %#.3g   %#.*f   %#.*f\n", centBin[j], centBin[j+1], xa[i][j], ya[i][j], strlen(values_string[i][j])-strlen(values_string_int[i][j])-1,ye[i][j], strlen(values_string[i][j])-strlen(values_string_int[i][j])-1,yesys[i][j]);
+
+Attention: stat. and syst. error can't be zero. There will be errors with the yaml files if the values are zero. The validation of the yaml file can't pass
+
+2. Using 'tables_print.py' to produce the python script for all the tables.
+
+3. Modify the python script after that.
+
+4. Change 'submission.yaml' by replacing 'name: datai' with 'name: Table i' on the last line of each table: ':%s/name: data/name: Table /g'
+Also change the abstract style, and any latex changes needed.
+
+5. tar files
+Decompressing: tar -xvf submission.tar.gz 
+Compressing: tar -zcvf submission.tar.gz hin17005hepdata_output
+
+
+
+
+
+
