@@ -1,0 +1,9 @@
+(base) tuos@mac:[submission]$ pwd
+/Users/shengquantuo/Desktop/013/figures/datapoints/submission
+(base) tuos@mac:[submission]$ lst /Users/shengquantuo/Desktop/013/figures/datapoints/ext_fig*/Fig*.C
+-rw-r--r--  1 shengquantuo  staff    50K Oct 11 04:21 /Users/shengquantuo/Desktop/013/figures/datapoints/ext_fig3/Fig3_RpAInMidY_EPOSLHC.C
+-rw-r--r--  1 shengquantuo  staff    61K Oct 11 12:58 /Users/shengquantuo/Desktop/013/figures/datapoints/ext_fig4/Fig4.C
+-rw-r--r--  1 shengquantuo  staff    89K Oct 11 23:51 /Users/shengquantuo/Desktop/013/figures/datapoints/ext_fig6/Fig6_YasymWithHIN12017_EPOSLHC.C
+-rw-r--r--  1 shengquantuo  staff    79K Oct 12 02:48 /Users/shengquantuo/Desktop/013/figures/datapoints/ext_fig2/Fig2.C
+-rw-r--r--  1 shengquantuo  staff    47K Oct 12 03:38 /Users/shengquantuo/Desktop/013/figures/datapoints/ext_fig5/Fig5_SpectraForYasym.C
+(base) tuos@mac:[submission]$ 
