@@ -1,11 +1,11 @@
-void figure3(){
+void figure7(){
 
   ifstream fileIn;
   fileIn.open("data_ampt.txt");
   ifstream fileInIso;
   fileInIso.open("data_iso.txt");
  
-  const int nL = 24;
+  const int nL = 23;
   double cL[nL];
   double cLErr[nL];
   double xL[nL];
@@ -20,10 +20,14 @@ void figure3(){
     //cout<<xL[i]<<"   "<<cL[i]<<endl;
   }
   for(int i=0; i< nL; i++){
-    fileInIso>>xLiso[i];
+    //fileInIso>>xLiso[i];
     fileInIso>>cLiso[i];
-    fileInIso>>cLisoErr[i];
+    //fileInIso>>cLisoErr[i];
     //cout<<xLiso[i]<<"   "<<cLiso[i]<<endl;
+
+    //tmp fix for iso:
+    xLiso[i]=xL[i];
+    cLisoErr[i]=0;
   } 
 
   TCanvas *c1 = new TCanvas("c1","c1",1,1,650,550);
@@ -43,9 +47,9 @@ void figure3(){
 
  TH1D* hist = new TH1D("hist","",200,-0.2,19.9);
  hist->SetXTitle("#font[12]{l}");
- hist->SetYTitle("#LT#font[12]{C_{l}}#GT");
- hist->SetMinimum(0.001);
- hist->SetMaximum(16.199);
+ hist->SetYTitle("#LT#font[12]{C_{l}^{m#neq0}}#GT");
+ hist->SetMinimum(0.0007);
+ hist->SetMaximum(0.0109);
  hist->GetXaxis()->CenterTitle(1);
  hist->GetYaxis()->CenterTitle(1);
  hist->GetYaxis()->SetTitleOffset(1.1);
@@ -86,14 +90,14 @@ void figure3(){
     leg->AddEntry(gr3,"isotropic dist.","pl");
     leg->Draw();
 
-    TLatex *tex2= new TLatex(12.1, 0.42,"0-5%, |#eta|<2.4");
+    TLatex *tex2= new TLatex(12.1, 0.0042,"0-5%, |#eta|<2.4");
     tex2->SetTextColor(1);
     tex2->SetTextSize(0.05);
     tex2->SetTextFont(42);
     tex2->Draw();
 
-  c1->SaveAs("plot_figure3.png");
-  c1->SaveAs("plot_figure3.pdf");
+  c1->SaveAs("plot_figure7.png");
+  c1->SaveAs("plot_figure7.pdf");
 
 }
 
