@@ -3,11 +3,11 @@ void figure4(){
   ifstream fileIn;
   fileIn.open("cl_full.txt");
   ifstream fileIn30;
-  fileIn30.open("cl_eta30.txt");
+  fileIn30.open("cl_eta24.txt");
   ifstream fileIn20;
-  fileIn20.open("cl_eta20.txt");
+  fileIn20.open("cl_eta16.txt");
   ifstream fileIn09;
-  fileIn09.open("cl_eta09.txt");
+  fileIn09.open("cl_eta08.txt");
  
   const int nL = 24;
   double cL[nL];
@@ -109,12 +109,12 @@ void figure4(){
     leg->SetTextSize(0.05);
     //leg->SetLineStyle(0.06);
     leg->AddEntry(gr2,"full sky","pl");
-    leg->AddEntry(gr3,"|#eta|<3.0","pl");
-    leg->AddEntry(gr4,"|#eta|<2.0","pl");
-    leg->AddEntry(gr5,"|#eta|<0.9","pl");
+    leg->AddEntry(gr3,"|#eta|<2.4","pl");
+    leg->AddEntry(gr4,"|#eta|<1.6","pl");
+    leg->AddEntry(gr5,"|#eta|<0.8","pl");
     leg->Draw();
 
-    TLatex *tex2= new TLatex(5.1, 10.6,"Isotropic events");
+    TLatex *tex2= new TLatex(4.1, 7.2,"Isotropic events");
     tex2->SetTextColor(1);
     tex2->SetTextSize(0.05);
     tex2->SetTextFont(42);
