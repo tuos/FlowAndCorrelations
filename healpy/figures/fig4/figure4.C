@@ -109,9 +109,9 @@ void figure4(){
     leg->SetTextSize(0.05);
     //leg->SetLineStyle(0.06);
     leg->AddEntry(gr2,"full sky","pl");
-    leg->AddEntry(gr3,"|#eta|<2.4","pl");
-    leg->AddEntry(gr4,"|#eta|<1.6","pl");
-    leg->AddEntry(gr5,"|#eta|<0.8","pl");
+    leg->AddEntry(gr3,"|#eta| < 2.4","pl");
+    leg->AddEntry(gr4,"|#eta| < 1.6","pl");
+    leg->AddEntry(gr5,"|#eta| < 0.8","pl");
     leg->Draw();
 
     TLatex *tex2= new TLatex(4.1, 7.2,"Isotropic events");
