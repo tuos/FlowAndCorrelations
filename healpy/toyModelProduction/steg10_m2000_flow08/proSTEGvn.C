@@ -49,6 +49,7 @@ void proSTEGvn()
   TRandom3 *rnd;
   rnd = new TRandom3(0);
   rnd->SetSeed(0);  
+  gRandom->SetSeed(0);  
 
   double v1, v2, v3, v4, v5, v6, ph, myphi, mypt, myeta, phi0, Psi;
   int nnf,k;
@@ -60,18 +61,14 @@ void proSTEGvn()
     //Psi = rnd->Uniform(0.0,PI2);
     Psi = 0;
     b_phirg = Psi; 
-    rnd->SetSeed(0);
     b_npg = rnd->Gaus(MeanMult,RMSMult); 
     n = 0;
 
-    rnd->SetSeed(0);
     v2=V2Dist->GetRandom();
   
     for(int j=0; j<b_npg;j++ ){
 
-      rnd->SetSeed(0);     
       mypt = PtDistr->GetRandom();
-      rnd->SetSeed(0);
       myeta =  EtaDistr->GetRandom();
       //v1=V1vsEta->Eval(myeta);
 
@@ -88,8 +85,8 @@ void proSTEGvn()
       //PhiDistr->SetParameters(v1,v2,v3,v4,v5,v6);
       //PhiDistr->SetParameters(v2,v3,v4,v5,v6);
       PhiDistr->SetParameters(v2,2.0);
-      rnd->SetSeed(0);  
       myphi = PhiDistr->GetRandom(); // randon selection dn/dphi
+      //cout<<"myphi = "<<myphi<<endl;
       myphi = myphi+Psi; // angle in lab frame -- needed for correct cumulant v2
       if (myphi>PI2) myphi=myphi-PI2; // 0 - 2*Pi
       
