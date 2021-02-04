@@ -1,0 +1,3 @@
+
+sbatch -J ToyPsiRand -o out_job.out jobsub.slurm
+
