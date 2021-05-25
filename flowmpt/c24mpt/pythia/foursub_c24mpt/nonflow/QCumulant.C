@@ -10,8 +10,9 @@
 #include "TRandom.h"
 #include "TTree.h"
 #include <TMath.h>
-#define Pi 3.14159265359 
 #define NBin_PT 10
+
+#include "TRandom3.h"
 
 using namespace std; 
  
@@ -149,6 +150,16 @@ void QCumulant(){
      t1.SetBranchAddress("phi", &phi0);
      nevt=t1.GetEntries();
 
+  TRandom3 *randomN;
+  randomN = new TRandom3(0);
+  gRandom->SetSeed(0);
+  double bkg_factor = 0.5;
+  int nBkg=0;
+  int nParticleJet1=0;
+  int nParticleJet2=0;
+  TF1 *jetEtaFun = new TF1("jetEtaFun","exp(-(x-0.0)^2/6.3)",-1.9,1.9);
+  // we first try to keep the pT value in Pythia8
+
      cout<<"Nevts = "<<nevt<<endl;
      for(long ne=0; ne<nevt; ne++)
      //for(long ne=0; ne<100000; ne++)
@@ -158,6 +169,24 @@ void QCumulant(){
  
        //event cut here
        //if(rmult<10) continue;
+
+       nBkg = bkg_factor*rmult;
+       nParticleJet1 = (rmult - bkg_factor*rmult)/2;
+       nParticleJet2 = rmult - nBkg - nParticleJet1;
+       for(int j=0; j<nBkg; j++){
+         eta0[j] = randomN->Uniform(-2.5, 2.5);
+         phi0[j] = randomN->Uniform(-1*TMath::Pi(), TMath::Pi());
+       }
+       double jetEta1 = jetEtaFun->GetRandom();
+       double jetPhi1 = randomN->Uniform(0, TMath::Pi());
+       for(int j=nBkg; j<nBkg+nParticleJet1; j++){
+         eta0[j] = randomN->Uniform(jetEta1-0.5, jetEta1+0.5);
+         phi0[j] = randomN->Uniform(jetPhi1-0.5, jetPhi1+0.5);
+       }
+       for(int j=nBkg+nParticleJet1; j<nBkg+nParticleJet1+nParticleJet2; j++){
+         eta0[j] = randomN->Uniform(-jetEta1-0.5, -jetEta1+0.5);
+         phi0[j] = randomN->Uniform(jetPhi1-TMath::Pi()-0.5, jetPhi1-TMath::Pi()+0.5);
+       }
 
        nCh=0; nmpt=0; hpttmp->Reset();
        Nh=0; 

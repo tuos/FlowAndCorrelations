@@ -10,8 +10,9 @@
 #include "TRandom.h"
 #include "TTree.h"
 #include <TMath.h>
-#define Pi 3.14159265359 
 #define NBin_PT 10
+
+#include "TRandom3.h"
 
 using namespace std; 
  
@@ -26,7 +27,6 @@ void QCumulant(){
   int multMin[NMultBin] = {1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 61, 71, 81,  91, 101, 121, 151, 181, 221};
   int multMax[NMultBin] = {5,10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 120, 150, 180, 220, 1000};
 
-
   int nh, ipt, inttemp;
   double Nh;
   Int_t rmult=0;
@@ -35,7 +35,7 @@ void QCumulant(){
   //ref;
   double SumMult[NMultBin]={0.};
   double AveMult[NMultBin]={0.};
-  
+
   int nCh;
   int nmpt;
   TH2D *hc24mpt[NMultBin];
@@ -66,20 +66,7 @@ void QCumulant(){
   double w2, w4, w6, w8;
   double AziCorr22, AziCorr24, AziCorr26, AziCorr28;
   const std::complex<double> i(0.,1.);
-  std::complex<double> Q2, Q4, Q422, Q6, Q8,  Q2a, Q2b, Q2c, Q2d , Q4a, Q4b, Q4aabb;
-  //subevent
-  int w2a, w2b, w2c, w2d, Nha, Nhb, Nhc, Nhd;
-  double etaGap=0.0;
-  double AziCorr22_sub, AziCorr22_sub_ac, AziCorr22_sub_bd, AziCorr22_sub_ad, AziCorr22_sub_bc, AziCorr24_sub;
-  double Sumw2A2_sub[NMultBin]={0.0}; double AveAziCorr22_sub[NMultBin]={0.0};
-  double Sumw4A4_sub[NMultBin]={0.0}; double AveAziCorr24_sub[NMultBin]={0.0};
-  double Sumw2A2_sub_ac[NMultBin]={0.0}; double AveAziCorr22_sub_ac[NMultBin]={0.0};
-  double Cumulant22_sub[NMultBin]={0.0}; double Cumulant24_sub[NMultBin]={0.0}; 
-  double Sumw2_sub[NMultBin]={0.0}; 
-  double Sumw2_sub_ac[NMultBin]={0.0}; 
-  double Sumw4_sub[NMultBin]={0.0};
-  double SC24sq_sub[NMultBin]={0.0};
-
+  std::complex<double> Q2, Q4, Q422, Q6, Q8;
   //diff
   double meanPt[NMultBin][NBin_PT]={0.0};
   double Nhp[NBin_PT];
@@ -120,6 +107,7 @@ void QCumulant(){
   double Sumw2pw4p[NMultBin][NBin_PT]={0.0}; double CovA2pA4p[NMultBin][NBin_PT]={0.0}; double Sumw2pw4pA2pA4p[NMultBin][NBin_PT]={0.0};
   double Sv24psq[NMultBin][NBin_PT]={0.0};
 /*
+     //char *file1 = "/scratch/tuos/ebeAnalysis/toyModel/version2_prod/fixedV2/prod/m100/jb0/steg_m100_prod.root";
      //char *file1 = "/scratch/tuos/ebeAnalysis/toyModel/version2_prod/fixedV2/prod/m40/jb0/steg_m40_prod.root";
      char *file1 = "/store/user/tuos/loops/cumulants/hijing/w01_hijing8tev_gensimtreeproduction/HIJING_pPb_8160_DataBS/w01_hijing8tev_gensimtreeproduction/190808_221750/0000/output_treeproduction_hijing8tev_20.root";
      //char *file1 = "/scratch/tuos/ebeAnalysis/toyModel/version2_prod/fixedV2/prod/testAlgo/m50/steg_m50_prod.root";
@@ -134,13 +122,9 @@ void QCumulant(){
      TChain t1("t1");
      //t1.Add("../../m1000/steg_100events_test.root/tree");
      //t1.Add("/scratch/tuos/ebeAnalysis/toyModel/version2_prod/fixedV2/prod/m100/jb0/steg_m100_prod.root/tree");
-     //for(int i=0; i<246; i++){
      for(int i=0; i<10; i++){
-       //t1.Add(Form("/store/user/tuos/loops/cumulants/pythia/PYTHIA8_tree_OCT13TeV500M/MinBias/PYTHIA8_tree_OCT13TeV500M/191011_162525/0000/output_treeproduction_pythia13tev_%d.root/demo/anaTree", i+1));
        t1.Add(Form("/store/user/tuos/loops/cumulants/pythia/PYTHIA8_treept001eta25_FEB05TeV500M/MinBias/PYTHIA8_treept001eta25_FEB05TeV500M/210305_233631/0000/output_treeproduction_pythia13tev_%d.root/demo/anaTree", i+1));
      }
-
-     //t1.Add("/store/user/tuos/loops/cumulants/pythia/PYTHIA8_tree_OCT13TeV500M/MinBias/PYTHIA8_tree_OCT13TeV500M/191011_162525/0000/output_treeproduction_pythia13tev_1.root/demo/anaTree");
 
 
      t1.SetBranchAddress("nTrk", &rmult);
@@ -148,6 +132,17 @@ void QCumulant(){
      t1.SetBranchAddress("eta", &eta0);
      t1.SetBranchAddress("phi", &phi0);
      nevt=t1.GetEntries();
+
+
+  TRandom3 *randomN;
+  randomN = new TRandom3(0);
+  gRandom->SetSeed(0);
+  double bkg_factor = 0.5;
+  int nBkg=0;
+  int nParticleJet1=0;
+  int nParticleJet2=0;
+  TF1 *jetEtaFun = new TF1("jetEtaFun","exp(-(x-0.0)^2/6.3)",-1.9,1.9);
+  // we first try to keep the pT value in Pythia8
 
      cout<<"Nevts = "<<nevt<<endl;
      for(long ne=0; ne<nevt; ne++)
@@ -158,12 +153,30 @@ void QCumulant(){
  
        //event cut here
        //if(rmult<10) continue;
+       //if(rmult>100) cout<<"ne = "<<ne<<" rmult ="<<rmult<<endl;
+
+       nBkg = bkg_factor*rmult;
+       nParticleJet1 = (rmult - bkg_factor*rmult)/2;
+       nParticleJet2 = rmult - nBkg - nParticleJet1;
+       for(int j=0; j<nBkg; j++){
+         eta0[j] = randomN->Uniform(-2.5, 2.5);
+         phi0[j] = randomN->Uniform(-1*TMath::Pi(), TMath::Pi());
+       }
+       double jetEta1 = jetEtaFun->GetRandom();
+       double jetPhi1 = randomN->Uniform(0, TMath::Pi());
+       for(int j=nBkg; j<nBkg+nParticleJet1; j++){
+         eta0[j] = randomN->Uniform(jetEta1-0.5, jetEta1+0.5);
+         phi0[j] = randomN->Uniform(jetPhi1-0.5, jetPhi1+0.5);
+       }
+       for(int j=nBkg+nParticleJet1; j<nBkg+nParticleJet1+nParticleJet2; j++){
+         eta0[j] = randomN->Uniform(-jetEta1-0.5, -jetEta1+0.5);
+         phi0[j] = randomN->Uniform(jetPhi1-TMath::Pi()-0.5, jetPhi1-TMath::Pi()+0.5);
+       }
 
        nCh=0; nmpt=0; hpttmp->Reset();
+
        Nh=0; 
        w2=0.0; w4=0.0; w6=0.0; w8=0.0;
-       Nha=0; Nhb=0; Nhc=0; Nhd=0; w2a=0; w2b=0; w2c=0; w2d=0;
-       Q2a=0; Q2b=0; Q2c=0; Q2d=0; Q4a=0; Q4b=0;
        AziCorr22=0.0; AziCorr24=0.0; AziCorr26=0.0; AziCorr28=0.0;
        Q2=0.0; Q4=0.0; Q422=0.0; Q6=0.0; Q8=0.0;
        for(ipt=0;ipt<NBin_PT;ipt++){
@@ -177,29 +190,17 @@ void QCumulant(){
            if(eta0[nh]<-2.40||eta0[nh]>2.40) continue;           
            if(pt0[nh]>0.5 && pt0[nh]<5.0) nCh=nCh+1;
            if(pt0[nh]<0.3||pt0[nh]>2.0) continue;
-	   hpt->Fill(pt0[nh]);
-	   Nh++;
 
            if(eta0[nh]>-0.5 && eta0[nh]<0.5){
              nmpt = nmpt+1;
            }
-           if(eta0[nh]>-2.4 && eta0[nh]<-1.575){
-             Nha = Nha+1;
-           }
-           if(eta0[nh]>-1.575 && eta0[nh]<-0.75){
-             Nhb = Nhb+1;
-           }
-           if(eta0[nh]>0.75 && eta0[nh]<1.575){
-             Nhc = Nhc+1;
-           }
-           if(eta0[nh]>1.575 && eta0[nh]<2.4){
-             Nhd = Nhd+1;
-           }
 
-
+           if(fabs(eta0[nh])>0.75 && fabs(eta0[nh])<2.4){
+	     hpt->Fill(pt0[nh]);
+	     Nh = Nh+1;
+           }
 	 } // end of loop over particles
-       //if(Nh<4) continue;  // event cut; 
-       if(Nha<1 || Nhb<1 || Nhc <1 || Nhd <1 || nmpt<1) continue;  // event cut; 
+       if(Nh<4 || nmpt<1) continue;  // event cut; 
 
      for(int nm=0;nm<NMultBin;nm++){
       if(nCh>=multMin[nm] && nCh<=multMax[nm]){
@@ -213,24 +214,9 @@ void QCumulant(){
        Q2+=(cos(2.0*phi0[nh])+i*sin(2.0*phi0[nh]));
        Q4+=(cos(4.0*phi0[nh])+i*sin(4.0*phi0[nh]));
 
-           if(eta0[nh]>-0.5 && eta0[nh]<0.5){
-             hpttmp->Fill(pt0[nh]);
-           }
-
-           if(eta0[nh]>-2.4 && eta0[nh]<-1.575){
-             Q2a+=(cos(2.0*phi0[nh])+i*sin(2.0*phi0[nh]));
-             Q4a+=(cos(4.0*phi0[nh])+i*sin(4.0*phi0[nh]));
-           }
-           if(eta0[nh]>-1.575 && eta0[nh]<-0.75){
-             Q2b+=(cos(2.0*phi0[nh])+i*sin(2.0*phi0[nh]));
-             Q4b+=(cos(4.0*phi0[nh])+i*sin(4.0*phi0[nh]));
-           }
-           if(eta0[nh]>0.75 && eta0[nh]<1.575){
-             Q2c+=(cos(2.0*phi0[nh])+i*sin(2.0*phi0[nh]));
-           }
-           if(eta0[nh]>1.575 && eta0[nh]<2.4){
-             Q2d+=(cos(2.0*phi0[nh])+i*sin(2.0*phi0[nh]));
-           }
+       if(eta0[nh]>-0.5 && eta0[nh]<0.5){
+         hpttmp->Fill(pt0[nh]);
+       }
 
      } // end of loop over particles 
 
@@ -258,10 +244,8 @@ void QCumulant(){
 */
 ///ref;
        Q422=Q4*conj(Q2)*conj(Q2);
-       Q4aabb=(Q2a*Q2a-Q4a)*conj(Q2b*Q2b-Q4b);
        SumMult[nm]+=Nh;
          w2=Nh*(Nh-1); 
-         w2a=Nha;  w2b=Nhb;  w2c=Nhc; w2d=Nhd;
          w4=Nh*(Nh-1)*(Nh-2)*(Nh-3);
          //w6=Nh*(Nh-1)*(Nh-2)*(Nh-3)*(Nh-4)*(Nh-5); 
          //w8=Nh*(Nh-1)*(Nh-2)*(Nh-3)*(Nh-4)*(Nh-5)*(Nh-6)*(Nh-7);
@@ -270,15 +254,6 @@ void QCumulant(){
          double s24_2=2.0*(2.0*(Nh-2)*abs(Q2)*abs(Q2)-Nh*(Nh-3));
          //AziCorr24=0; AziCorr26=0; AziCorr28=0;
          AziCorr24=(s24_1-s24_2)/w4;
-
-         AziCorr22_sub = (Q2b*conj(Q2c)).real()/Nhb/Nhc;
-
-         AziCorr22_sub_ac = (Q2a*conj(Q2c)).real()/Nha/Nhc;
-         AziCorr22_sub_bd = (Q2b*conj(Q2d)).real()/Nhb/Nhd;
-         AziCorr22_sub_ad = (Q2a*conj(Q2d)).real()/Nha/Nhd;
-         AziCorr22_sub_bc = (Q2b*conj(Q2c)).real()/Nhb/Nhc;
-         AziCorr24_sub = (Q2a*Q2b*conj(Q2c)*conj(Q2d)).real()/w2a/w2b/w2c/w2d;
-
          //AziCorr24=(pow(abs(Q2),4)+abs(Q4)*abs(Q4)-2.0*Q422.real())/w4 - 2.0*(2.0*(Nh-2)*abs(Q2)*abs(Q2)-Nh*(Nh-3))/w4;
 //         AziCorr24=AziCorr24;   AziCorr24=AziCorr24;
 //         cout<<"ne="<<ne<<", AziCorr22="<<AziCorr22<<", AziCorr24="<<AziCorr24<<endl;
@@ -322,15 +297,9 @@ void QCumulant(){
                    96.0*(Nh-7)*(Nh-6)*(Nh-2)*pow(abs(Q2),2) +
                    24.0*Nh*(Nh-7)*(Nh-6)*(Nh-5))/w8;  //  AziCorr26=AziCorr22; AziCorr28=AziCorr24; */
        Sumw2[nm]+=w2;  Sumw4[nm]+=w4; Sumw2w4[nm]+=w2*w4;
-       Sumw2_sub[nm]+=Nha*Nhb;
-       Sumw2_sub_ac[nm]+=Nha*Nhc;
-       Sumw4_sub[nm]+=Nha*(Nha-1)*Nhb*Nhc;
        //Sumw6[nm]+=w6;  Sumw8[nm]+=w8; 
        Sumw2sq[nm]+=w2*w2; Sumw4sq[nm]+=w4*w4;
        Sumw2A2[nm]+=w2*AziCorr22; Sumw4A4[nm]+=w4*AziCorr24;
-       Sumw2A2_sub[nm]+=Nha*Nhb*AziCorr22_sub; 
-       Sumw2A2_sub_ac[nm]+=Nha*Nhc*AziCorr22_sub_ac; 
-       Sumw4A4_sub[nm]+=w2a*w2b*w2c*AziCorr24_sub;
        //Sumw6A6[nm]+=w6*AziCorr26; Sumw8A8[nm]+=w8*AziCorr28;
        Sumw2A2sq[nm]+=w2*AziCorr22*AziCorr22; Sumw4A4sq[nm]+=w4*AziCorr24*AziCorr24;
        Sumw2w4A2A4[nm]+=w2*w4*AziCorr22*AziCorr24;
@@ -358,15 +327,14 @@ void QCumulant(){
          }
        }
 */
-
+       
       hmpt[nm]->Fill(hpttmp->GetMean());
-      hc24[nm]->Fill(AziCorr24_sub-AziCorr22_sub_ac*AziCorr22_sub_bd-AziCorr22_sub_ad*AziCorr22_sub_bc);
-      hc24mpt[nm]->Fill(hpttmp->GetMean(), AziCorr24_sub-AziCorr22_sub_ac*AziCorr22_sub_bd-AziCorr22_sub_ad*AziCorr22_sub_bc);
+      hc24[nm]->Fill(AziCorr24-2*AziCorr22*AziCorr22);
+      hc24mpt[nm]->Fill(hpttmp->GetMean(), AziCorr24-2*AziCorr22*AziCorr22);
 
       }  // end of loop over mult cut;
-
-     } // end of loop over nm;
-    } // end of loop over events;
+      } // end of loop over nm
+     } // end of loop over events;
 
     for(int nm=0;nm<NMultBin;nm++){
      AveMult[nm]=SumMult[nm]*1.0/Nevt[nm];
@@ -374,17 +342,12 @@ void QCumulant(){
 ///ref;
      AveAziCorr22[nm]=Sumw2A2[nm]/Sumw2[nm];
      AveAziCorr24[nm]=Sumw4A4[nm]/Sumw4[nm];
-     AveAziCorr22_sub[nm]=Sumw2A2_sub[nm]/Sumw2_sub[nm];
-     AveAziCorr22_sub_ac[nm]=Sumw2A2_sub_ac[nm]/Sumw2_sub_ac[nm];
-     AveAziCorr24_sub[nm]=Sumw4A4_sub[nm]/Sumw4_sub[nm];
      //AveAziCorr26[nm]=Sumw6A6[nm]/Sumw6[nm];
      //AveAziCorr28[nm]=Sumw8A8[nm]/Sumw8[nm];
      AveAziCorr22sq[nm]=Sumw2A2sq[nm]/Sumw2[nm];
      AveAziCorr24sq[nm]=Sumw4A4sq[nm]/Sumw4[nm];
      Cumulant22[nm]=AveAziCorr22[nm];    
      Cumulant24[nm]=AveAziCorr24[nm]-2.0*AveAziCorr22[nm]*AveAziCorr22[nm];
-     Cumulant22_sub[nm]=AveAziCorr22_sub[nm];    
-     Cumulant24_sub[nm]=AveAziCorr24_sub[nm]-2.0*AveAziCorr22_sub[nm]*AveAziCorr22_sub_ac[nm];
      //Cumulant26[nm]=AveAziCorr26[nm]-9.0*AveAziCorr22[nm]*AveAziCorr24[nm]+12.0*pow(AveAziCorr22[nm],3.0);
      //Cumulant28[nm]=AveAziCorr28[nm]-16.0*AveAziCorr26[nm]*AveAziCorr22[nm]-18.0*pow(AveAziCorr24[nm],2.0) + 
      //               144.0*AveAziCorr24[nm]*pow(AveAziCorr22[nm],2.0)-144.0*pow(AveAziCorr22[nm],4.0); 
@@ -426,8 +389,6 @@ void QCumulant(){
        SV24sq[nm]=1.0/pow(2.0*AveAziCorr22[nm]*AveAziCorr22[nm]-AveAziCorr24[nm],3.0/2)*(AveAziCorr22[nm]*AveAziCorr22[nm]*Sumw2sq[nm]/Sumw2[nm]/Sumw2[nm]*S2sq[nm]+1.0/16*Sumw4sq[nm]/Sumw4[nm]/Sumw4[nm]*S4sq[nm]-1.0/2*AveAziCorr22[nm]*Sumw2w4[nm]/Sumw2[nm]/Sumw4[nm]*CovA2A4[nm]);
      else SV24sq[nm]=0.0;
      SC24sq[nm] = 16*AveAziCorr22[nm]*AveAziCorr22[nm]*Sumw2sq[nm]/Sumw2[nm]/Sumw2[nm]*S2sq[nm] + Sumw4sq[nm]/Sumw4[nm]/Sumw4[nm]*S4sq[nm] - 8*AveAziCorr22[nm]*Sumw2w4[nm]/Sumw2[nm]/Sumw4[nm]*CovA2A4[nm];
-
-     SC24sq_sub[nm] = 16*AveAziCorr22_sub[nm]*AveAziCorr22_sub[nm]*Sumw2sq[nm]/Sumw2_sub[nm]/Sumw2_sub[nm]*S2sq[nm] + Sumw4sq[nm]/Sumw4_sub[nm]/Sumw4_sub[nm]*S4sq[nm] - 8*AveAziCorr22_sub[nm]*Sumw2w4[nm]/Sumw2_sub[nm]/Sumw4_sub[nm]*CovA2A4[nm];
 //diff;
 /*
     for(ipt=0;ipt<NBin_PT;ipt++) {
@@ -482,11 +443,9 @@ void QCumulant(){
   outcumulant.open("Cumulant.txt");
     //for(int nm=0;nm<NMultBin;nm++) for(ipt=0;ipt<NBin_PT;ipt++) outcumulant<<AveMultp[nm][ipt]<<"   "<<Cumulant22p[nm][ipt]<<"   "<<Cumulant24p[nm][ipt]<<endl;
     ///for(int nm=0;nm<NMultBin;nm++)  outcumulant<<AveMult[nm]<<"   "<<Cumulant22[nm]<<"   "<<Cumulant24[nm]<<"   "<<Cumulant26[nm]<<"   "<<Cumulant28[nm]<<endl;
-    //for(int nm=0;nm<NMultBin;nm++)  outcumulant<<Nevt[nm]<<"   "<<AveMult[nm]<<"   "<<Cumulant22[nm]<<"   "<<Cumulant24[nm]<<" "<<sqrt(SC24sq[nm])<<endl;
-    for(int nm=0;nm<NMultBin;nm++)  outcumulant<<Nevt[nm]<<"   "<<AveMult[nm]<<"   "<<Cumulant22[nm]<<" "<<Cumulant22_sub[nm]<<"   "<<Cumulant24[nm]<<" "<<sqrt(SC24sq[nm])<<"   "<<Cumulant24_sub[nm]<<" "<<sqrt(SC24sq_sub[nm])<<"      "<<Sumw2_sub[nm]<<" "<<Sumw4_sub[nm]<<endl;
+    for(int nm=0;nm<NMultBin;nm++)  outcumulant<<Nevt[nm]<<"   "<<AveMult[nm]<<"   "<<Cumulant22[nm]<<"   "<<Cumulant24[nm]<<" "<<sqrt(SC24sq[nm])<<endl;
     //for(int nm=0;nm<NMultBin;nm++)  outcumulant<<AveMult[nm]<<"   "<<V24[nm]<<"   "<<sqrt(SV24sq[nm])<<endl;
     outcumulant<<nevt<<endl;
-    outcumulant<<"Nevt   AveMult   Cumulant22   Cumulant22_sub    Cumulant24   Cumulant24_err    Cumulant24_sub Cumulant24_suberr     Sumw2_sub   Sumw4_sub"<<endl;
   outcumulant.close();
 
     ofstream outcorr;
@@ -503,15 +462,14 @@ void QCumulant(){
 
     }
 
-  TFile *f = new TFile("outfile_corr_c24mpt_4sub.root","recreate");
+  TFile *f = new TFile("outfile_corr_c24mpt_standard.root","recreate");
   f->cd();
   for(int nm=0;nm<NMultBin;nm++){
     hmult[nm]->Write();
     hmpt[nm]->Write();
     hc24[nm]->Write();
     hc24mpt[nm]->Write();
-  } 
-
+  }   
   hpt->Write();
 
   f->Close();

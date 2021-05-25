@@ -1,8 +1,8 @@
 void c24mpt_figure(){
-  TFile *infile1 = new TFile("../../standard_c24mpt//up/outfile_corr_c24mpt_standard.root","read");
-  TFile *infile2 = new TFile("../../twosub/c24mpt/up/outfile_corr_c24mpt_2sub.root","read");
-  TFile *infile3 = new TFile("../../threesub/nogap/reCheckCode/c24mpt/up/outfile_corr_c24mpt.root","read");
-  TFile *infile4 = new TFile("../../foursub/c24mpt/up/outfile_corr_c24mpt_4sub.root","read");
+  TFile *infile1 = new TFile("../standard_c24mpt/outfile_corr_c24mpt_standard.root","read");
+  TFile *infile2 = new TFile("../twosub_c24mpt/outfile_corr_c24mpt_2sub.root","read");
+  TFile *infile3 = new TFile("../threesub_c24mpt/outfile_corr_c24mpt.root","read");
+  TFile *infile4 = new TFile("../foursub_c24mpt/outfile_corr_c24mpt_4sub.root","read");
   
   const int NMultBin = 17;
   TH2D *hc24mpt1[NMultBin];
@@ -77,8 +77,8 @@ void c24mpt_figure(){
         gPad->SetTicks(-1);
         TH1D *hist3=(TH1D*)hist->Clone();
         hist3->SetYTitle("cov(c_{2}{4}, #LTp_{T}#GT)");
-        hist3->SetMinimum(-0.000004);
-        hist3->SetMaximum(0.000006);
+        hist3->SetMinimum(-0.0021);
+        hist3->SetMaximum(0.0006);
         hist3->Draw();
         TGraphErrors *gr1 = new TGraphErrors(NMultBin,mmult1,cov1,0,cove1);
         gr1->SetTitle("");
@@ -113,12 +113,12 @@ void c24mpt_figure(){
         gr4->SetLineColor(8);
         gr4->Draw("psameezL");
 
-        TLatex *tex = new TLatex(30,0.0000049,"PYTHIA8 13 TeV");
+        TLatex *tex = new TLatex(30,0.00039,"PYTHIA8 13 TeV");
         tex->SetTextSize(0.04);
         tex->SetLineWidth(2);
         tex->SetTextFont(42);
         tex->Draw();
-        tex = new TLatex(30,0.0000041,"0.3 < p_{T} < 2 GeV");
+        tex = new TLatex(30,0.00025,"0.3 < p_{T} < 2 GeV");
         tex->SetTextSize(0.04);
         tex->SetLineWidth(2);
         tex->SetTextFont(42);
@@ -127,7 +127,7 @@ void c24mpt_figure(){
         tex->SetTextSize(0.05);
         tex->SetLineWidth(2);
         //tex->Draw();
-    TLegend *leg = new TLegend(0.63,0.65,0.8,0.9);
+    TLegend *leg = new TLegend(0.63,0.35,0.8,0.58);
     leg->SetFillColor(10);
     leg->SetBorderSize(0);
     leg->SetTextFont(42);

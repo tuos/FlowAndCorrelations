@@ -44,9 +44,9 @@ void QCumulant(){
   TH1D *hc24[NMultBin];
   TH1D *hmult[NMultBin];
   for(int k =0; k<NMultBin; k++){  
-    hc24mpt[k] = new TH2D(Form("c24mpt_%d",k),"",100,0,10,200,-0.001,0.001);
+    hc24mpt[k] = new TH2D(Form("c24mpt_%d",k),"",100,0,10,220,-11,11);
     hmpt[k] = new TH1D(Form("mpt_%d",k),"",100,0,10);
-    hc24[k] = new TH1D(Form("c24_%d",k),"",200,-0.001,0.001);
+    hc24[k] = new TH1D(Form("c24_%d",k),"",220,-11,11);
     hmult[k] = new TH1D(Form("mult_%d",k),"",200,0,200);
   }
   TH1D *hpttmp=new TH1D("pttmp","ptdist_allevents",100,0,10);

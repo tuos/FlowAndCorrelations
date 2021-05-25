@@ -1,8 +1,8 @@
-void mc24_figure(){
-  TFile *infile1 = new TFile("../standard_c24mpt/outfile_corr_c24mpt_standard.root","read");
-  TFile *infile2 = new TFile("../twosub_c24mpt/outfile_corr_c24mpt_2sub.root","read");
-  TFile *infile3 = new TFile("../threesub_c24mpt/outfile_corr_c24mpt.root","read");
-  TFile *infile4 = new TFile("../foursub_c24mpt/outfile_corr_c24mpt_4sub.root","read");
+void c24mpt_figure(){
+  TFile *infile1 = new TFile("../../standard_c24mpt/nonflow/outfile_corr_c24mpt_standard.root","read");
+  TFile *infile2 = new TFile("../../twosub_c24mpt/nonflow/outfile_corr_c24mpt_2sub.root","read");
+  TFile *infile3 = new TFile("../../threesub_c24mpt/nonflow/outfile_corr_c24mpt.root","read");
+  TFile *infile4 = new TFile("../../foursub_c24mpt/nonflow/outfile_corr_c24mpt_4sub.root","read");
   
   const int NMultBin = 17;
   TH2D *hc24mpt1[NMultBin];
@@ -27,10 +27,10 @@ void mc24_figure(){
   double cove3[NMultBin];
   double cove4[NMultBin];
   for(int k =0; k<NMultBin; k++){
-    hc24mpt1[k] = (TH2D*)infile1->Get(Form("c24_%d",k));
-    hc24mpt2[k] = (TH2D*)infile2->Get(Form("c24_%d",k));
-    hc24mpt3[k] = (TH2D*)infile3->Get(Form("c24_%d",k));
-    hc24mpt4[k] = (TH2D*)infile4->Get(Form("c24_%d",k));
+    hc24mpt1[k] = (TH2D*)infile1->Get(Form("c24mpt_%d",k));
+    hc24mpt2[k] = (TH2D*)infile2->Get(Form("c24mpt_%d",k));
+    hc24mpt3[k] = (TH2D*)infile3->Get(Form("c24mpt_%d",k));
+    hc24mpt4[k] = (TH2D*)infile4->Get(Form("c24mpt_%d",k));
     hmult1[k] = (TH1D*)infile1->Get(Form("mult_%d",k));
     hmult2[k] = (TH1D*)infile2->Get(Form("mult_%d",k));
     hmult3[k] = (TH1D*)infile3->Get(Form("mult_%d",k));
@@ -40,14 +40,14 @@ void mc24_figure(){
     mmult2[k]=hmult2[k]->GetMean();
     mmult3[k]=hmult3[k]->GetMean();
     mmult4[k]=hmult4[k]->GetMean();
-    cov1[k]=hc24mpt1[k]->GetMean();
-    cov2[k]=hc24mpt2[k]->GetMean();
-    cov3[k]=hc24mpt3[k]->GetMean();
-    cov4[k]=hc24mpt4[k]->GetMean();
-    cove1[k]=hc24mpt1[k]->GetMeanError();
-    cove2[k]=hc24mpt2[k]->GetMeanError();
-    cove3[k]=hc24mpt3[k]->GetMeanError();
-    cove4[k]=hc24mpt4[k]->GetMeanError();
+    cov1[k]=hc24mpt1[k]->GetCovariance();
+    cov2[k]=hc24mpt2[k]->GetCovariance();
+    cov3[k]=hc24mpt3[k]->GetCovariance();
+    cov4[k]=hc24mpt4[k]->GetCovariance();
+    cove1[k]=0;
+    cove2[k]=0;
+    cove3[k]=0;
+    cove4[k]=0;
   }
 
  TH1D* hist = new TH1D("hist","",150,0.,150.);
@@ -76,9 +76,9 @@ void mc24_figure(){
         gPad->SetRightMargin(0.02);
         gPad->SetTicks(-1);
         TH1D *hist3=(TH1D*)hist->Clone();
-        hist3->SetYTitle("#LTc_{2}{4}#GT");
-        hist3->SetMinimum(-0.02);
-        hist3->SetMaximum(0.0005);
+        hist3->SetYTitle("cov(c_{2}{4}, #LTp_{T}#GT)");
+        hist3->SetMinimum(-0.003);
+        hist3->SetMaximum(0.001);
         hist3->Draw();
         TGraphErrors *gr1 = new TGraphErrors(NMultBin,mmult1,cov1,0,cove1);
         gr1->SetTitle("");
@@ -113,12 +113,12 @@ void mc24_figure(){
         gr4->SetLineColor(8);
         gr4->Draw("psameezL");
 
-        TLatex *tex = new TLatex(12,0.00039,"PYTHIA8 13 TeV");
+        TLatex *tex = new TLatex(30,0.00039,"PYTHIA8 13 TeV");
         tex->SetTextSize(0.04);
         tex->SetLineWidth(2);
         tex->SetTextFont(42);
         tex->Draw();
-        tex = new TLatex(12,0.00031,"0.3 < p_{T} < 2 GeV");
+        tex = new TLatex(30,0.00025,"0.3 < p_{T} < 2 GeV");
         tex->SetTextSize(0.04);
         tex->SetLineWidth(2);
         tex->SetTextFont(42);
@@ -127,7 +127,7 @@ void mc24_figure(){
         tex->SetTextSize(0.05);
         tex->SetLineWidth(2);
         //tex->Draw();
-    TLegend *leg = new TLegend(0.53,0.65,0.7,0.9);
+    TLegend *leg = new TLegend(0.63,0.3,0.8,0.53);
     leg->SetFillColor(10);
     leg->SetBorderSize(0);
     leg->SetTextFont(42);
@@ -139,7 +139,7 @@ void mc24_figure(){
     leg->AddEntry(gr4," 4-subevent","pl");
     leg->Draw();
 
-  c1->Print("plot_figure_mc24.png");
+  c1->Print("plot_figure_c24mpt.png");
 
 }
 

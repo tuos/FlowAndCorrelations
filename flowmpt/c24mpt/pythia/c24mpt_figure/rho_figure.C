@@ -1,8 +1,8 @@
 void rho_figure(){
-  TFile *infile1 = new TFile("../../standard_c24mpt//up/outfile_corr_c24mpt_standard.root","read");
-  TFile *infile2 = new TFile("../../twosub/c24mpt/up/outfile_corr_c24mpt_2sub.root","read");
-  TFile *infile3 = new TFile("../../threesub/nogap/reCheckCode/c24mpt/up/outfile_corr_c24mpt.root","read");
-  TFile *infile4 = new TFile("../../foursub/c24mpt/up/outfile_corr_c24mpt_4sub.root","read");
+  TFile *infile1 = new TFile("../standard_c24mpt/outfile_corr_c24mpt_standard.root","read");
+  TFile *infile2 = new TFile("../twosub_c24mpt/outfile_corr_c24mpt_2sub.root","read");
+  TFile *infile3 = new TFile("../threesub_c24mpt/outfile_corr_c24mpt.root","read");
+  TFile *infile4 = new TFile("../foursub_c24mpt/outfile_corr_c24mpt_4sub.root","read");
   
   const int NMultBin = 17;
   TH2D *hc24mpt1[NMultBin];

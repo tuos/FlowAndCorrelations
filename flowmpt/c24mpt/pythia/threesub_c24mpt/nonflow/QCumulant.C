@@ -10,8 +10,9 @@
 #include "TRandom.h"
 #include "TTree.h"
 #include <TMath.h>
-#define Pi 3.14159265359 
 #define NBin_PT 10
+
+#include "TRandom3.h"
 
 using namespace std; 
  
@@ -66,11 +67,11 @@ void QCumulant(){
   double w2, w4, w6, w8;
   double AziCorr22, AziCorr24, AziCorr26, AziCorr28;
   const std::complex<double> i(0.,1.);
-  std::complex<double> Q2, Q4, Q422, Q6, Q8,  Q2a, Q2b, Q2c, Q2d , Q4a, Q4b, Q4aabb;
+  std::complex<double> Q2, Q4, Q422, Q6, Q8,  Q2a, Q2b, Q2c , Q4a, Q4b, Q4aabb;
   //subevent
-  int w2a, w2b, w2c, w2d, Nha, Nhb, Nhc, Nhd;
+  int w2a, w2b, w2c, Nha, Nhb, Nhc;
   double etaGap=0.0;
-  double AziCorr22_sub, AziCorr22_sub_ac, AziCorr22_sub_bd, AziCorr22_sub_ad, AziCorr22_sub_bc, AziCorr24_sub;
+  double AziCorr22_sub, AziCorr22_sub_ac, AziCorr24_sub;
   double Sumw2A2_sub[NMultBin]={0.0}; double AveAziCorr22_sub[NMultBin]={0.0};
   double Sumw4A4_sub[NMultBin]={0.0}; double AveAziCorr24_sub[NMultBin]={0.0};
   double Sumw2A2_sub_ac[NMultBin]={0.0}; double AveAziCorr22_sub_ac[NMultBin]={0.0};
@@ -149,6 +150,17 @@ void QCumulant(){
      t1.SetBranchAddress("phi", &phi0);
      nevt=t1.GetEntries();
 
+  TRandom3 *randomN;
+  randomN = new TRandom3(0);
+  gRandom->SetSeed(0);
+  double bkg_factor = 0.5;
+  int nBkg=0;
+  int nParticleJet1=0;
+  int nParticleJet2=0;
+  TF1 *jetEtaFun = new TF1("jetEtaFun","exp(-(x-0.0)^2/6.3)",-1.9,1.9);
+  // we first try to keep the pT value in Pythia8
+
+
      cout<<"Nevts = "<<nevt<<endl;
      for(long ne=0; ne<nevt; ne++)
      //for(long ne=0; ne<100000; ne++)
@@ -159,11 +171,29 @@ void QCumulant(){
        //event cut here
        //if(rmult<10) continue;
 
+       nBkg = bkg_factor*rmult;
+       nParticleJet1 = (rmult - bkg_factor*rmult)/2;
+       nParticleJet2 = rmult - nBkg - nParticleJet1;
+       for(int j=0; j<nBkg; j++){
+         eta0[j] = randomN->Uniform(-2.5, 2.5);
+         phi0[j] = randomN->Uniform(-1*TMath::Pi(), TMath::Pi());
+       }
+       double jetEta1 = jetEtaFun->GetRandom();
+       double jetPhi1 = randomN->Uniform(0, TMath::Pi());
+       for(int j=nBkg; j<nBkg+nParticleJet1; j++){
+         eta0[j] = randomN->Uniform(jetEta1-0.5, jetEta1+0.5);
+         phi0[j] = randomN->Uniform(jetPhi1-0.5, jetPhi1+0.5);
+       }
+       for(int j=nBkg+nParticleJet1; j<nBkg+nParticleJet1+nParticleJet2; j++){
+         eta0[j] = randomN->Uniform(-jetEta1-0.5, -jetEta1+0.5);
+         phi0[j] = randomN->Uniform(jetPhi1-TMath::Pi()-0.5, jetPhi1-TMath::Pi()+0.5);
+       }
+
        nCh=0; nmpt=0; hpttmp->Reset();
        Nh=0; 
        w2=0.0; w4=0.0; w6=0.0; w8=0.0;
-       Nha=0; Nhb=0; Nhc=0; Nhd=0; w2a=0; w2b=0; w2c=0; w2d=0;
-       Q2a=0; Q2b=0; Q2c=0; Q2d=0; Q4a=0; Q4b=0;
+       Nha=0; Nhb=0; Nhc=0; w2a=0; w2b=0; w2c=0;
+       Q2a=0; Q2b=0; Q2c=0; Q4a=0; Q4b=0;
        AziCorr22=0.0; AziCorr24=0.0; AziCorr26=0.0; AziCorr28=0.0;
        Q2=0.0; Q4=0.0; Q422=0.0; Q6=0.0; Q8=0.0;
        for(ipt=0;ipt<NBin_PT;ipt++){
@@ -183,23 +213,20 @@ void QCumulant(){
            if(eta0[nh]>-0.5 && eta0[nh]<0.5){
              nmpt = nmpt+1;
            }
-           if(eta0[nh]>-2.4 && eta0[nh]<-1.575){
+           if(fabs(eta0[nh])>0.75 && fabs(eta0[nh])<1.3){
              Nha = Nha+1;
            }
-           if(eta0[nh]>-1.575 && eta0[nh]<-0.75){
+           if(eta0[nh]>-2.4 && eta0[nh]<-1.3){
              Nhb = Nhb+1;
            }
-           if(eta0[nh]>0.75 && eta0[nh]<1.575){
+           if(eta0[nh]>1.3 && eta0[nh]<2.4){
              Nhc = Nhc+1;
-           }
-           if(eta0[nh]>1.575 && eta0[nh]<2.4){
-             Nhd = Nhd+1;
            }
 
 
 	 } // end of loop over particles
        //if(Nh<4) continue;  // event cut; 
-       if(Nha<1 || Nhb<1 || Nhc <1 || Nhd <1 || nmpt<1) continue;  // event cut; 
+       if(Nha<2 || Nhb<1 || Nhc <1 || nmpt<1) continue;  // event cut; 
 
      for(int nm=0;nm<NMultBin;nm++){
       if(nCh>=multMin[nm] && nCh<=multMax[nm]){
@@ -217,19 +244,16 @@ void QCumulant(){
              hpttmp->Fill(pt0[nh]);
            }
 
-           if(eta0[nh]>-2.4 && eta0[nh]<-1.575){
+           if(fabs(eta0[nh])>0.75 && fabs(eta0[nh])<1.3){
              Q2a+=(cos(2.0*phi0[nh])+i*sin(2.0*phi0[nh]));
              Q4a+=(cos(4.0*phi0[nh])+i*sin(4.0*phi0[nh]));
            }
-           if(eta0[nh]>-1.575 && eta0[nh]<-0.75){
+           if(eta0[nh]>-2.4 && eta0[nh]<-1.3){
              Q2b+=(cos(2.0*phi0[nh])+i*sin(2.0*phi0[nh]));
              Q4b+=(cos(4.0*phi0[nh])+i*sin(4.0*phi0[nh]));
            }
-           if(eta0[nh]>0.75 && eta0[nh]<1.575){
+           if(eta0[nh]>1.3 && eta0[nh]<2.4){
              Q2c+=(cos(2.0*phi0[nh])+i*sin(2.0*phi0[nh]));
-           }
-           if(eta0[nh]>1.575 && eta0[nh]<2.4){
-             Q2d+=(cos(2.0*phi0[nh])+i*sin(2.0*phi0[nh]));
            }
 
      } // end of loop over particles 
@@ -261,7 +285,7 @@ void QCumulant(){
        Q4aabb=(Q2a*Q2a-Q4a)*conj(Q2b*Q2b-Q4b);
        SumMult[nm]+=Nh;
          w2=Nh*(Nh-1); 
-         w2a=Nha;  w2b=Nhb;  w2c=Nhc; w2d=Nhd;
+         w2a=Nha*(Nha-1);  w2b=Nhb;  w2c=Nhc;
          w4=Nh*(Nh-1)*(Nh-2)*(Nh-3);
          //w6=Nh*(Nh-1)*(Nh-2)*(Nh-3)*(Nh-4)*(Nh-5); 
          //w8=Nh*(Nh-1)*(Nh-2)*(Nh-3)*(Nh-4)*(Nh-5)*(Nh-6)*(Nh-7);
@@ -271,13 +295,9 @@ void QCumulant(){
          //AziCorr24=0; AziCorr26=0; AziCorr28=0;
          AziCorr24=(s24_1-s24_2)/w4;
 
-         AziCorr22_sub = (Q2b*conj(Q2c)).real()/Nhb/Nhc;
-
+         AziCorr22_sub = (Q2a*conj(Q2b)).real()/Nha/Nhb;
          AziCorr22_sub_ac = (Q2a*conj(Q2c)).real()/Nha/Nhc;
-         AziCorr22_sub_bd = (Q2b*conj(Q2d)).real()/Nhb/Nhd;
-         AziCorr22_sub_ad = (Q2a*conj(Q2d)).real()/Nha/Nhd;
-         AziCorr22_sub_bc = (Q2b*conj(Q2c)).real()/Nhb/Nhc;
-         AziCorr24_sub = (Q2a*Q2b*conj(Q2c)*conj(Q2d)).real()/w2a/w2b/w2c/w2d;
+         AziCorr24_sub = ((Q2a*Q2a-Q4a)*conj(Q2b)*conj(Q2c)).real()/w2a/w2b/w2c;
 
          //AziCorr24=(pow(abs(Q2),4)+abs(Q4)*abs(Q4)-2.0*Q422.real())/w4 - 2.0*(2.0*(Nh-2)*abs(Q2)*abs(Q2)-Nh*(Nh-3))/w4;
 //         AziCorr24=AziCorr24;   AziCorr24=AziCorr24;
@@ -358,10 +378,10 @@ void QCumulant(){
          }
        }
 */
-
+       
       hmpt[nm]->Fill(hpttmp->GetMean());
-      hc24[nm]->Fill(AziCorr24_sub-AziCorr22_sub_ac*AziCorr22_sub_bd-AziCorr22_sub_ad*AziCorr22_sub_bc);
-      hc24mpt[nm]->Fill(hpttmp->GetMean(), AziCorr24_sub-AziCorr22_sub_ac*AziCorr22_sub_bd-AziCorr22_sub_ad*AziCorr22_sub_bc);
+      hc24[nm]->Fill(AziCorr24_sub-2*AziCorr22_sub*AziCorr22_sub_ac);
+      hc24mpt[nm]->Fill(hpttmp->GetMean(), AziCorr24_sub-2*AziCorr22_sub*AziCorr22_sub_ac);
 
       }  // end of loop over mult cut;
 
@@ -503,7 +523,7 @@ void QCumulant(){
 
     }
 
-  TFile *f = new TFile("outfile_corr_c24mpt_4sub.root","recreate");
+  TFile *f = new TFile("outfile_corr_c24mpt.root","recreate");
   f->cd();
   for(int nm=0;nm<NMultBin;nm++){
     hmult[nm]->Write();
