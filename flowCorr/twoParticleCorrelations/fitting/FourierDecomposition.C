@@ -6,7 +6,7 @@ void FourierDecomposition(){
   
   // input 1d correlation function 
   //
-  float V1=-0.05, V2=0.005, V3=0.002, V4=0.001, V5=0.001, V6=0.001;
+  float V1=-0.05, V2=0.02, V3=0.01, V4=0.005, V5=0.003, V6=0.001;
   TF1 *inputDist = new TF1("inputDist","[0]*(1 + 2*[1]*cos(x) + 2*[2]*cos(2*x) + 2*[3]*cos(3*x) + 2*[4]*cos(4*x) + 2*[5]*cos(5*x) + 2*[6]*cos(6*x))",-TMath::Pi()/2, TMath::Pi()*3/2);
   inputDist->SetParameter(0, 1);
   inputDist->SetParameter(1, V1);
