@@ -1,0 +1,94 @@
+
+===log for setting up===
+[tuos@gw344 root]$ mkdir dev
+[tuos@gw344 root]$ cd dev/
+[tuos@gw344 dev]$ cp ../pythia8305.tgz .
+[tuos@gw344 dev]$ tar xvfz pythia8305.tgz 
+[tuos@gw344 dev]$ cd pythia8305
+[tuos@gw344 pythia8305]$ pwd
+/scratch/tuos/models/angantyr/root/dev/pythia8305
+[tuos@gw344 pythia8305]$ echo $ROOTSYS
+/cvmfs/cms.cern.ch/slc6_amd64_gcc700/lcg/root/6.12.07-ogkkac3/
+[tuos@gw344 pythia8305]$ ./configure --with-root=/cvmfs/cms.cern.ch/slc6_amd64_gcc700/lcg/root/6.12.07-ogkkac3/
+[tuos@gw344 pythia8305]$ make
+[tuos@gw344 pythia8305]$ make -j 8
+make: Nothing to be done for 'all'.
+[tuos@gw344 pythia8305]$ export PYTHIA8DATA=/scratch/tuos/models/angantyr/root/dev/pythia8305/share/Pythia8/xmldoc
+[tuos@gw341 pythia8305]$ mkdir production
+[tuos@gw341 pythia8305]$ cd production/
+[tuos@gw341 production]$ cp /scratch/tuos/models/angantyr/root/pythia8305/examples/angantyr/pbpb_angantyr_5tev.cc .
+[tuos@gw344 production]$ cp ../examples/Makefile.inc .
+[tuos@gw344 production]$ cp /scratch/tuos/models/angantyr/root/pythia8305/examples/angantyr/Makefile .
+[tuos@gw344 production]$ make pbpb_angantyr_5tev 
+[tuos@gw344 production]$ ./pbpb_angantyr_5tev 
+===The End===
+Modifying around line 260 of src/HIUserHooks.cc 
+  // hard coded impact parameter range b>11fm
+  while(b<11){
+    b = sqrt(-2.0*log(rndPtr->flat()))*width();
+  }
+[tuos@gw344 pythia8305]$ make -j 8
+g++ src/HIUserHooks.cc -o tmp/HIUserHooks.o -c -MD -Iinclude -O2 -std=c++11 -pedantic -W -Wall -Wshadow -fPIC 
+ar cr lib/libpythia8.a tmp/Analysis.o tmp/Basics.o
+===compile OK===
+Now test run : vi production/pbpb_angantyr_5tev.cc 
+ --------  End PYTHIA Particle Data Table  -----------------------------------------------------------------------------------------
+
+Running event number: 0
+impact parameter b = 12.3
+impact parameter b = 13.0
+ PYTHIA Error in BeamRemnants::setKinematics: kinematics construction failed  
+Running event number: 2
+impact parameter b = 12.3
+impact parameter b = 11.1
+Running event number: 4
+impact parameter b = 12.5
+impact parameter b = 11.5
+Running event number: 6
+impact parameter b = 12.2
+impact parameter b = 12.9
+Running event number: 8
+impact parameter b = 14.8
+impact parameter b = 13.4
+Running event number: 10
+impact parameter b = 15.0
+impact parameter b = 14.6
+Running event number: 12
+impact parameter b = 14.8
+impact parameter b = 11.3
+Running event number: 14
+impact parameter b = 11.5
+impact parameter b = 12.4
+Running event number: 16
+impact parameter b = 11.9
+impact parameter b = 12.8
+ PYTHIA Warning in SimpleSpaceShower::pT2nextQCD: weight above unity  
+Running event number: 18
+impact parameter b = 14.5
+impact parameter b = 12.0
+=== It works! All events with b>11fm===
+
+Testing the correct b cut so that we have Nch<200(or 150, Nch with pt>0.5 and <5.0) is not biased:
+
+The branch nMultiplictyTree is using pt>0.5 and <5.0. Looks like b>11fm is OK for Nch<200.
+
+---
+Need 10 million events with b>11fm. If running 100 jobs, each job needs to have 100k events. It should work since with b>9fm, it takes about 50 mins to finish 10k events
+--
+Testing running time: /scratch/tuos/models/angantyr/root/dev/pythia8305/production/collisions_pbpb
+2k events with b>11fm, it takes 4 mins to finish 1k events, so 100k events will take about 400mins, which is less than 7 hours. (Need 4 mins to pre-setup the model, takes 7mins 30 seconds to finish 2k events.). 100k events per job is perfect. And we need 100 jobs.
+---
+Batch number: 100, 101, 102, ... , 299 are for PbPb at 5.02 TeV
+Batch number: 300, 301, 302, ... , 499 are for pPb at 5.02 TeV
+Batch number: 500, 501, 502, ... , 699 are for pp at 13 TeV
+---
+ppb and pp
+export PYTHIA8DATA=/scratch/tuos/models/angantyr/root/dev/ppb_pp/pythia8305/share/Pythia8/xmldoc
+/scratch/tuos/models/angantyr/root/dev/ppb_pp/pythia8305/production/collisions_ppb
+pPb, each job 200k events, should be ok since see it can finish 2k events within 4 mins.
+
+/scratch/tuos/models/angantyr/root/dev/ppb_pp/pythia8305/production/collisions_pp
+pp, 2 mins presetup, 10k events finished in 70 seconds. If we have 5000k/job, it will take 500*70s<10 hours. File size is also about 3MB*500=1.5GB. 100 jobs will produce 500 million events. 
+
+
+
