@@ -59,7 +59,7 @@ void multiparticleFlow()
   hist->GetXaxis()->SetLabelSize(0.06);
 
   //ALICE
-  c1->cd(1);
+  c1->cd(3);
   gPad->SetLeftMargin(0.12);
   gPad->SetBottomMargin(0.14);
   gPad->SetTopMargin(0.0);
@@ -130,7 +130,7 @@ void multiparticleFlow()
   tex2->DrawLatex(0.2,0.74,"|#eta| < 2.5");
 
   //CMS
-  c1->cd(3);
+  c1->cd(1);
   gPad->SetLeftMargin(0.12);
   gPad->SetBottomMargin(0.14);
   gPad->SetTopMargin(0.0);
