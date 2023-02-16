@@ -5,16 +5,19 @@ void multiparticleFlow()
   const int nDataSets=17;
   char fileNames[nDataSets][200]={"alicev22.txt", "alicev24.txt", "alicev24sub.txt", "alicev26.txt",
                   "atlasv22.txt", "atlasv24.txt", "atlasv24sub.txt", "atlasv26.txt", "atlasv28.txt",
-          "cmsv22.txt", "cmsv24.txt", "cmsv26.txt", "cmsv28.txt", "cmsv2lyz.txt",
+          "cmsv22nonsub.txt", "cmsv24.txt", "cmsv26.txt", "cmsv28.txt", "cmsv2lyz.txt",
                                "phenixv22.txt", "phenixv24.txt", "phenixv26.txt"};
 
-  int colors[nDataSets] = {2,1,1,4, 2,1,1,4,6, 2,1,4,6,8, 2,1,4};
-  int markers[nDataSets] = {21,24,20,25, 21,24,20,25,27, 21,24,25,27,28, 21,24,25};
+  int colors[nDataSets] = {4,2,2,8, 4,2,2,8,1, 4,2,8,1,6, 4,2,8};
+  int markers[nDataSets] = {21,20,24,34, 21,20,24,34,47, 21,20,34,47,25, 21,20,34};
   double sysValues[nDataSets][100];
   ifstream infile;
   TGraphErrors *graph[nDataSets];
   for(int i=0; i<nDataSets; i++){
-    graph[i] = (TGraphErrors*)GetGraphWithSymmYErrorsFromFile(Form("./%s",fileNames[i]),colors[i],markers[i],1.2);
+    if (i==0 || i==4 || i==9 || i==14)
+    graph[i] = (TGraphErrors*)GetGraphWithSymmYErrorsFromFile(Form("./%s",fileNames[i]),colors[i],markers[i],1.4);
+   else
+   graph[i] = (TGraphErrors*)GetGraphWithSymmYErrorsFromFile(Form("./%s",fileNames[i]),colors[i],markers[i],1.8);
     //get sys values
     infile.open(Form("./%s",fileNames[i]));
     float tmp, sysy;
@@ -161,7 +164,7 @@ void multiparticleFlow()
   leg3->SetFillColor(0);
   leg3->SetTextSize(0.048);
   leg3->SetBorderSize(0);
-  leg3->AddEntry(graph[9],"v_{2}^{sub}{2, |#Delta#eta|>2}","pl");
+  leg3->AddEntry(graph[9],"v_{2}{2, |#Delta#eta|>2}","pl");
   leg3->AddEntry(graph[10],"v_{2}{4}","pl");
   leg3->AddEntry(graph[11],"v_{2}{6}","pl");
   leg3->AddEntry(graph[12],"v_{2}{8}","pl");
