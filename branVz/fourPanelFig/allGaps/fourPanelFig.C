@@ -9,14 +9,18 @@ double tmp;
 double ptValues[nCentBin][nPtBin];
 double v2Obs[nCentBin][nPtBin];
 double v2ObsError[nCentBin][nPtBin];
-double EPresulotion[nCentBin]={0.2689, 0.3750, 0.4045, 0.3222};
-double EPresulotionError[nCentBin]={0.00001, 0.00001, 0.00002, 0.000005};
 double v2Corrected[nCentBin][nPtBin];
 double v2CorrectedError[nCentBin][nPtBin];
+double EPresulotion[nCentBin]={0.2689, 0.3750, 0.4045, 0.3222};
+double EPresulotionError[nCentBin]={0.00001, 0.00001, 0.00002, 0.000005};
+double v2ObsLG23[nCentBin][nPtBin];
+double v2ObsLG23Error[nCentBin][nPtBin];
+double v2CorrectedLG23[nCentBin][nPtBin];
+double v2CorrectedLG23Error[nCentBin][nPtBin];
 
 // read v2 values
   ifstream inputV2;
-  inputV2.open("txt_cent_pt_v2_error.txt");
+  inputV2.open("txt_cent_pt_v2_LG4_error.txt");
     for(int i=0; i<nCentBin; i++){
       for(int j=0; j<nPtBin; j++){
         inputV2>>tmp;
@@ -26,12 +30,25 @@ double v2CorrectedError[nCentBin][nPtBin];
       }
     }
     inputV2.close();
+  inputV2.open("txt_cent_pt_v2_LG23_error.txt");
+    for(int i=0; i<nCentBin; i++){
+      for(int j=0; j<nPtBin; j++){
+        inputV2>>tmp;
+        inputV2>>tmp;
+        inputV2>>v2ObsLG23[i][j];
+        inputV2>>v2ObsLG23Error[i][j];
+      }
+    }
+    inputV2.close();
 
 // get v2 corrected
     for(int i=0; i<nCentBin; i++){
       for(int j=0; j<nPtBin; j++){
         v2Corrected[i][j] = v2Obs[i][j]/EPresulotion[i];
         v2CorrectedError[i][j] = (v2Obs[i][j]/EPresulotion[i])*sqrt(v2ObsError[i][j]*v2ObsError[i][j]/v2Obs[i][j]/v2Obs[i][j] + EPresulotionError[i]*EPresulotionError[i]/EPresulotion[i]/EPresulotion[i]);
+
+        v2CorrectedLG23[i][j] = v2ObsLG23[i][j]/EPresulotion[i];
+        v2CorrectedLG23Error[i][j] = (v2ObsLG23[i][j]/EPresulotion[i])*sqrt(v2ObsLG23Error[i][j]*v2ObsLG23Error[i][j]/v2ObsLG23[i][j]/v2ObsLG23[i][j] + EPresulotionError[i]*EPresulotionError[i]/EPresulotion[i]/EPresulotion[i]);
       }
     }
 
@@ -75,12 +92,21 @@ double v2CorrectedError[nCentBin][nPtBin];
   graph1->SetLineWidth(2);
   graph1->SetLineColor(1);
   graph1->Draw("psameez");
+  TGraphErrors *graph1LG23 = new TGraphErrors(nPtBin, &ptValues[0][0],&v2CorrectedLG23[0][0],0,&v2CorrectedLG23Error[0][0]);
+  graph1LG23->SetTitle("");
+  graph1LG23->SetMarkerStyle(20);
+  graph1LG23->SetMarkerSize(1.4);
+  graph1LG23->SetMarkerColor(2);
+  graph1LG23->SetLineWidth(2);
+  graph1LG23->SetLineColor(2);
+  graph1LG23->Draw("psameez");
   TLegend *leg1 = new TLegend(0.63,0.7,0.98,0.950);
   leg1->SetFillStyle(0);
   leg1->SetFillColor(0);
   leg1->SetTextSize(0.048);
   leg1->SetBorderSize(0);
-  leg1->AddEntry(graph1,"v_{2}","pl");
+  leg1->AddEntry(graph1,"LG4","pl");
+  leg1->AddEntry(graph1LG23,"LG23","pl");
   leg1->Draw();
   TLatex *tex1= new TLatex();
   tex1->SetNDC();
@@ -105,6 +131,14 @@ double v2CorrectedError[nCentBin][nPtBin];
   graph2->SetLineWidth(2);
   graph2->SetLineColor(1);
   graph2->Draw("psameez");
+  TGraphErrors *graph2LG23 = new TGraphErrors(nPtBin, &ptValues[1][0],&v2CorrectedLG23[1][0],0,&v2CorrectedLG23Error[1][0]);
+  graph2LG23->SetTitle("");
+  graph2LG23->SetMarkerStyle(20);
+  graph2LG23->SetMarkerSize(1.4);
+  graph2LG23->SetMarkerColor(2);
+  graph2LG23->SetLineWidth(2);
+  graph2LG23->SetLineColor(2);
+  graph2LG23->Draw("psameez");
   TLatex *tex2= new TLatex();
   tex2->SetNDC();
   tex2->SetTextFont(42);
@@ -128,6 +162,14 @@ double v2CorrectedError[nCentBin][nPtBin];
   graph3->SetLineWidth(2);
   graph3->SetLineColor(1);
   graph3->Draw("psameez");
+  TGraphErrors *graph3LG23 = new TGraphErrors(nPtBin, &ptValues[2][0],&v2CorrectedLG23[2][0],0,&v2CorrectedLG23Error[2][0]);
+  graph3LG23->SetTitle("");
+  graph3LG23->SetMarkerStyle(20);
+  graph3LG23->SetMarkerSize(1.4);
+  graph3LG23->SetMarkerColor(2);
+  graph3LG23->SetLineWidth(2);
+  graph3LG23->SetLineColor(2);
+  graph3LG23->Draw("psameez");
   TLatex *tex3= new TLatex();
   tex3->SetNDC();
   tex3->SetTextFont(42);
@@ -151,6 +193,14 @@ double v2CorrectedError[nCentBin][nPtBin];
   graph4->SetLineWidth(2);
   graph4->SetLineColor(1);
   graph4->Draw("psameez");
+  TGraphErrors *graph4LG23 = new TGraphErrors(nPtBin, &ptValues[3][0],&v2CorrectedLG23[3][0],0,&v2CorrectedLG23Error[3][0]);
+  graph4LG23->SetTitle("");
+  graph4LG23->SetMarkerStyle(20);
+  graph4LG23->SetMarkerSize(1.4);
+  graph4LG23->SetMarkerColor(2);
+  graph4LG23->SetLineWidth(2);
+  graph4LG23->SetLineColor(2);
+  graph4LG23->Draw("psameez");
   TLatex *tex4= new TLatex();
   tex4->SetNDC();
   tex4->SetTextFont(42);
