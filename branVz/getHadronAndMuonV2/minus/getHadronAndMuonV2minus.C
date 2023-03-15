@@ -215,6 +215,9 @@ double v2MuonError[nCentBin][nPtBin];
         if(isnan(v2HadronError[i][j])) v2HadronError[i][j]=0;
         if(isnan(v2MuonError[i][j])) v2MuonError[i][j]=0;
 
+        if(v2HadronError[i][j]<0) v2HadronError[i][j]=-v2HadronError[i][j];
+        if(v2MuonError[i][j]<0) v2MuonError[i][j]=-v2MuonError[i][j];
+
         outV2<<i<<"   "<<(ptCuts[j]+ptCuts[j+1])/2.0<<"   "<<v2Hadron[i][j]<<"   "<<v2HadronError[i][j]<<"   "<<v2Muon[i][j]<<"   "<<v2MuonError[i][j]<<endl;
         cout<<i<<"   "<<(ptCuts[j]+ptCuts[j+1])/2.0<<"   "<<v2Hadron[i][j]<<"   "<<v2HadronError[i][j]<<"   "<<v2Muon[i][j]<<"   "<<v2MuonError[i][j]<<endl;
       }
