@@ -120,7 +120,7 @@ void integrated_vn(){
     hvn[i]->SetMarkerSize(0.6);
     hvn[i]->Draw("pez");
 
-    tex->DrawLatex(5, -0.2*hvn[i]->GetMaximum(), Form("Cent: %f - %f", cBin[i], cBin[i+1]));
+    tex->DrawLatex(5, 0.2*hvn[i]->GetMaximum(), Form("Cent: %d - %d", cBin[i], cBin[i+1]));
 
   }  
 

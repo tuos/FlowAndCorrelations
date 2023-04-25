@@ -1,0 +1,93 @@
+import FWCore.ParameterSet.Config as cms
+
+process = cms.Process("CmsTwoPartCorrAnalysis")
+
+
+# __________________ General _________________
+
+# Configure the logger
+process.load("FWCore.MessageService.MessageLogger_cfi")
+process.MessageLogger.cerr.FwkReport.reportEvery = 100
+
+# Configure the number of maximum event the analyser run on in interactive mode
+# -1 == ALL
+process.maxEvents = cms.untracked.PSet( 
+    #input = cms.untracked.int32(-1) 
+    input = cms.untracked.int32(100) 
+    )
+
+
+# __________________ I/O files _________________
+
+# Define the input file to run on in interactive mode
+process.source = cms.Source("PoolSource",
+    fileNames = cms.untracked.vstring(
+        #'/store/user/clindsey/MinBias_Hydjet_Drum5F_2018_5p02TeV/RECODEBUG_20190625/190626_194626/0000/step2_RAW2DIGI_L1Reco_RECO_668.root'
+        #'/store/user/clindsey/MinBias_Hydjet_Drum5F_2018_5p02TeV/RECODEBUG_20190625/190626_194626/0000/step2_RAW2DIGI_L1Reco_RECO_120.root'
+        #'/store/user/clindsey/MinBias_Hydjet_Drum5F_2018_5p02TeV/RECODEBUG_20190625/190626_194626/0000/step2_RAW2DIGI_L1Reco_RECO_123.root'
+        #'/store/himc/HINPbPbAutumn18DR/MinBias_Hydjet_Drum5F_2018_5p02TeV/AODSIM/NoPUmva98_103X_upgrade2018_realistic_HI_v11-v1/270000/F87DB3E2-4AF9-4D40-9B91-707A101B1399.root'
+        #'/store/himc/HINPbPbAutumn18DR/MinBias_Hydjet_Drum5F_2018_5p02TeV/AODSIM/NoPUmva98_103X_upgrade2018_realistic_HI_v11-v1/120000/6D79232F-796F-FB41-A039-99DE13EC0A81.root'
+        #'/store/himc/HINPbPbAutumn18DR/MinBias_AMPT_NoStringMelting_2018_5p02TeV/AODSIM/NoPU_103X_upgrade2018_realistic_HI_v11-v1/50000/3DB1C67F-8968-B74A-89B0-BAB7553ABA21.root'
+
+        #'/store/himc/HINPbPbAutumn18DR/MinBias_Hydjet_Drum5F_2018_5p02TeV/AODSIM/NoPUmva98_103X_upgrade2018_realistic_HI_v11-v1/120000/577AD674-75BC-514C-9489-1DC3C8BF9D9D.root'
+        #'/store/himc/HINPbPbAutumn18DR/MinBias_Hydjet_Drum5F_2018_5p02TeV/AODSIM/NoPUmva98_103X_upgrade2018_realistic_HI_v11-v1/120000/38DF5873-D2AD-724A-B4ED-6D29110F6529.root'
+        
+        #'file:/afs/cern.ch/work/s/subehera/CMSSW_10_3_1_patch2/src/Analyzers/CmsTwoPartCorrAnalysis/cfg/step2_RAW2DIGI_L1Reco_RECO_124.root'
+        
+        '/store/himc/HINPbPbAutumn18DR/MinBias_Hydjet_Drum5F_2018_5p02TeV/AODSIM/NoPU_103X_upgrade2018_realistic_HI_v11_ext1-v3/2520000/000F2389-243D-504C-A627-2918FDD0AE22.root' ## New data with more stat
+    )
+)
+
+# Define output file name
+import os
+process.TFileService = cms.Service("TFileService",
+     #fileName = cms.string(os.getenv('CMSSW_BASE') + '/src/Analyzers/ChargeDepAndPtCorr/test/chargeptdepcorr.root')
+     #fileName = cms.string('chargeptdepcorr_MC_central_hydjetAOD_cent010_3040_6080_1p0pttrig2p0_1p0ptass2p0_Sep26_2022_subashcode.root')
+     fileName = cms.string('chargeptdepcorr_MC_central_hydjetAOD_cent010_1p0pttrig2p0_1p0ptass2p0_Nov11_2022_5centbin_raghumix_norunnumcondtn.root')
+)
+
+
+# __________________ Detector conditions _________________
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
+
+from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
+process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:phase1_2018_realistic_hi', '') 
+#process.HiForest.GlobalTagLabel = process.GlobalTag.globaltag
+process.GlobalTag.snapshotTime = cms.string("9999-12-31 23:59:59.000")
+process.GlobalTag.toGet.extend([
+        cms.PSet(record = cms.string("HeavyIonRcd"),
+                 tag = cms.string("CentralityTable_HFtowers200_HydjetDrum5F_v1032x02_mc"),
+                 #tag = cms.string("CentralityTable_HFtowers200_HydjetCymbal5Ev8_v1020x01_mc"),
+                 connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
+                 label = cms.untracked.string("HFtowers")
+                 ),
+        ])
+
+
+
+# __________________ Event selection _________________
+# Load centrality producer for centrality calculation
+process.load("RecoHI.HiCentralityAlgos.CentralityBin_cfi")
+process.newCentralityBin = process.centralityBin.clone()
+
+# Load HI event selection modules
+process.load('HeavyIonsAnalysis.Configuration.collisionEventSelection_cff')
+# __________________ Analyse Sequence _________________
+
+# Load you analyzer with initial configuration
+process.load("Analyzers.CmsTwoPartCorrAnalysis.chargedepptcorr_cff")
+process.defaultAnalysis_010   = process.CPDC010.clone()
+process.defaultAnalysis_05   = process.CPDC05.clone()
+process.defaultAnalysis_510   = process.CPDC510.clone()
+#process.defaultAnalysis   = process.CPDCSUBASH.clone()
+process.defaultAnalysis_1020   = process.CPDC1020.clone()
+process.defaultAnalysis_2030   = process.CPDC2030.clone()
+process.p = cms.Path(#process.hfCoincFilter3 *             # Requier HF coincidence with 3 GeV  
+    process.primaryVertexFilter *        # Clean up on vertices
+    #process.clusterCompatibilityFilter * # Clean up on pileup
+    process.centralityBin*              # Compute centrality
+    #process.defaultAnalysis_010 )#*
+    #process.defaultAnalysis_1020 *
+    #process.defaultAnalysis_2030 *
+    process.defaultAnalysis_05 *
+    process.defaultAnalysis_510 )

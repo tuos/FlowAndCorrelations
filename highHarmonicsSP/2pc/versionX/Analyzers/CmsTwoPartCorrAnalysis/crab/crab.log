@@ -1,0 +1,1301 @@
+DEBUG 2022-09-19 10:13:31.455 UTC: 	 CRAB Client version: v3.220823
+DEBUG 2022-09-19 10:13:31.456 UTC: 	 Running on: Linux lxplus770.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-09-19 10:13:31.456 UTC: 	 Executing command: 'submit'
+DEBUG 2022-09-19 10:13:31.456 UTC: 	 Found CRAB cache file /afs/cern.ch/user/p/prabhat/.crab3
+DEBUG 2022-09-21 10:45:41.055 UTC: 	 CRAB Client version: v3.220823
+DEBUG 2022-09-21 10:45:41.056 UTC: 	 Running on: Linux lxplus797.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-09-21 10:45:41.056 UTC: 	 Executing command: 'submit'
+DEBUG 2022-09-21 10:45:41.081 UTC: 	 Found CRAB cache file /afs/cern.ch/user/p/prabhat/.crab3
+INFO 2022-09-21 10:45:41.126 UTC: 	 Will use CRAB configuration file submit.py
+DEBUG 2022-09-21 10:45:41.126 UTC: 	 Loading CRAB configuration file.
+ERROR 2022-09-21 10:45:41.130 UTC: 	 Error while loading CRAB configuration:
+cannot import name getUsernameFromSiteDB
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2022-09-21 10:45:41.130 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/SubCommand.py", line 89, in loadConfig
+    raise ConfigurationException(configmsg)
+ConfigurationException: Error while loading CRAB configuration:
+cannot import name getUsernameFromSiteDB
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+INFO 2022-09-21 10:45:41.151 UTC: 	 Log file is /afs/cern.ch/work/p/prabhat/SayanCMW/CMSSW_10_3_3_patch1/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-09-21 12:54:55.136 UTC: 	 CRAB Client version: v3.220823
+DEBUG 2022-09-21 12:54:55.136 UTC: 	 Running on: Linux lxplus797.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-09-21 12:54:55.136 UTC: 	 Executing command: 'submit'
+DEBUG 2022-09-21 12:54:55.147 UTC: 	 Found CRAB cache file /afs/cern.ch/user/p/prabhat/.crab3
+INFO 2022-09-21 12:54:55.171 UTC: 	 Will use CRAB configuration file submit.py
+DEBUG 2022-09-21 12:54:55.172 UTC: 	 Loading CRAB configuration file.
+DEBUG 2022-09-21 12:54:55.193 UTC: 	 Will use CRAB Analysis plugin (i.e. will run an analysis job type).
+ERROR 2022-09-21 12:54:55.207 UTC: 	 Working area '/afs/cern.ch/work/p/prabhat/SayanCMW/CMSSW_10_3_3_patch1/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_C2_dry_Test_2' already exists 
+Please change the requestName in the config file
+ERROR 2022-09-21 12:54:55.207 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/SubCommand.py", line 320, in __init__
+    getattr(self.configuration.General, 'requestName', None))
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/ClientUtilities.py", line 387, in createWorkArea
+    raise ConfigException("Working area '%s' already exists \nPlease change the requestName in the config file" % fullpath)
+ConfigException: Working area '/afs/cern.ch/work/p/prabhat/SayanCMW/CMSSW_10_3_3_patch1/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_C2_dry_Test_2' already exists 
+Please change the requestName in the config file
+INFO 2022-09-21 12:54:55.228 UTC: 	 Log file is /afs/cern.ch/work/p/prabhat/SayanCMW/CMSSW_10_3_3_patch1/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-09-21 17:07:19.309 UTC: 	 CRAB Client version: v3.220823
+DEBUG 2022-09-21 17:07:19.309 UTC: 	 Running on: Linux lxplus783.cern.ch 3.10.0-1160.71.1.el7.x86_64 #1 SMP Tue Jun 28 15:37:28 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-09-21 17:07:19.309 UTC: 	 Executing command: 'submit'
+DEBUG 2022-09-21 17:07:19.333 UTC: 	 Found CRAB cache file /afs/cern.ch/user/p/prabhat/.crab3
+INFO 2022-09-21 17:07:19.392 UTC: 	 Will use CRAB configuration file submit.py
+DEBUG 2022-09-21 17:07:19.392 UTC: 	 Loading CRAB configuration file.
+DEBUG 2022-09-21 17:07:19.397 UTC: 	 Will use CRAB Analysis plugin (i.e. will run an analysis job type).
+ERROR 2022-09-21 17:07:19.397 UTC: 	 Working area '/afs/cern.ch/work/p/prabhat/SayanCMW/CMSSW_10_3_3_patch1/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_C2_dry_Test_2' already exists 
+Please change the requestName in the config file
+ERROR 2022-09-21 17:07:19.397 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/SubCommand.py", line 320, in __init__
+    getattr(self.configuration.General, 'requestName', None))
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/ClientUtilities.py", line 387, in createWorkArea
+    raise ConfigException("Working area '%s' already exists \nPlease change the requestName in the config file" % fullpath)
+ConfigException: Working area '/afs/cern.ch/work/p/prabhat/SayanCMW/CMSSW_10_3_3_patch1/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_C2_dry_Test_2' already exists 
+Please change the requestName in the config file
+INFO 2022-09-21 17:07:19.404 UTC: 	 Log file is /afs/cern.ch/work/p/prabhat/SayanCMW/CMSSW_10_3_3_patch1/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-09-22 10:18:17.214 UTC: 	 CRAB Client version: v3.220823
+DEBUG 2022-09-22 10:18:17.215 UTC: 	 Running on: Linux lxplus744.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-09-22 10:18:17.215 UTC: 	 Executing command: 'kill'
+DEBUG 2022-09-22 10:18:17.259 UTC: 	 Found CRAB cache file /afs/cern.ch/user/p/prabhat/.crab3
+ERROR 2022-09-22 10:18:17.308 UTC: 	 Error: DptDPt_Data_allchgarge_exclusive_eta1_Noeff_central is not a valid CRAB project directory.
+ERROR 2022-09-22 10:18:17.308 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/SubCommand.py", line 275, in __init__
+    SubCommand.validateOptions(self)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/SubCommand.py", line 642, in validateOptions
+    raise ConfigurationException(msg)
+ConfigurationException: [91mError[0m: DptDPt_Data_allchgarge_exclusive_eta1_Noeff_central is not a valid CRAB project directory.
+INFO 2022-09-22 10:18:17.312 UTC: 	 Log file is /afs/cern.ch/work/p/prabhat/SayanCMW/CMSSW_10_3_3_patch1/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-09-22 10:18:25.327 UTC: 	 CRAB Client version: v3.220823
+DEBUG 2022-09-22 10:18:25.327 UTC: 	 Running on: Linux lxplus744.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-09-22 10:18:25.327 UTC: 	 Executing command: 'kill'
+DEBUG 2022-09-22 10:18:25.327 UTC: 	 Found CRAB cache file /afs/cern.ch/user/p/prabhat/.crab3
+ERROR 2022-09-22 10:18:25.328 UTC: 	 Error: DptDPt_Data_allchgarge_exclusive_eta1_Noeff_central is not a valid CRAB project directory.
+ERROR 2022-09-22 10:18:25.328 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/SubCommand.py", line 275, in __init__
+    SubCommand.validateOptions(self)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/SubCommand.py", line 642, in validateOptions
+    raise ConfigurationException(msg)
+ConfigurationException: [91mError[0m: DptDPt_Data_allchgarge_exclusive_eta1_Noeff_central is not a valid CRAB project directory.
+INFO 2022-09-22 10:18:25.329 UTC: 	 Log file is /afs/cern.ch/work/p/prabhat/SayanCMW/CMSSW_10_3_3_patch1/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-10-21 18:34:19.303 UTC: 	 CRAB Client version: v3.220823
+DEBUG 2022-10-21 18:34:19.303 UTC: 	 Running on: Linux lxplus780.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-10-21 18:34:19.303 UTC: 	 Executing command: 'submit'
+DEBUG 2022-10-21 18:34:19.316 UTC: 	 Found CRAB cache file /afs/cern.ch/user/s/sayan/.crab3
+ERROR 2022-10-21 18:34:19.350 UTC: 	 CRAB configuration file chargedepptcorr_MC_central_cfg.py not found.
+ERROR 2022-10-21 18:34:19.350 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.220823.00/lib/CRABClient/Commands/SubCommand.py", line 51, in loadConfig
+    raise ConfigurationException("CRAB configuration file %s not found." % (configname))
+ConfigurationException: CRAB configuration file chargedepptcorr_MC_central_cfg.py not found.
+INFO 2022-10-21 18:34:19.357 UTC: 	 Log file is /eos/home-s/sayan/DptDpt_miniAOD/subashcode_AOD/CMSSW_10_3_3_patch1/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-11-21 17:05:05.287 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-11-21 17:05:05.287 UTC: 	 Running on: Linux lxplus730.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-11-21 17:05:05.287 UTC: 	 Executing command: 'submit'
+DEBUG 2022-11-21 17:05:05.287 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2022-11-21 17:05:05.288 UTC: 	 Will use CRAB configuration file multicrab3_MC_HYDJET.py
+DEBUG 2022-11-21 17:05:05.288 UTC: 	 Loading CRAB configuration file.
+DEBUG 2022-11-21 17:05:05.298 UTC: 	 Will use CRAB Analysis plugin (i.e. will run an analysis job type).
+ERROR 2022-11-21 17:05:05.298 UTC: 	 Working area '/afs/cern.ch/user/k/kpanja/Sayan/Run3_MC/AOD_MC_testRun/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/MC_HINtestRun3_0p5pttrg10p0_1p0ptass3p0_eta2p4_cent4070_Nov21_2022/crab_MC_HINtestRun3_0p5pttrg10p0_1p0ptass3p0_eta2p4_cent4070_Nov21_2022' already exists 
+Please change the requestName in the config file
+ERROR 2022-11-21 17:05:05.298 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 318, in __init__
+    self.requestarea, self.requestname, self.logfile = createWorkArea(
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/ClientUtilities.py", line 387, in createWorkArea
+    raise ConfigException("Working area '%s' already exists \nPlease change the requestName in the config file" % fullpath)
+CRABClient.ClientExceptions.ConfigException: Working area '/afs/cern.ch/user/k/kpanja/Sayan/Run3_MC/AOD_MC_testRun/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/MC_HINtestRun3_0p5pttrg10p0_1p0ptass3p0_eta2p4_cent4070_Nov21_2022/crab_MC_HINtestRun3_0p5pttrg10p0_1p0ptass3p0_eta2p4_cent4070_Nov21_2022' already exists 
+Please change the requestName in the config file
+INFO 2022-11-21 17:05:05.328 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Sayan/Run3_MC/AOD_MC_testRun/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-11-21 17:17:20.379 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-11-21 17:17:20.380 UTC: 	 Running on: Linux lxplus730.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-11-21 17:17:20.380 UTC: 	 Executing command: 'status'
+DEBUG 2022-11-21 17:17:20.380 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+ERROR 2022-11-21 17:17:20.382 UTC: 	 Cannot find .requestcache file in CRAB project directory /afs/cern.ch/user/k/kpanja/Sayan/Run3_MC/AOD_MC_testRun/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/MC_HINtestRun3_0p5pttrg10p0_1p0ptass3p0_eta2p4_cent010_Nov21_2022
+ERROR 2022-11-21 17:17:20.382 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/status.py", line 48, in __init__
+    SubCommand.__init__(self, logger, cmdargs)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 275, in __init__
+    SubCommand.validateOptions(self)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 646, in validateOptions
+    self.loadLocalCache()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 508, in loadLocalCache
+    raise ex
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 502, in loadLocalCache
+    self.cachedinfo, self.logfile = loadCache(self.requestarea, self.logger)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/ClientUtilities.py", line 440, in loadCache
+    raise CachefileNotFoundException(msg)
+CRABClient.ClientExceptions.CachefileNotFoundException: Cannot find .requestcache file in CRAB project directory /afs/cern.ch/user/k/kpanja/Sayan/Run3_MC/AOD_MC_testRun/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/MC_HINtestRun3_0p5pttrg10p0_1p0ptass3p0_eta2p4_cent010_Nov21_2022
+INFO 2022-11-21 17:17:20.386 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Sayan/Run3_MC/AOD_MC_testRun/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-11-24 05:43:44.600 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-11-24 05:43:44.600 UTC: 	 Running on: Linux lxplus757.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-11-24 05:43:44.600 UTC: 	 Executing command: 'resubmit'
+DEBUG 2022-11-24 05:43:44.601 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+ERROR 2022-11-24 05:43:44.718 UTC: 	 Cannot find .requestcache file in CRAB project directory /afs/cern.ch/user/k/kpanja/Sayan/Run3_MC/AOD_MC_testRun/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/MC_HINtestRun3_0p5pttrg3p0_0p5ptass3p0_eta2p4_cent4070_Nov23_2022
+ERROR 2022-11-24 05:43:44.718 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/resubmit.py", line 30, in __init__
+    SubCommand.__init__(self, logger, cmdargs)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 275, in __init__
+    SubCommand.validateOptions(self)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 646, in validateOptions
+    self.loadLocalCache()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 508, in loadLocalCache
+    raise ex
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 502, in loadLocalCache
+    self.cachedinfo, self.logfile = loadCache(self.requestarea, self.logger)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/ClientUtilities.py", line 440, in loadCache
+    raise CachefileNotFoundException(msg)
+CRABClient.ClientExceptions.CachefileNotFoundException: Cannot find .requestcache file in CRAB project directory /afs/cern.ch/user/k/kpanja/Sayan/Run3_MC/AOD_MC_testRun/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/MC_HINtestRun3_0p5pttrg3p0_0p5ptass3p0_eta2p4_cent4070_Nov23_2022
+INFO 2022-11-24 05:43:44.789 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Sayan/Run3_MC/AOD_MC_testRun/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-11-25 23:07:15.347 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-11-25 23:07:15.347 UTC: 	 Running on: Linux lxplus716.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-11-25 23:07:15.348 UTC: 	 Executing command: 'submit'
+DEBUG 2022-11-25 23:07:15.348 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2022-11-25 23:07:15.349 UTC: 	 Will use CRAB configuration file multicrab3_MC_HYDJET.py
+DEBUG 2022-11-25 23:07:15.349 UTC: 	 Loading CRAB configuration file.
+DEBUG 2022-11-25 23:07:15.350 UTC: 	 Will use CRAB Analysis plugin (i.e. will run an analysis job type).
+ERROR 2022-11-25 23:07:15.351 UTC: 	 Working area '/afs/cern.ch/user/k/kpanja/Sayan/Run3_MC/AOD_MC_testRun/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/MC_HINtestRun3_0p3pttrg3p0_0p3ptass3p0_eta2p4_cent030_Nov26_2022/crab_MC_HINtestRun3_0p3pttrg3p0_0p3ptass3p0_eta2p4_cent1020_Nov26_2022' already exists 
+Please change the requestName in the config file
+ERROR 2022-11-25 23:07:15.351 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 318, in __init__
+    self.requestarea, self.requestname, self.logfile = createWorkArea(
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/ClientUtilities.py", line 387, in createWorkArea
+    raise ConfigException("Working area '%s' already exists \nPlease change the requestName in the config file" % fullpath)
+CRABClient.ClientExceptions.ConfigException: Working area '/afs/cern.ch/user/k/kpanja/Sayan/Run3_MC/AOD_MC_testRun/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/MC_HINtestRun3_0p3pttrg3p0_0p3ptass3p0_eta2p4_cent030_Nov26_2022/crab_MC_HINtestRun3_0p3pttrg3p0_0p3ptass3p0_eta2p4_cent1020_Nov26_2022' already exists 
+Please change the requestName in the config file
+INFO 2022-11-25 23:07:15.381 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Sayan/Run3_MC/AOD_MC_testRun/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-11-26 11:20:30.387 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-11-26 11:20:30.388 UTC: 	 Running on: Linux lxplus710.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-11-26 11:20:30.388 UTC: 	 Executing command: 'submit'
+DEBUG 2022-11-26 11:20:30.389 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2022-11-26 11:20:30.392 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2022-11-26 11:20:30.392 UTC: 	 Loading CRAB configuration file.
+ERROR 2022-11-26 11:20:30.397 UTC: 	 Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 27)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2022-11-26 11:20:30.397 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 27
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 55, in loadConfig
+    self.configuration = loadConfigurationFile(os.path.abspath(configname))
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 334, in loadConfigurationFile
+    raise RuntimeError(msg)
+RuntimeError: Unable to load Configuration File:
+/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py
+Due to error:
+invalid syntax (crab_2022Data_AOD.py, line 27)Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 27
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 89, in loadConfig
+    raise ConfigurationException(configmsg)
+CRABClient.ClientExceptions.ConfigurationException: Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 27)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+INFO 2022-11-26 11:20:30.403 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-11-26 11:21:13.658 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-11-26 11:21:13.658 UTC: 	 Running on: Linux lxplus710.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-11-26 11:21:13.658 UTC: 	 Executing command: 'submit'
+DEBUG 2022-11-26 11:21:13.659 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2022-11-26 11:21:13.661 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2022-11-26 11:21:13.661 UTC: 	 Loading CRAB configuration file.
+ERROR 2022-11-26 11:21:13.664 UTC: 	 Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 23)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2022-11-26 11:21:13.664 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 23
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 55, in loadConfig
+    self.configuration = loadConfigurationFile(os.path.abspath(configname))
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 334, in loadConfigurationFile
+    raise RuntimeError(msg)
+RuntimeError: Unable to load Configuration File:
+/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py
+Due to error:
+invalid syntax (crab_2022Data_AOD.py, line 23)Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 23
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 89, in loadConfig
+    raise ConfigurationException(configmsg)
+CRABClient.ClientExceptions.ConfigurationException: Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 23)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+INFO 2022-11-26 11:21:13.666 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-11-26 11:22:52.669 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-11-26 11:22:52.670 UTC: 	 Running on: Linux lxplus710.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-11-26 11:22:52.670 UTC: 	 Executing command: 'submit'
+DEBUG 2022-11-26 11:22:52.670 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2022-11-26 11:22:52.672 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2022-11-26 11:22:52.672 UTC: 	 Loading CRAB configuration file.
+ERROR 2022-11-26 11:22:52.675 UTC: 	 Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 27)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2022-11-26 11:22:52.675 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 27
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 55, in loadConfig
+    self.configuration = loadConfigurationFile(os.path.abspath(configname))
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 334, in loadConfigurationFile
+    raise RuntimeError(msg)
+RuntimeError: Unable to load Configuration File:
+/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py
+Due to error:
+invalid syntax (crab_2022Data_AOD.py, line 27)Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 27
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 89, in loadConfig
+    raise ConfigurationException(configmsg)
+CRABClient.ClientExceptions.ConfigurationException: Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 27)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+INFO 2022-11-26 11:22:52.677 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-11-26 11:25:00.357 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-11-26 11:25:00.358 UTC: 	 Running on: Linux lxplus710.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-11-26 11:25:00.358 UTC: 	 Executing command: 'submit'
+DEBUG 2022-11-26 11:25:00.358 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2022-11-26 11:25:00.359 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2022-11-26 11:25:00.359 UTC: 	 Loading CRAB configuration file.
+ERROR 2022-11-26 11:25:00.362 UTC: 	 Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 32)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2022-11-26 11:25:00.362 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 32
+    config.General.requestName = 'PbPb_AllCent_RAW1_Nov26'
+    ^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 55, in loadConfig
+    self.configuration = loadConfigurationFile(os.path.abspath(configname))
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 334, in loadConfigurationFile
+    raise RuntimeError(msg)
+RuntimeError: Unable to load Configuration File:
+/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py
+Due to error:
+invalid syntax (crab_2022Data_AOD.py, line 32)Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 32
+    config.General.requestName = 'PbPb_AllCent_RAW1_Nov26'
+    ^
+SyntaxError: invalid syntax
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 89, in loadConfig
+    raise ConfigurationException(configmsg)
+CRABClient.ClientExceptions.ConfigurationException: Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 32)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+INFO 2022-11-26 11:25:00.364 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-11-27 17:46:55.790 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-11-27 17:46:55.790 UTC: 	 Running on: Linux lxplus741.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-11-27 17:46:55.790 UTC: 	 Executing command: 'submit'
+DEBUG 2022-11-27 17:46:55.791 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2022-11-27 17:46:55.838 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2022-11-27 17:46:55.838 UTC: 	 Loading CRAB configuration file.
+DEBUG 2022-11-27 17:46:55.870 UTC: 	 Will use CRAB Analysis plugin (i.e. will run an analysis job type).
+ERROR 2022-11-27 17:46:55.873 UTC: 	 Working area '/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/2022_AOD/crab_PbPb_AllCent_RAW1_MB_MergedTrack_Nov27' already exists 
+Please change the requestName in the config file
+ERROR 2022-11-27 17:46:55.873 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 318, in __init__
+    self.requestarea, self.requestname, self.logfile = createWorkArea(
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/ClientUtilities.py", line 387, in createWorkArea
+    raise ConfigException("Working area '%s' already exists \nPlease change the requestName in the config file" % fullpath)
+CRABClient.ClientExceptions.ConfigException: Working area '/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/2022_AOD/crab_PbPb_AllCent_RAW1_MB_MergedTrack_Nov27' already exists 
+Please change the requestName in the config file
+INFO 2022-11-27 17:46:56.165 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-12-01 10:04:26.492 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-12-01 10:04:26.492 UTC: 	 Running on: Linux lxplus779.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-12-01 10:04:26.492 UTC: 	 Executing command: 'status'
+DEBUG 2022-12-01 10:04:26.493 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+ERROR 2022-12-01 10:04:26.493 UTC: 	 Error: 2022_AOD/crab_PbPb_AllCent_RAW14_MB_GeneralTrack_vnpT_Nov30 is not a valid CRAB project directory.
+ERROR 2022-12-01 10:04:26.493 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/status.py", line 48, in __init__
+    SubCommand.__init__(self, logger, cmdargs)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 275, in __init__
+    SubCommand.validateOptions(self)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 642, in validateOptions
+    raise ConfigurationException(msg)
+CRABClient.ClientExceptions.ConfigurationException: [91mError[0m: 2022_AOD/crab_PbPb_AllCent_RAW14_MB_GeneralTrack_vnpT_Nov30 is not a valid CRAB project directory.
+INFO 2022-12-01 10:04:26.519 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-12-01 10:15:05.004 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-12-01 10:15:05.004 UTC: 	 Running on: Linux lxplus779.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-12-01 10:15:05.004 UTC: 	 Executing command: 'status'
+DEBUG 2022-12-01 10:15:05.004 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+ERROR 2022-12-01 10:15:05.007 UTC: 	 Error: 2022_AOD/crab_PbPb_AllCent_RAW14_MB_GeneralTrack_vnpT_Nov30 is not a valid CRAB project directory.
+ERROR 2022-12-01 10:15:05.007 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/status.py", line 48, in __init__
+    SubCommand.__init__(self, logger, cmdargs)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 275, in __init__
+    SubCommand.validateOptions(self)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 642, in validateOptions
+    raise ConfigurationException(msg)
+CRABClient.ClientExceptions.ConfigurationException: [91mError[0m: 2022_AOD/crab_PbPb_AllCent_RAW14_MB_GeneralTrack_vnpT_Nov30 is not a valid CRAB project directory.
+INFO 2022-12-01 10:15:05.013 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-12-01 11:28:46.747 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-12-01 11:28:46.747 UTC: 	 Running on: Linux lxplus779.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-12-01 11:28:46.747 UTC: 	 Executing command: 'submit'
+DEBUG 2022-12-01 11:28:46.747 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2022-12-01 11:28:46.748 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2022-12-01 11:28:46.748 UTC: 	 Loading CRAB configuration file.
+DEBUG 2022-12-01 11:28:46.749 UTC: 	 Will use CRAB Analysis plugin (i.e. will run an analysis job type).
+ERROR 2022-12-01 11:28:46.749 UTC: 	 Working area '/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/2022_AOD/crab_PbPb_AllCent_RAW21_MB_GeneralTrack_vnpT_Nov30' already exists 
+Please change the requestName in the config file
+ERROR 2022-12-01 11:28:46.749 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 318, in __init__
+    self.requestarea, self.requestname, self.logfile = createWorkArea(
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/ClientUtilities.py", line 387, in createWorkArea
+    raise ConfigException("Working area '%s' already exists \nPlease change the requestName in the config file" % fullpath)
+CRABClient.ClientExceptions.ConfigException: Working area '/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/2022_AOD/crab_PbPb_AllCent_RAW21_MB_GeneralTrack_vnpT_Nov30' already exists 
+Please change the requestName in the config file
+INFO 2022-12-01 11:28:46.767 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-12-01 11:30:42.394 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-12-01 11:30:42.395 UTC: 	 Running on: Linux lxplus729.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-12-01 11:30:42.395 UTC: 	 Executing command: 'status'
+DEBUG 2022-12-01 11:30:42.403 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+ERROR 2022-12-01 11:30:42.434 UTC: 	 Cannot find .requestcache file in CRAB project directory /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/2022_AOD/crab_PbPb_AllCent_RAW21_MB_GeneralTrack_vnpT_Nov30
+ERROR 2022-12-01 11:30:42.434 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/status.py", line 48, in __init__
+    SubCommand.__init__(self, logger, cmdargs)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 275, in __init__
+    SubCommand.validateOptions(self)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 646, in validateOptions
+    self.loadLocalCache()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 508, in loadLocalCache
+    raise ex
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 502, in loadLocalCache
+    self.cachedinfo, self.logfile = loadCache(self.requestarea, self.logger)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/ClientUtilities.py", line 440, in loadCache
+    raise CachefileNotFoundException(msg)
+CRABClient.ClientExceptions.CachefileNotFoundException: Cannot find .requestcache file in CRAB project directory /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/2022_AOD/crab_PbPb_AllCent_RAW21_MB_GeneralTrack_vnpT_Nov30
+INFO 2022-12-01 11:30:42.481 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2022-12-01 11:31:57.352 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2022-12-01 11:31:57.352 UTC: 	 Running on: Linux lxplus729.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2022-12-01 11:31:57.352 UTC: 	 Executing command: 'status'
+DEBUG 2022-12-01 11:31:57.352 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+ERROR 2022-12-01 11:31:57.353 UTC: 	 Cannot find .requestcache file in CRAB project directory /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/2022_AOD/crab_PbPb_AllCent_RAW21_MB_GeneralTrack_vnpT_Nov30
+ERROR 2022-12-01 11:31:57.353 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/status.py", line 48, in __init__
+    SubCommand.__init__(self, logger, cmdargs)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 275, in __init__
+    SubCommand.validateOptions(self)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 646, in validateOptions
+    self.loadLocalCache()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 508, in loadLocalCache
+    raise ex
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 502, in loadLocalCache
+    self.cachedinfo, self.logfile = loadCache(self.requestarea, self.logger)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/ClientUtilities.py", line 440, in loadCache
+    raise CachefileNotFoundException(msg)
+CRABClient.ClientExceptions.CachefileNotFoundException: Cannot find .requestcache file in CRAB project directory /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/2022_AOD/crab_PbPb_AllCent_RAW21_MB_GeneralTrack_vnpT_Nov30
+INFO 2022-12-01 11:31:57.355 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2023-01-30 18:18:59.877 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2023-01-30 18:18:59.877 UTC: 	 Running on: Linux lxplus756.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2023-01-30 18:18:59.877 UTC: 	 Executing command: 'submit'
+DEBUG 2023-01-30 18:18:59.892 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2023-01-30 18:18:59.909 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2023-01-30 18:18:59.909 UTC: 	 Loading CRAB configuration file.
+ERROR 2023-01-30 18:18:59.978 UTC: 	 Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 28)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2023-01-30 18:18:59.978 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 28
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 55, in loadConfig
+    self.configuration = loadConfigurationFile(os.path.abspath(configname))
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 334, in loadConfigurationFile
+    raise RuntimeError(msg)
+RuntimeError: Unable to load Configuration File:
+/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py
+Due to error:
+invalid syntax (crab_2022Data_AOD.py, line 28)Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 28
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 89, in loadConfig
+    raise ConfigurationException(configmsg)
+CRABClient.ClientExceptions.ConfigurationException: Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 28)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+INFO 2023-01-30 18:19:00.035 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2023-01-30 18:24:50.722 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2023-01-30 18:24:50.723 UTC: 	 Running on: Linux lxplus756.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2023-01-30 18:24:50.723 UTC: 	 Executing command: 'submit'
+DEBUG 2023-01-30 18:24:50.723 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2023-01-30 18:24:50.723 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2023-01-30 18:24:50.724 UTC: 	 Loading CRAB configuration file.
+ERROR 2023-01-30 18:24:50.728 UTC: 	 Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 31)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2023-01-30 18:24:50.728 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 31
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 55, in loadConfig
+    self.configuration = loadConfigurationFile(os.path.abspath(configname))
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 334, in loadConfigurationFile
+    raise RuntimeError(msg)
+RuntimeError: Unable to load Configuration File:
+/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py
+Due to error:
+invalid syntax (crab_2022Data_AOD.py, line 31)Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 31
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 89, in loadConfig
+    raise ConfigurationException(configmsg)
+CRABClient.ClientExceptions.ConfigurationException: Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 31)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+INFO 2023-01-30 18:24:50.729 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2023-01-30 18:27:13.396 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2023-01-30 18:27:13.396 UTC: 	 Running on: Linux lxplus756.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2023-01-30 18:27:13.396 UTC: 	 Executing command: 'submit'
+DEBUG 2023-01-30 18:27:13.396 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2023-01-30 18:27:13.397 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2023-01-30 18:27:13.397 UTC: 	 Loading CRAB configuration file.
+ERROR 2023-01-30 18:27:13.399 UTC: 	 Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 31)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2023-01-30 18:27:13.399 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 31
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 55, in loadConfig
+    self.configuration = loadConfigurationFile(os.path.abspath(configname))
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 334, in loadConfigurationFile
+    raise RuntimeError(msg)
+RuntimeError: Unable to load Configuration File:
+/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py
+Due to error:
+invalid syntax (crab_2022Data_AOD.py, line 31)Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 31
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 89, in loadConfig
+    raise ConfigurationException(configmsg)
+CRABClient.ClientExceptions.ConfigurationException: Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 31)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+INFO 2023-01-30 18:27:13.406 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2023-01-30 18:32:30.341 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2023-01-30 18:32:30.342 UTC: 	 Running on: Linux lxplus756.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2023-01-30 18:32:30.342 UTC: 	 Executing command: 'submit'
+DEBUG 2023-01-30 18:32:30.342 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2023-01-30 18:32:30.343 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2023-01-30 18:32:30.343 UTC: 	 Loading CRAB configuration file.
+ERROR 2023-01-30 18:32:30.346 UTC: 	 Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 32)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2023-01-30 18:32:30.346 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 32
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 55, in loadConfig
+    self.configuration = loadConfigurationFile(os.path.abspath(configname))
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 334, in loadConfigurationFile
+    raise RuntimeError(msg)
+RuntimeError: Unable to load Configuration File:
+/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py
+Due to error:
+invalid syntax (crab_2022Data_AOD.py, line 32)Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 32
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 89, in loadConfig
+    raise ConfigurationException(configmsg)
+CRABClient.ClientExceptions.ConfigurationException: Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 32)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+INFO 2023-01-30 18:32:30.348 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2023-01-30 18:33:20.059 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2023-01-30 18:33:20.060 UTC: 	 Running on: Linux lxplus756.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2023-01-30 18:33:20.060 UTC: 	 Executing command: 'submit'
+DEBUG 2023-01-30 18:33:20.060 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2023-01-30 18:33:20.061 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2023-01-30 18:33:20.061 UTC: 	 Loading CRAB configuration file.
+ERROR 2023-01-30 18:33:20.158 UTC: 	 Error while loading CRAB configuration:
+No module named 'httplib'
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2023-01-30 18:33:20.158 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 4, in <module>
+    from httplib import HTTPException
+ModuleNotFoundError: No module named 'httplib'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 55, in loadConfig
+    self.configuration = loadConfigurationFile(os.path.abspath(configname))
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 334, in loadConfigurationFile
+    raise RuntimeError(msg)
+RuntimeError: Unable to load Configuration File:
+/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py
+Due to error:
+No module named 'httplib'Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 4, in <module>
+    from httplib import HTTPException
+ModuleNotFoundError: No module named 'httplib'
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 89, in loadConfig
+    raise ConfigurationException(configmsg)
+CRABClient.ClientExceptions.ConfigurationException: Error while loading CRAB configuration:
+No module named 'httplib'
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+INFO 2023-01-30 18:33:20.160 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2023-01-30 18:38:54.271 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2023-01-30 18:38:54.271 UTC: 	 Running on: Linux lxplus756.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2023-01-30 18:38:54.271 UTC: 	 Executing command: 'submit'
+DEBUG 2023-01-30 18:38:54.271 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2023-01-30 18:38:54.272 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2023-01-30 18:38:54.272 UTC: 	 Loading CRAB configuration file.
+ERROR 2023-01-30 18:38:54.274 UTC: 	 Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 32)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2023-01-30 18:38:54.274 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 32
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 55, in loadConfig
+    self.configuration = loadConfigurationFile(os.path.abspath(configname))
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 334, in loadConfigurationFile
+    raise RuntimeError(msg)
+RuntimeError: Unable to load Configuration File:
+/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py
+Due to error:
+invalid syntax (crab_2022Data_AOD.py, line 32)Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 32
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 89, in loadConfig
+    raise ConfigurationException(configmsg)
+CRABClient.ClientExceptions.ConfigurationException: Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 32)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+INFO 2023-01-30 18:38:54.276 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2023-01-30 18:58:42.640 UTC: 	 CRAB Client version: v3.221018
+DEBUG 2023-01-30 18:58:42.640 UTC: 	 Running on: Linux lxplus756.cern.ch 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2023-01-30 18:58:42.640 UTC: 	 Executing command: 'submit'
+DEBUG 2023-01-30 18:58:42.640 UTC: 	 Found CRAB cache file /afs/cern.ch/user/k/kpanja/.crab3
+INFO 2023-01-30 18:58:42.641 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2023-01-30 18:58:42.641 UTC: 	 Loading CRAB configuration file.
+ERROR 2023-01-30 18:58:42.645 UTC: 	 Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 73)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+ERROR 2023-01-30 18:58:42.645 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 73
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 55, in loadConfig
+    self.configuration = loadConfigurationFile(os.path.abspath(configname))
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 334, in loadConfigurationFile
+    raise RuntimeError(msg)
+RuntimeError: Unable to load Configuration File:
+/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py
+Due to error:
+invalid syntax (crab_2022Data_AOD.py, line 73)Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/WMCore/Configuration.py", line 326, in loadConfigurationFile
+    modRef = imp.load_module(cfgBaseName, modPath[0],
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 234, in load_module
+    return load_source(name, filename, file)
+  File "/cvmfs/cms.cern.ch/slc7_amd64_gcc10/external/python3/3.9.6-67e5cf5b4952101922f1d4c8474baa39/lib/python3.9/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 711, in _load
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 846, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 983, in get_code
+  File "<frozen importlib._bootstrap_external>", line 913, in source_to_code
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab_2022Data_AOD.py", line 73
+    print "Failed submitting task: %s" % (hte.headers)
+          ^
+SyntaxError: invalid syntax
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.221018.00/lib/CRABClient/Commands/SubCommand.py", line 89, in loadConfig
+    raise ConfigurationException(configmsg)
+CRABClient.ClientExceptions.ConfigurationException: Error while loading CRAB configuration:
+invalid syntax (crab_2022Data_AOD.py, line 73)
+Please refer to https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ
+See the ./crab.log file for more details.
+The documentation about the CRAB configuration file can be found in https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+INFO 2023-01-30 18:58:42.679 UTC: 	 Log file is /afs/cern.ch/user/k/kpanja/Raghu/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2023-02-18 10:28:49.980 UTC: 	 CRAB Client version: v3.230124
+DEBUG 2023-02-18 10:28:49.980 UTC: 	 Running on: Linux lxplus738.cern.ch 3.10.0-1160.81.1.el7.x86_64 #1 SMP Fri Dec 16 17:29:43 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2023-02-18 10:28:49.980 UTC: 	 Executing command: 'submit'
+DEBUG 2023-02-18 10:28:49.980 UTC: 	 Found CRAB cache file /afs/cern.ch/user/r/rpradhan/.crab3
+INFO 2023-02-18 10:28:49.981 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2023-02-18 10:28:49.981 UTC: 	 Loading CRAB configuration file.
+DEBUG 2023-02-18 10:28:49.988 UTC: 	 Will use CRAB Analysis plugin (i.e. will run an analysis job type).
+ERROR 2023-02-18 10:28:49.988 UTC: 	 Working area '/afs/cern.ch/work/r/rpradhan/Run3_data/newEventSelection/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/2022_AOD_JSON_newEventSelection/crab_PbPb_AllCent_Raw0_MB_JSON_newEventSelections_GeneralTrack_vnpT_Feb18' already exists 
+Please change the requestName in the config file
+ERROR 2023-02-18 10:28:49.989 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/lib/CRABClient/Commands/SubCommand.py", line 318, in __init__
+    self.requestarea, self.requestname, self.logfile = createWorkArea(
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/lib/CRABClient/ClientUtilities.py", line 387, in createWorkArea
+    raise ConfigException("Working area '%s' already exists \nPlease change the requestName in the config file" % fullpath)
+CRABClient.ClientExceptions.ConfigException: Working area '/afs/cern.ch/work/r/rpradhan/Run3_data/newEventSelection/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/2022_AOD_JSON_newEventSelection/crab_PbPb_AllCent_Raw0_MB_JSON_newEventSelections_GeneralTrack_vnpT_Feb18' already exists 
+Please change the requestName in the config file
+INFO 2023-02-18 10:28:49.997 UTC: 	 Log file is /afs/cern.ch/work/r/rpradhan/Run3_data/newEventSelection/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2023-02-18 10:43:52.290 UTC: 	 CRAB Client version: v3.230124
+DEBUG 2023-02-18 10:43:52.290 UTC: 	 Running on: Linux lxplus738.cern.ch 3.10.0-1160.81.1.el7.x86_64 #1 SMP Fri Dec 16 17:29:43 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2023-02-18 10:43:52.290 UTC: 	 Executing command: 'submit'
+DEBUG 2023-02-18 10:43:52.290 UTC: 	 Found CRAB cache file /afs/cern.ch/user/r/rpradhan/.crab3
+DEBUG 2023-02-18 11:31:05.537 UTC: 	 CRAB Client version: v3.230124
+DEBUG 2023-02-18 11:31:05.537 UTC: 	 Running on: Linux lxplus738.cern.ch 3.10.0-1160.81.1.el7.x86_64 #1 SMP Fri Dec 16 17:29:43 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2023-02-18 11:31:05.537 UTC: 	 Executing command: 'status'
+DEBUG 2023-02-18 11:31:05.537 UTC: 	 Found CRAB cache file /afs/cern.ch/user/r/rpradhan/.crab3
+DEBUG 2023-02-18 19:53:49.583 UTC: 	 CRAB Client version: v3.230124
+DEBUG 2023-02-18 19:53:49.583 UTC: 	 Running on: Linux lxplus758.cern.ch 3.10.0-1160.81.1.el7.x86_64 #1 SMP Fri Dec 16 17:29:43 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2023-02-18 19:53:49.583 UTC: 	 Executing command: 'submit'
+DEBUG 2023-02-18 19:53:49.587 UTC: 	 Found CRAB cache file /afs/cern.ch/user/r/rpradhan/.crab3
+INFO 2023-02-18 19:53:49.592 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2023-02-18 19:53:49.592 UTC: 	 Loading CRAB configuration file.
+INFO 2023-02-18 19:53:49.945 UTC: 	 Wrong format in command-line argument '23'. Expected format is <section-name>.<parameter-name>=<parameter-value>.
+ERROR 2023-02-18 19:53:49.945 UTC: 	 ERROR: Wrong command-line format.
+ERROR 2023-02-18 19:53:49.945 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/lib/CRABClient/Commands/SubCommand.py", line 316, in __init__
+    self.loadConfig(self.options.config, self.args)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/lib/CRABClient/Commands/SubCommand.py", line 67, in loadConfig
+    raise ConfigurationException("ERROR: Wrong command-line format.")
+CRABClient.ClientExceptions.ConfigurationException: ERROR: Wrong command-line format.
+INFO 2023-02-18 19:53:50.059 UTC: 	 Log file is /afs/cern.ch/work/r/rpradhan/Run3_data/newEventSelection/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
+DEBUG 2023-02-19 12:42:03.766 UTC: 	 CRAB Client version: v3.230124
+DEBUG 2023-02-19 12:42:03.767 UTC: 	 Running on: Linux lxplus758.cern.ch 3.10.0-1160.81.1.el7.x86_64 #1 SMP Fri Dec 16 17:29:43 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2023-02-19 12:42:03.767 UTC: 	 Executing command: 'submit'
+DEBUG 2023-02-19 12:42:03.767 UTC: 	 Found CRAB cache file /afs/cern.ch/user/r/rpradhan/.crab3
+INFO 2023-02-19 12:42:03.768 UTC: 	 Will use CRAB configuration file crab_2022Data_AOD.py
+DEBUG 2023-02-19 12:42:03.768 UTC: 	 Loading CRAB configuration file.
+DEBUG 2023-02-19 12:42:03.769 UTC: 	 Overriden parameter General.requestName with 'PbPb_AllCent_Raw0_MB_JSON_newEventSelections_GeneralTrack_vnpT_Feb19_new'
+DEBUG 2023-02-19 12:42:03.770 UTC: 	 Overriden parameter Data.inputDataset with '/HITestRaw0/HIRun2022A-PromptReco-v1/AOD'
+DEBUG 2023-02-19 12:42:03.770 UTC: 	 Overriden parameter Data.outputDatasetTag with 'PbPb_AllCent_Raw0_MB_JSON_newEventSelections_GeneralTrack_vnpT_Feb19_new'
+DEBUG 2023-02-19 12:42:03.770 UTC: 	 Will use CRAB Analysis plugin (i.e. will run an analysis job type).
+ERROR 2023-02-19 12:42:03.770 UTC: 	 Working area '/afs/cern.ch/work/r/rpradhan/Run3_data/newEventSelection/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/2022_AOD_JSON_newEventSelection_new/crab_PbPb_AllCent_Raw0_MB_JSON_newEventSelections_GeneralTrack_vnpT_Feb19_new' already exists 
+Please change the requestName in the config file
+ERROR 2023-02-19 12:42:03.770 UTC: 	 Caught ClientException exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/bin/crab.py", line 159, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/bin/crab.py", line 144, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/lib/CRABClient/Commands/submit.py", line 36, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/lib/CRABClient/Commands/SubCommand.py", line 318, in __init__
+    self.requestarea, self.requestname, self.logfile = createWorkArea(
+  File "/cvmfs/cms.cern.ch/share/cms/crab-prod/v3.230124.00/lib/CRABClient/ClientUtilities.py", line 387, in createWorkArea
+    raise ConfigException("Working area '%s' already exists \nPlease change the requestName in the config file" % fullpath)
+CRABClient.ClientExceptions.ConfigException: Working area '/afs/cern.ch/work/r/rpradhan/Run3_data/newEventSelection/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/2022_AOD_JSON_newEventSelection_new/crab_PbPb_AllCent_Raw0_MB_JSON_newEventSelections_GeneralTrack_vnpT_Feb19_new' already exists 
+Please change the requestName in the config file
+INFO 2023-02-19 12:42:03.808 UTC: 	 Log file is /afs/cern.ch/work/r/rpradhan/Run3_data/newEventSelection/CMSSW_12_5_0_pre5/src/Analyzers/CmsTwoPartCorrAnalysis/crab/crab.log
