@@ -65,8 +65,10 @@ defaultCPDC = cms.EDAnalyzer('AnaTwoPC', #Analyzer named: Correspond to the clas
                              rhomaxVtx = cms.untracked.double(0.2),
                              #Track selection
                              
-                             pTminTrk_trg = cms.untracked.double(0.5),
-                             pTmaxTrk_trg = cms.untracked.double(10.0), #3.0 original
+                             pTminTrk_trg = cms.untracked.double(0.5), #default before
+                             pTmaxTrk_trg = cms.untracked.double(10.0), #3.0 original #default before
+                             #pTminTrk_trg = cms.untracked.double(1.0), #tuo-ptcut
+                             #pTmaxTrk_trg = cms.untracked.double(3.0), #tuo-ptcut
                              pTminTrk_ass = cms.untracked.double(1.0),
                              pTmaxTrk_ass = cms.untracked.double(3.0),
                              etaminTrk_trg = cms.untracked.double(-2.4), #-2.4

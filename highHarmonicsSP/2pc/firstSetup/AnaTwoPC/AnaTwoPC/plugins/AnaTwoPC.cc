@@ -129,6 +129,9 @@ AnaTwoPC::AnaTwoPC(const edm::ParameterSet& iConfig) :
   const Int_t nptBin_ = 17;
   Double_t ptbining_[nptBin_+1] = {0.3, 0.4, 0.5, 0.6, 0.8, 1.0, 1.25, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0, 7.0, 8.0, 10.0};
 
+  //const Int_t nptBin_ = 1; //tuo-ptcut
+  //Double_t ptbining_[nptBin_+1] = {1.0, 3.0}; //tuo-ptcut
+
 
   const Int_t nrapBin = 18;
   Double_t rapbining[nrapBin+1] = {-2.4, -2.0, -1.6, -1.4, -1.3, -1.2, -1.0, -0.8, -0.4, 0.0, 0.4, 0.8, 1.0, 1.2, 1.3, 1.4, 1.6, 2.0, 2.4};
@@ -722,10 +725,12 @@ void AnaTwoPC::endJob()
    std::cout<< "Start running correlation analysis!" << std::endl;
    for( unsigned int i = 0; i < evtVec.size(); i++ )
    {
-     //if( i % 100 == 0 ) std::cout << "Processing " << i << "th event" << std::endl;
+     if( i % 100 == 0 ) std::cout << "Processing " << i << "th event" << std::endl;
      //std::cout<<"Signal event :  " << i << std::endl<<std::endl<<std::endl;
+     ///std::cout<<"iEvt = "<<i<<"   Starting with Filling Signal Histogram"<<std::endl;
      if(fIsMC) FillHistsSignal( i, kTRUE );
      FillHistsSignal( i, kFALSE );
+     ///std::cout<<"iEvt = "<<i<<"   Done with Filling Signal Histogram, Starting BKG"<<std::endl;
      /*
      unsigned int mixstart = i+1;                                                                                                                 
      unsigned int mixend   = evtVec.size();
@@ -767,8 +772,10 @@ void AnaTwoPC::endJob()
 	  //nmix++;
           //if (nmix > bkgFactor) break;
 
+          ///std::cout<<" i, j = "<<i<<"  "<<j<< " Start filling bkg histograms" << std::endl;
 	  if(fIsMC)FillHistsBackground( i, j, kTRUE ); //---- un comment if you want to use it
 	  FillHistsBackground( i, j, kFALSE ); //--un comment if you want to use  background
+          ///std::cout<<" i, j = "<<i<<"  "<<j<< " Finish filling bkg histograms" << std::endl;
 	}
    }
    
@@ -1126,6 +1133,7 @@ void AnaTwoPC::LoopTracks(const edm::Event& iEvent, const edm::EventSetup& iSetu
       }
 
       if ( iter_tk.pt() <= pTcut || iter_tk.pt() >=10.0 ) continue;
+      //if ( iter_tk.pt() <= pTcut || iter_tk.pt() <= 1.0  || iter_tk.pt() >=3.0 ) continue; //tuo-ptcut
       //if ( std::abs( iter_tk.eta() ) >= 2.4 ) continue;
       if( iter_tk.eta() < etamin_trg || iter_tk.eta() > etamax_trg ) continue;
       double dzvtx = iter_tk.dz( bestvtx );
