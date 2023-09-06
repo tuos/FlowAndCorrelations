@@ -1,0 +1,15 @@
+
+===
+this is still true.
+Those files can not be managed via rucio.
+You need to get Rucio quota on some Rusio Storage Element
+and use CRAB to write your output there.
+Then you can create Rucio rules.
+
+Stefano
+===
+
+CMSSW_13_0_12 for step1
+CMSSW_13_2_0 for step2 and step3
+
+
