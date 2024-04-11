@@ -1,0 +1,29 @@
+
+OSG account setup
+
+Wiki page for running simulations:
+https://github.com/chunshen1987/iEBE-MUSIC/wiki/Running-simulations-on-the-Open-Science-Grid
+
+/home/tuos/XeXe/a_570_beta2_000
+/home/tuos/XeXe/a_570_beta2_207
+/home/tuos/XeXe/a_570_beta2_162
+/home/tuos/XeXe/a_492_beta2_207
+
+/home/tuos/PbPb
+
+
+./collect_results.sh ~/XeXe/
+scp -pr tuos@ap21.uc.osg-htc.org:/ospool/ap21/data/tuos/XeXe .
+
+###laptop###
+python3 -m pip install --upgrade pip
+pip install h5py
+tuos@mac:[XeXe]$ python3 fetch_Qnch_from_hdf5_LHC.py XeXe.h5 
+tuos@mac:[XeXe]$ python3 analyze_vnch_inte.py QnVectors.pickle 
+====
+Running:
+/home/tuos/XeXe/a_570_beta2_000
+python3 ../../iEBE-MUSIC/Cluster_supports/OSG/generate_submission_script.py 50000 1 1 $DATA/singularity_repos/iebe-music_apr2024.sif parameters_dict_user_IPGlasma_a_570_beta2_000.py a_570_beta2_000
+
+
+
