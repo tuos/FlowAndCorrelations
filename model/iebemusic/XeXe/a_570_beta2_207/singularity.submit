@@ -1,0 +1,40 @@
+universe = vanilla
+executable = run_singularity.sh
+arguments = parameters_dict_user_IPGlasma_a_570_beta2_207.py $(Process) 1 1 9395252
+
+JobBatchName = iEBEMUSIC_XeXe_a_570_beta2_207
+
+should_transfer_files = YES
+WhenToTransferOutput = ON_EXIT
+
++SingularityImage = "osdf:///ospool/ap21/data/tuos/singularity_repos/iebe-music_apr2024.sif"
+Requirements = SINGULARITY_CAN_USE_SIF && StringListIMember("stash", HasFileTransferPluginMethods)
+
+transfer_input_files = parameters_dict_user_IPGlasma_a_570_beta2_207.py
+transfer_checkpoint_files = playground/event_0/EVENT_RESULTS_$(Process).tar.gz
+
+transfer_output_files = playground/event_0/EVENT_RESULTS_$(Process)/spvn_results_$(Process).h5
+
+error = ../log/job.$(Cluster).$(Process).error
+output = ../log/job.$(Cluster).$(Process).output
+log = ../log/job.$(Cluster).$(Process).log
+
+#+JobDurationCategory = "Long"
+max_idle = 1000
+
+# remove the failed jobs
+periodic_remove = (ExitCode == 73)
+
+checkpoint_exit_code = 85
+
+# Send the job to Held state on failure.
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0 && ExitCode != 73)
+
+# The below are good base requirements for first testing jobs on OSG,
+# if you don't have a good idea of memory and disk usage.
+request_cpus = 1
+request_memory = 2 GB
+request_disk = 2 GB
+
+# Queue one job with the above specifications.
+queue 50000
