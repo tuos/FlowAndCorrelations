@@ -1,0 +1,16 @@
+
+hadd HIMinimumBias0_PbPb2018_miniAOD_nonsym_C2_96detabin_4p0pttrg16p0_1p5ptass4p0_etamod2p4_cent010_etabin_ptbin_m3vz3_Maximmix_Apr17_2024_HI0_240416_231009_0000.root /store/user/sayan/HIMinimumBias0/PbPb2018_miniAOD_nonsym_C2_96detabin_4p0pttrg16p0_1p5ptass4p0_etamod2p4_cent010_etabin_ptbin_m3vz3_Maximmix_Apr17_2024_HI0/240416_231009/0000/pbpb_miniAOD_nonsym_C2_96detabin_4p0pttrg16p0_1p5ptass4p0_m2p4etatrgbin2p4_m2p4etaass2p4_cent010_m3p0Vz3p0_Apr08_2024_shiftedmiddlebin_maximmix_*.root
+
+find /store/user/sayan/ -type d > list.txt
+grep -E '/000' list.txt > listFinal.txt
+
+===
+scontrol show job 61975882
+sacct -u tuos
+===
+failed jobs:
+[tuos@gw344 rohit]$ find /store/user/rosingh/HIMinimumBias4/PbPb2018_miniAOD_nonsym_C2_96detabin_4p0pttrg16p0_1p5ptass4p0_etamod2p4_cent3050_etabin_ptbin_m15vz15_Maximmix_centup_Apr15_2024_HI4/240415_220407/0004/ -type f -size -50000c
+Go into the directory, rename the failed job output files, do merging by hand, copy the merged file to the central place
+===
+
+
