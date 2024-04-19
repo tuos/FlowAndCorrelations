@@ -24,6 +24,21 @@ tuos@mac:[XeXe]$ python3 analyze_vnch_inte.py QnVectors.pickle
 Running:
 /home/tuos/XeXe/a_570_beta2_000
 python3 ../../iEBE-MUSIC/Cluster_supports/OSG/generate_submission_script.py 50000 1 1 $DATA/singularity_repos/iebe-music_apr2024.sif parameters_dict_user_IPGlasma_a_570_beta2_000.py a_570_beta2_000
+===
+Merging logs at $DATA: zip -r joblog.zip /home/tuos/XeXe/log
+===Running
+source $HOME/venv/bin/activate
+(venv) [tuos@ap21 a_570_beta2_162]$ python3 ../../iEBE-MUSIC/Cluster_supports/OSG/generate_submission_script.py 50000 1 1 $DATA/singularity_repos/iebe-music_apr2024.sif parameters_dict_user_IPGlasma_a_570_beta2_162.py XeXe_a_570_beta2_162
+(venv) [tuos@ap21 a_570_beta2_162]$ condor_submit singularity.submit 
+===Running
+source $HOME/venv/bin/activate
+(venv) [tuos@ap21 a_570_beta2_207]$ python3 ../../iEBE-MUSIC/Cluster_supports/OSG/generate_submission_script.py 50000 1 1 $DATA/singularity_repos/iebe-music_apr2024.sif parameters_dict_user_IPGlasma_a_570_beta2_207.py XeXe_a_570_beta2_207
+(venv) [tuos@ap21 a_570_beta2_207]$ condor_submit singularity.submit 
+===
+vi ../iEBE-MUSIC/Cluster_supports/OSG/generate_submission_script.py 
+# release the job if it has been held for more than 60 seconds  
+periodic_release = ((JobStatus == 5) && (time() - EnteredCurrentStatus) >  60)
+===
 
 
 
