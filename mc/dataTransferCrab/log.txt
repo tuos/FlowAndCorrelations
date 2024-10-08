@@ -1,4 +1,5 @@
 
+
 ===
 this is still true.
 Those files can not be managed via rucio.
@@ -11,5 +12,34 @@ Stefano
 
 CMSSW_13_0_12 for step1
 CMSSW_13_2_0 for step2 and step3
+
+===
+
+Zhenyu's sample transfer
+/ReggeGribovPartonMC_EposLHC_pPb_4080_4080_DataBS/davidlw-RecoSkim2016_pPb_V0_v1-2fc6918bc3c19ca88eae36cad5440243/USER
+CMSSW_8_0_24
+export SCRAM_ARCH=slc6_amd64_gcc530
+
+###
+[tuos@gw346 mcCernToVandy]$ cmssw-el6
+Singularity> 
+Singularity> export SCRAM_ARCH=slc6_amd64_gcc530
+Singularity> source /cvmfs/cms.cern.ch/cmsset_default.sh
+Singularity> cmsrel CMSSW_8_0_24
+Singularity> cd CMSSW_8_0_24/src/
+Singularity> cmsenv
+
+###2024 Oct. EOS transfer to Vanderbilt###
+[tuos@gw346 mcCernToVandy]$ cmssw-el8
+Singularity> export SCRAM_ARCH=el8_amd64_gcc11
+Singularity> cmsrel CMSSW_13_2_6
+New release CMSSW_14_1_0_pre3
+[tuos@gw346 mcCernToVandy]$ cmssw-el8
+Singularity> export SCRAM_ARCH=el8_amd64_gcc12
+Singularity> cmsrel CMSSW_14_1_0_pre3
+
+example of resubmitting crab jobs (will only resubmit current failed jobs):
+crab resubmit -d project_PYTHIA8_HYDJET_DiJet_5360GeV_RECODEBUG_141X_2024-09-01/crab_PYTHIA8_HYDJET_DiJet_5360GeV_RECODEBUG_141X_2024-09-01/
+
 
 
