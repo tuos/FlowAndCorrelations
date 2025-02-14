@@ -48,9 +48,9 @@ void projection_plot_vn_highNjets(){
     cout<<Nch05[i]<<"  "<<v2_05[i]<<"  "<<v2_05_stat[i]<<"  "<<v2_05_stat_new[i]<<endl;
   }
 
-
+/*
   gStyle->SetPadLeftMargin(0.18);
-  gStyle->SetPadRightMargin(0.14);
+  //gStyle->SetPadRightMargin(0.14);
   gStyle->SetPadBottomMargin(0.10);
   gStyle->SetPadTopMargin(0.10);
   gStyle->SetOptStat(0);  // hide statistics box
@@ -62,7 +62,7 @@ void projection_plot_vn_highNjets(){
   gStyle->SetLabelOffset(0.01,"xyz"); // label offset (to fit bigger font
   gStyle->SetNdivisions(505,"xyz");
   gStyle->SetPalette(1);
-
+*/
   
   TCanvas* c_vn_jet;
   c_vn_jet = new TCanvas("c_vn_jet", "c_vn_jet", 1200, 600);
@@ -70,16 +70,20 @@ void projection_plot_vn_highNjets(){
   c_vn_jet->SetFrameFillColor(0);
   c_vn_jet->SetFrameBorderSize(0);
   c_vn_jet->SetFrameBorderMode(0);
-  gPad->SetTicks(-1);
+  c_vn_jet->SetLeftMargin(0.16);
+  c_vn_jet->SetBottomMargin(0.01);
+  c_vn_jet->SetTopMargin(0.01);
+  c_vn_jet->SetRightMargin(0.01);
+  //gPad->SetTicks(-1);
   gStyle->SetOptStat(0);
-  //c_vn_jet->Divide(2,1,0,0);
-  c_vn_jet->Divide(2,1);
+  c_vn_jet->Divide(2,1,0,0);
+  //c_vn_jet->Divide(2,1);
 
   c_vn_jet->cd(1);
-  gPad->SetLeftMargin(0.14);
+  gPad->SetLeftMargin(0.16);
   gPad->SetBottomMargin(0.14);
   gPad->SetTopMargin(0.05);
-  gPad->SetRightMargin(0.02);
+  //gPad->SetRightMargin(0.02);
   gPad->SetTicks(-1);
   
   
@@ -94,11 +98,13 @@ void projection_plot_vn_highNjets(){
   hist_1->GetYaxis()->SetTitleFont(42);
   hist_1->GetYaxis()->SetTitleSize(0.05);
   hist_1->GetYaxis()->SetLabelSize(0.05);
-  hist_1->GetYaxis()->SetTitleOffset(1.32);
+  hist_1->GetYaxis()->SetTitleOffset(1.43);
+  hist_1->GetYaxis()->SetNdivisions(505);
   hist_1->GetXaxis()->SetTitleFont(42);
   hist_1->GetXaxis()->SetTitleSize(0.05);
   hist_1->GetXaxis()->SetLabelSize(0.05);
-  hist_1->GetXaxis()->SetTitleOffset(0.9);
+  hist_1->GetXaxis()->SetTitleOffset(1.1);
+  hist_1->GetXaxis()->SetNdivisions(505);
   hist_1->SetTitle("");
   hist_1->SetMinimum(0.);
   hist_1->SetMaximum(0.41);
@@ -151,16 +157,19 @@ void projection_plot_vn_highNjets(){
   tex1->SetTextFont(42);
   tex1->SetTextSize(0.045);
   tex1->DrawLatex(0.53,0.85,"0.3 < j_{T} < 3.0 GeV");
+  tex1->DrawLatex(0.23,0.34,"p_{T}^{jet} > 550 GeV");
+  tex1->DrawLatex(0.23,0.26,"|#eta^{jet}| < 1.6");
+  tex1->DrawLatex(0.23,0.19,"Anti-k_{T} R = 0.8");
   tex1->SetTextFont(62);
-  tex1->DrawLatex(0.14,0.965,"CMS Projection");
+  tex1->DrawLatex(0.16,0.965,"CMS Projection");
 
 
 
   c_vn_jet->cd(2);
-  gPad->SetLeftMargin(0.14);
+  //gPad->SetLeftMargin(0.14);
   gPad->SetBottomMargin(0.14);
   gPad->SetTopMargin(0.05);
-  gPad->SetRightMargin(0.02);
+  gPad->SetRightMargin(0.01);
   gPad->SetTicks(-1);
 
   TH1D *hist_2;
@@ -215,11 +224,12 @@ void projection_plot_vn_highNjets(){
   tex2->SetNDC();
   tex2->SetTextFont(42);
   tex2->SetTextSize(0.045);
+  tex2->DrawLatex(0.615,0.962,"pp 13 TeV 3000 fb^{-1}");
   tex2->DrawLatex(0.53,0.85,"0.5 < j_{T} < 3.0 GeV");
 
 
-c_vn_jet->SaveAs("fig_projection_vn_jet.png");
-c_vn_jet->SaveAs("fig_projection_vn_jet.pdf");
+  c_vn_jet->SaveAs("fig_projection_vn_jet.png");
+  c_vn_jet->SaveAs("fig_projection_vn_jet.pdf");
 
 
 }
