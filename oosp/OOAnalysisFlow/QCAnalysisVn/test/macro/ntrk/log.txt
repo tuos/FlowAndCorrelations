@@ -1,0 +1,9 @@
+
+ls /store/user/tuos/OO/data/OOIP*_v2QC_July31NtrkOffline/IonPhysic*/*/*/*/*.root
+
+#[tuos@gw02 ntrk]$ rm merged.root 
+#[tuos@gw02 ntrk]$ hadd merged.root /store/user/tuos/OO/data/OOIP*_v2QC_July31NtrkOffline/IonPhysic*/*/*/*/*.root
+
+[tuos@gw01 nene]$ ls /store/user/tuos/OO/data/NeNeIP*July31Ntrk/IonPhysics*/NeNe*July31Ntrk/*/*/nene_miniAOD_qc_*.root
+
+
