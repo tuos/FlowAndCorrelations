@@ -429,7 +429,7 @@ void SPAnalysis::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup
     int cent = -1;
     if(doOO_){
       for (int ic=0; ic < nCentTableBins; ic++){
-        if(etHFtowerSum>oo_binBoundaries[ic] && etHFtowerSum<=oo_binBoundaries[ic+1]){
+        if(etHFtowerSum>nene_binBoundaries[ic] && etHFtowerSum<=nene_binBoundaries[ic+1]){
           cent = nCentTableBins -1 - ic;
         }
       }
